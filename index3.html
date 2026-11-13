@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Chế độ No-Cache -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Ôn Tập Dịch Câu & Phiên Âm - Hán Cổ 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: rgba(17, 24, 39, 0.88);
+            --card-border: rgba(212, 175, 55, 0.42);
+            --gold: #f59e0b;
+            --gold-light: #fde68a;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+        }
+
+        body.theme-nature {
+            --bg-dark: #071f18;
+            --card-bg: rgba(11, 37, 28, 0.9);
+            --card-border: rgba(52, 211, 153, 0.4);
+            --gold: #34d399;
+            --gold-light: #a7f3d0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 20px 16px 60px;
+        }
+
+        header {
+            text-align: center;
+            padding: 22px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 18px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+        }
+
+        header h1 {
+            font-size: 1.85rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            color: var(--gold-light);
+            font-size: 0.95rem;
+        }
+
+        /* Thanh điều hướng & công cụ */
+        .top-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            background: var(--card-bg);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .nav-tabs, .utility-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 9px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: var(--gold);
+        }
+
+        .btn.active {
+            background: var(--gold);
+            color: #090d16;
+            border-color: var(--gold);
+        }
+
+        .view-section {
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Thanh tìm kiếm & nút che đáp án */
+        .control-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: rgba(0, 0, 0, 0.45);
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: var(--gold);
+        }
+
+        /* Thẻ câu hỏi */
+        .sentence-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 22px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+
+        .q-badge {
+            background: var(--gold);
+            color: #000;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        .summary-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+            background: rgba(0, 0, 0, 0.28);
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .line-item {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .line-label {
+            min-width: 92px;
+            font-weight: 700;
+            color: var(--gold-light);
+            font-size: 0.92rem;
+        }
+
+        .han-sentence {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            letter-spacing: 1.5px;
+        }
+
+        .hv-sentence {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .mean-sentence {
+            font-size: 1.02rem;
+            color: var(--text-main);
+        }
+
+        /* Bảng giải nghĩa từng chữ Hán */
+        .word-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .word-cell {
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            min-width: 78px;
+            flex: 0 1 auto;
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.15s, border-color 0.15s;
+        }
+
+        .word-cell:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .w-han {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            padding: 6px 8px;
+            background: rgba(245, 158, 11, 0.14);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .w-hv {
+            font-weight: 600;
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            padding: 5px 6px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .w-mean {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            padding: 5px 6px;
+            line-height: 1.3;
+        }
+
+        /* Hiệu ứng làm mờ để tự dò bài */
+        .masked {
+            filter: blur(8px);
+            user-select: none;
+            cursor: pointer;
+            transition: filter 0.2s ease;
+        }
+
+        .masked:hover, .masked.revealed {
+            filter: blur(0);
+            user-select: auto;
+        }
+
+        /* Phòng luyện tập (Tab 3) */
+        .practice-box {
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .char-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 16px 0;
+            min-height: 54px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 10px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .char-tile {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: rgba(245, 158, 11, 0.18);
+            border: 1px solid var(--gold);
+            color: var(--gold-light);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.15s;
+        }
+
+        .char-tile:hover {
+            transform: scale(1.07);
+            background: var(--gold);
+            color: #000;
+        }
+
+        .char-tile.used {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        /* In A4 Khổ Ngang */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            #bgCanvas, .top-bar, .control-panel, #view-practice {
+                display: none !important;
+            }
+            #view-part1, #view-part2 {
+                display: block !important;
+            }
+            header, .sentence-card, .summary-lines, .word-cell, .w-han {
+                background: #fff !important;
+                color: #000 !important;
+                border-color: #333 !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+            }
+            header h1, .han-sentence, .hv-sentence, .mean-sentence, .line-label, .w-han, .w-hv, .w-mean {
+                color: #000 !important;
+                filter: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<div class="container">
+    <header>
+        <h1>ÔN TẬP DỊCH CÂU &amp; PHIÊN ÂM - HÁN CỔ 4</h1>
+        <p>Hệ Thống Học Chiết Tự Từng Chữ, Phiên Âm Hán Việt &amp; Dịch Nghĩa Toàn Câu</p>
+    </header>
+
+    <div class="top-bar">
+        <div class="nav-tabs">
+            <button class="btn active" onclick="switchView('part1', this)">📜 Phần 1: Cho Hán Văn ➔ Viết Hán Việt &amp; Dịch (13 Câu)</button>
+            <button class="btn" onclick="switchView('part2', this)">✍️ Phần 2: Cho Hán Việt ➔ Viết Hán Văn &amp; Dịch (13 Câu)</button>
+            <button class="btn" onclick="switchView('practice', this)">🎯 Phòng Luyện Thi &amp; Ghép Chữ Hán</button>
+        </div>
+        <div class="utility-btns">
+            <button class="btn" onclick="toggleTheme()">🌌 Đổi Nền (Vũ Trụ / Rừng Trúc)</button>
+            <button class="btn" onclick="window.print()">🖨️ In A4 Khổ Ngang</button>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 1: PHẦN 1 (13 CÂU) ==================== -->
+    <section id="view-part1" class="view-section active">
+        <div class="control-panel">
+            <input type="text" id="searchP1" class="search-box" placeholder="🔍 Tìm kiếm trong Phần 1 (chữ Hán, phiên âm Hán Việt, nghĩa tiếng Việt...)" oninput="renderPart1()">
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn" id="btnP1MaskHV" onclick="toggleMaskP1('hv')">🙈 Che Hán Việt</button>
+                <button class="btn" id="btnP1MaskMean" onclick="toggleMaskP1('mean')">🙈 Che Dịch Nghĩa</button>
+                <button class="btn" id="btnP1MaskTable" onclick="toggleMaskP1('table')">🙈 Che Bảng Từng Chữ</button>
+            </div>
+        </div>
+        <div id="containerPart1"></div>
+    </section>
+
+    <!-- ==================== TAB 2: PHẦN 2 (13 CÂU) ==================== -->
+    <section id="view-part2" class="view-section">
+        <div class="control-panel">
+            <input type="text" id="searchP2" class="search-box" placeholder="🔍 Tìm kiếm trong Phần 2 (Hán Việt, chữ Hán, nghĩa...)" oninput="renderPart2()">
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn" id="btnP2MaskHan" onclick="toggleMaskP2('han')">🙈 Che Chữ Hán</button>
+                <button class="btn" id="btnP2MaskMean" onclick="toggleMaskP2('mean')">🙈 Che Dịch Nghĩa</button>
+                <button class="btn" id="btnP2MaskTable" onclick="toggleMaskP2('table')">🙈 Che Bảng Từng Chữ</button>
+            </div>
+        </div>
+        <div id="containerPart2"></div>
+    </section>
+
+    <!-- ==================== TAB 3: PHÒNG LUYỆN THI ==================== -->
+    <section id="view-practice" class="view-section">
+        <div class="control-panel" style="justify-content:center;">
+            <button class="btn active" id="pracMode1" onclick="setPracticeMode('p1')">📖 Luyện Đề Phần 1 (Nhìn Hán Văn ➔ Đọc Hán Việt &amp; Nghĩa)</button>
+            <button class="btn" id="pracMode2" onclick="setPracticeMode('p2')">🧩 Luyện Đề Phần 2 (Nhìn Hán Việt ➔ Ghép Chữ Hán &amp; Dịch)</button>
+            <button class="btn" onclick="nextPracticeCard()">🔀 Đổi Câu Ngẫu Nhiên</button>
+        </div>
+
+        <div class="practice-box" id="practiceContent"></div>
+    </section>
+</div>
+
+<script>
+    // ==================== DỮ LIỆU PHẦN 1 (13 CÂU: CHO HÁN VĂN -> VIẾT HÁN VIỆT & DỊCH NGHĨA) ====================
+    const part1Data = [
+        {
+            id: 1,
+            han: "北風起，大雪飛。登樓遠望，一片白色。",
+            hv: "Bắc phong khởi, đại tuyết phi. Đăng lâu viễn vọng, nhất phiến bạch sắc.",
+            mean: "Gió bắc (bấc) nổi lên, tuyết bay rất nhiều. Lên lầu trông ra xa, (thấy) một dải màu trắng.",
+            words: [
+                ["北","Bắc","bắc"], ["風","phong","gió"], ["起","khởi","nổi lên"], ["大","đại","lớn/nhiều"],
+                ["雪","tuyết","tuyết"], ["飛","phi","bay"], ["登","Đăng","lên"], ["樓","lâu","lầu"],
+                ["遠","viễn","xa"], ["望","vọng","trông"], ["一","nhất","một"], ["片","phiến","dải"],
+                ["白","bạch","trắng"], ["色","sắc","màu"]
+            ]
+        },
+        {
+            id: 2,
+            han: "雪止日出，檐溜成冰。其形如箸。",
+            hv: "Tuyết chỉ nhật xuất, thiềm lựu thành băng. Kỳ hình như trợ.",
+            mean: "Tuyết ngừng (rơi) mặt trời mọc, nước trên mái hiên chảy xuống thành băng, hình giống chiếc đũa.",
+            words: [
+                ["雪","Tuyết","tuyết"], ["止","chỉ","ngừng"], ["日","nhật","mặt trời"], ["出","xuất","mọc/ra"],
+                ["檐","thiềm","mái hiên"], ["溜","lựu","nước chảy"], ["成","thành","thành"], ["冰","băng","băng"],
+                ["其","Kỳ","của nó"], ["形","hình","hình dạng"], ["如","như","giống như"], ["箸","trợ","đũa"]
+            ]
+        },
+        {
+            id: 3,
+            han: "王姓陳，名國峻，安生王柳之子也，封興道大王。",
+            hv: "Vương tính Trần, danh Quốc Tuấn, An Sinh vương Liễu chi tử dã, phong Hưng Đạo Đại Vương.",
+            mean: "Vương họ Trần, tên Quốc Tuấn, là con của An Sinh vương Liễu, phong tước Hưng Đạo Đại Vương.",
+            words: [
+                ["王","Vương","vương/vua"], ["姓","tính","họ"], ["陳","Trần","Trần"], ["名","danh","tên"],
+                ["國","Quốc","nước/quốc"], ["峻","Tuấn","Tuấn"], ["安","An","An"], ["生","Sinh","sinh"],
+                ["王","Vương","vương/vua"], ["柳","Liễu","Liễu"], ["之","chi","của"], ["子","tử","con"],
+                ["也","dã","Là…vậy"], ["封","phong","phong"], ["興","Hưng","hưng"], ["道","Đạo","đạo"],
+                ["大","Đại","lớn/nhiều"], ["王","Vương","vương/vua"]
+            ]
+        },
+        {
+            id: 4,
+            han: "安生王與太宗有隙，臨终執王手曰:",
+            hv: "An Sinh vương dữ Thái Tông hữu khích, lâm chung chấp vương thủ viết:",
+            mean: "An Sinh vương có hiềm khích với vua Thái Tông, lúc sắp mất, cầm tay vương bảo rằng:",
+            words: [
+                ["安","An","An"], ["生","Sinh","sinh"], ["王","Vương","vương/vua"], ["與","dữ","với"],
+                ["太","Thái","thái/lớn"], ["宗","Tông","tông"], ["有","hữu","có"], ["隙","khích","hiềm khích"],
+                ["臨","lâm","sắp/đến"], ["终","chung","chung/mất"], ["執","chấp","cầm"], ["王","Vương","vương/vua"],
+                ["手","thủ","tay"], ["曰","viết","nói"]
+            ]
+        },
+        {
+            id: 5,
+            han: "汝不能爲我得天下吾不暝目。王深念之，舉動惟謹。",
+            hv: "“Nhữ bất năng vi ngã đắc thiên hạ ngô bất minh mục”. Vương thâm niệm chi, cử động duy cẩn.",
+            mean: "“Nếu con không thể vì ta mà chiếm được thiên hạ thì ta chết không nhắm mắt”. Vương nghĩ sâu xa điều ấy, mọi cử chỉ hành động đều cẩn thận.",
+            words: [
+                ["汝","Nhữ","con/ngươi"], ["不","bất","không"], ["能","năng","có thể"], ["爲","vi","vì/là"],
+                ["我","ngã","ta"], ["得","đắc","được/chiếm"], ["天","thiên","trời/thiên"], ["下","hạ","dưới/hạ"],
+                ["吾","ngô","ta"], ["不","bất","không"], ["暝","minh","nhắm"], ["目","mục","mắt"],
+                ["王","Vương","vương/vua"], ["深","thâm","sâu"], ["念","niệm","nghĩ"], ["之","chi","của/ấy"],
+                ["舉","cử","cử"], ["動","động","động"], ["惟","duy","chỉ/đều"], ["謹","cẩn","cẩn thận"]
+            ]
+        },
+        {
+            id: 6,
+            han: "重興間, 兩退元兵, 爲當時武功第一。及卒, 立廟祀之.",
+            hv: "Trùng Hưng gian, lưỡng thoái Nguyên binh, vi đương thời vũ công đệ nhất. Cập tốt, lập miếu tự chi.",
+            mean: "Trong thời Trùng Hưng hai lần đánh lui quân Nguyên, là người có võ công bậc nhất lúc bấy giờ. Đến khi mất, (nhà vua) lập miếu thờ Vương.",
+            words: [
+                ["重","Trùng","trùng"], ["興","Hưng","hưng"], ["間","gian","trong thời"], ["兩","lưỡng","hai"],
+                ["退","thoái","đánh lui"], ["元","Nguyên","Nguyên"], ["兵","binh","quân"], ["爲","vi","là"],
+                ["當","đương","đương"], ["時","thời","thời"], ["武","vũ","võ"], ["功","công","công"],
+                ["第","đệ","thứ/bậc"], ["一","nhất","một"], ["及","Cập","đến khi"], ["卒","tốt","mất"],
+                ["立","lập","lập"], ["廟","miếu","miếu"], ["祀","tự","thờ"], ["之","chi","Ngài/người ấy"]
+            ]
+        },
+        {
+            id: 7,
+            han: "護法韋馱者, 執金剛神之類也. 手執金剛杵, 以威力護法故.",
+            hv: "Hộ pháp Vi Đà giả, chấp kim cương thần chi loại dã. Thủ chấp kim cương xử, dĩ uy lực hộ pháp cố.",
+            mean: "Hộ Pháp Vi Đà là vị thần cầm Kim Cang, tay cầm gậy Kim Cang, dùng oai lực để bảo vệ chánh pháp.",
+            words: [
+                ["護","Hộ","bảo vệ"], ["法","pháp","pháp"], ["韋","Vi","Vi"], ["馱","Đà","Đà"],
+                ["者","giả","người/vị"], ["執","chấp","cầm"], ["金","kim","kim/vàng"], ["剛","cương","cương/cứng"],
+                ["神","thần","thần"], ["之","chi","của/ấy"], ["類","loại","loại"], ["也","dã","là/vậy"],
+                ["手","Thủ","tay"], ["執","chấp","cầm"], ["金","kim","kim/vàng"], ["剛","cương","cương/cứng"],
+                ["杵","xử","gậy/chày"], ["以","dĩ","dùng"], ["威","uy","oai"], ["力","lực","sức mạnh"],
+                ["護","hộ","bảo vệ"], ["法","pháp","pháp"], ["故","cố","vì vậy"]
+            ]
+        },
+        {
+            id: 8,
+            han: "四王天有天大將軍，名韋琨者，常往來三洲，擁護佛法。",
+            hv: "Tứ Vương Thiên hữu Thiên Đại tướng quân, danh Vi Côn giả, thường vãng lai tam châu, ủng hộ Phật Pháp.",
+            mean: "Cõi trời Tứ Vương có vị Thiên đại tướng quân, tên là Vi Côn, thường qua lại ba châu để ủng hộ Phật pháp.",
+            words: [
+                ["四","Tứ","bốn"], ["王","Vương","vương/vua"], ["天","Thiên","trời/thiên"], ["有","hữu","có"],
+                ["天","Thiên","trời/thiên"], ["大","Đại","lớn/nhiều"], ["將","tướng","tướng"], ["軍","quân","quân"],
+                ["名","danh","tên"], ["韋","Vi","Vi"], ["琨","Côn","Côn"], ["者","giả","người/vị"],
+                ["常","thường","thường"], ["往","vãng","đi"], ["來","lai","lại/đến"], ["三","tam","ba"],
+                ["洲","châu","châu"], ["擁","ủng","ủng"], ["護","hộ","bảo vệ"], ["佛","Phật","Phật"],
+                ["法","pháp","pháp"]
+            ]
+        },
+        {
+            id: 9,
+            han: "本無其像，乃供韋馱天像以代之。",
+            hv: "Bổn vô kỳ tượng, nãi cúng Vi Đà thiên tượng dĩ đại chi.",
+            mean: "Vốn không có tượng của ngài Vi Côn, mới thờ cúng tượng của ngài Vi Đà để thay thế.",
+            words: [
+                ["本","Bổn","vốn"], ["無","vô","không có"], ["其","kỳ","của Ngài"], ["像","tượng","tượng"],
+                ["乃","nãi","bèn"], ["供","cúng","thờ cúng"], ["韋","Vi","Vi"], ["馱","Đà","Đà"],
+                ["天","thiên","trời/thiên"], ["像","tượng","tượng"], ["以","dĩ","để"], ["代","đại","thay thế"],
+                ["之","chi","Ngài ấy"]
+            ]
+        },
+        {
+            id: 10,
+            han: "若密教中則根據金光明經，而供散脂大將矣。",
+            hv: "Nhược Mật Giáo trung tắc căn cứ Kim Quang Minh kinh, nhi cung Tán Chỉ Đại Tướng hỹ.",
+            mean: "Còn bên Mật giáo thì căn cứ vào bộ Kinh “Kim Quang Minh” nên thờ tượng Đại tướng Tán Chỉ.",
+            words: [
+                ["若","Nhược","Nếu, còn như"], ["密","Mật","mật"], ["教","Giáo","giáo"], ["中","trung","trong"],
+                ["則","tắc","thì"], ["根","căn","gốc/căn"], ["據","cứ","dựa vào"], ["金","Kim","kim/vàng"],
+                ["光","Quang","quang/sáng"], ["明","Minh","minh/sáng"], ["經","kinh","kinh"], ["而","nhi","nên"],
+                ["供","cung","thờ cúng"], ["散","Tán","Tán"], ["脂","Chỉ","Chỉ"], ["大","Đại","lớn/nhiều"],
+                ["將","tướng","tướng"], ["矣","hĩ","vậy"]
+            ]
+        },
+        {
+            id: 11,
+            han: "鸿龐氏首曰涇陽王，相傳我越之始君也,生貉龍君。王乃貉龍君之子也。",
+            hv: "Hồng Bàng thị thủ viết Kinh Dương Vương, tương truyền ngã Việt chi thủy (thỉ) quân dã, sinh Lạc Long Quân. Vương nãi Lạc Long Quân chi tử dã.",
+            mean: "Vua đầu của họ Hồng Bàng là Kinh Dương Vương, tương truyền là vị vua đầu tiên của nước ta, sinh ra Lạc Long Quân. Hùng Vương là con của Lạc Long Quân.",
+            words: [
+                ["鸿","Hồng","Hồng"], ["龐","Bàng","Bàng"], ["氏","thị","họ"], ["首","thủ","đầu tiên"],
+                ["曰","viết","gọi là"], ["涇","Kinh","Kinh"], ["陽","Dương","Dương"], ["王","Vương","vương/vua"],
+                ["相","tương","cùng/tương"], ["傳","truyền","truyền"], ["我","ngã","ta"], ["越","Việt","Việt"],
+                ["之","chi","của"], ["始","thủy","đầu tiên"], ["君","quân","vua"], ["也","dã","là/vậy"],
+                ["生","sinh","sinh"], ["貉","Lạc","Lạc"], ["龍","Long","Long/rồng"], ["君","Quân","vua"],
+                ["王","Vương","vương/vua"], ["乃","nãi","bèn/là"], ["貉","Lạc","Lạc"], ["龍","Long","Long/rồng"],
+                ["君","Quân","vua"], ["之","chi","của/ấy"], ["子","tử","con"], ["也","dã","Là…vậy"]
+            ]
+        },
+        {
+            id: 12,
+            han: "涇陽王生子, 崇纜,號貉龍君; 貉龍君娶嫗姬, 生百男, 是爲百粵之祖",
+            hv: "Kinh Dương Vương sinh tử, Sùng Lãm, hiệu Lạc Long Quân; Lạc Long Quân thú Âu Cơ, sinh bách nam, thị vi Bách Việt chi tổ.",
+            mean: "Kinh Dương Vương sinh được con trai là Sùng Lãm, gọi là Lạc Long Quân; Lạc Long Quân lấy nàng Âu Cơ, sinh ra một trăm người con trai, đó là tổ tiên của Bách Việt.",
+            words: [
+                ["涇","Kinh","Kinh"], ["陽","Dương","Dương"], ["王","Vương","vương/vua"], ["生","sinh","sinh"],
+                ["子","tử","con"], ["崇","Sùng","Sùng"], ["纜","Lãm","Lãm"], ["號","hiệu","gọi hiệu"],
+                ["貉","Lạc","Lạc"], ["龍","Long","Long/rồng"], ["君","Quân","vua"], ["娶","thú","lấy vợ"],
+                ["嫗","Âu","Âu"], ["姬","Cơ","Cơ"], ["生","sinh","sinh"], ["百","bách","trăm"],
+                ["男","nam","con trai"], ["是","thị","đó"], ["爲","vi","là"], ["百","Bách","trăm"],
+                ["粵","Việt","Việt"], ["之","chi","của/ấy"], ["祖","tổ","tổ tiên"]
+            ]
+        },
+        {
+            id: 13,
+            han: "推其長者爲雄王，嗣君位，建國號文郎國，都峰州，相傳十八世，皆稱雄王。",
+            hv: "Suy kỳ trưởng giả vi Hùng Vương, tự quân vị. Kiến quốc hiệu Văn Lang quốc, đô Phong Châu. Tương truyền thập bát thế, giai xưng Hùng Vương.",
+            mean: "Tôn con trưởng làm Hùng Vương, nối ngôi vua dựng nước gọi là nước Văn Lang, đóng đô ở Phong Châu, truyền nhau được mười tám đời, đều gọi là Hùng Vương.",
+            words: [
+                ["推","Suy","tôn lên"], ["其","kỳ","của Ngài"], ["長","trưởng","trưởng"], ["者","giả","người/vị"],
+                ["爲","vi","là"], ["雄","Hùng","Hùng"], ["王","Vương","vương/vua"], ["嗣","tự","nối"],
+                ["君","quân","vua"], ["位","vị","ngôi"], ["建","kiến","dựng"], ["國","quốc","nước/quốc"],
+                ["號","hiệu","gọi hiệu"], ["文","Văn","văn"], ["郎","Lang","lang"], ["國","quốc","nước/quốc"],
+                ["都","đô","đóng đô"], ["峰","Phong","Phong"], ["州","Châu","Châu"], ["相","tương","cùng/tương"],
+                ["傳","truyền","truyền"], ["十","thập","mười"], ["八","bát","tám"], ["世","thế","đời"],
+                ["皆","giai","đều"], ["稱","xưng","gọi"], ["雄","Hùng","Hùng"], ["王","Vương","vương/vua"]
+            ]
+        }
+    ];
+
+    // ==================== DỮ LIỆU PHẦN 2 (13 CÂU: CHO HÁN VIỆT -> VIẾT HÁN VĂN & DỊCH NGHĨA) ====================
+    const part2Data = [
+        {
+            id: 1,
+            hv: "Lễ giả lễ bái; Tụng giả phúng tụng.",
+            han: "禮者禮拜。誦者諷誦。",
+            mean: "Lễ là lễ bái; Tụng là tụng niệm.",
+            words: [
+                ["禮","Lễ","lễ"], ["者","giả","là"], ["禮","lễ","lễ"], ["拜","bái","lạy"],
+                ["誦","Tụng","tụng"], ["者","giả","là/người"], ["諷","phúng","phúng/đọc tụng"], ["誦","tụng","tụng"]
+            ]
+        },
+        {
+            id: 2,
+            hv: "Phúng tụng, tắc thâm huân Bát nhã chủng tử.",
+            han: "諷誦，則深薰般若種子。",
+            mean: "Tụng niệm thì huân tập sâu hạt giống trí tuệ.",
+            words: [
+                ["諷","Phúng","phúng/đọc tụng"], ["誦","tụng","tụng"], ["則","tắc","thì"], ["深","thâm","sâu"],
+                ["薰","huân","huân tập"], ["般","Bát","Bát"], ["若","nhã","nhã"], ["種","chủng","hạt giống"],
+                ["子","tử","con"]
+            ]
+        },
+        {
+            id: 3,
+            hv: "Lễ bái, tắc tam nghiệp thanh tịnh.",
+            han: "禮拜則三業清淨。",
+            mean: "Lễ lạy thì ba nghiệp thanh tịnh.",
+            words: [
+                ["禮","Lễ","lễ"], ["拜","bái","lạy"], ["則","tắc","thì"], ["三","tam","ba"],
+                ["業","nghiệp","nghiệp"], ["清","thanh","trong sạch"], ["淨","tịnh","thanh tịnh"]
+            ]
+        },
+        {
+            id: 4,
+            hv: "Sử ngã tâm nhập Phật tâm, cầu Phật tâm nhập ngã tâm.",
+            han: "使我心入佛心。求佛心入我心。",
+            mean: "Làm cho tâm ta nhập vào tâm Phật, cầu tâm Phật nhập vào tâm ta.",
+            words: [
+                ["使","Sử","khiến/làm cho"], ["我","ngã","ta"], ["心","tâm","tâm"], ["入","nhập","vào"],
+                ["佛","Phật","Phật"], ["心","tâm","tâm"], ["求","cầu","cầu"], ["佛","Phật","Phật"],
+                ["心","tâm","tâm"], ["入","nhập","vào"], ["我","ngã","ta"], ["心","tâm","tâm"]
+            ]
+        },
+        {
+            id: 5,
+            hv: "Lưỡng lưỡng hỗ tương nhiếp nhập, tắc cảm ứng đạo giao hỹ.",
+            han: "兩兩互相攝入。則感應道交矣。",
+            mean: "Hai bên hòa nhập vào nhau, thì đạo cảm ứng giao hòa vậy.",
+            words: [
+                ["兩","Lưỡng","hai"], ["兩","lưỡng","hai"], ["互","hỗ","lẫn nhau"], ["相","tương","cùng/tương"],
+                ["攝","nhiếp","thu nhiếp"], ["入","nhập","vào"], ["則","tắc","thì"], ["感","cảm","cảm"],
+                ["應","ứng","ứng"], ["道","đạo","đạo"], ["交","giao","giao"], ["矣","hĩ","vậy"]
+            ]
+        },
+        {
+            id: 6,
+            hv: "Hạng trung hữu ốc, tứ diện đoản tường, hướng nam khai môn.",
+            han: "巷中有屋，四面短牆，向南開門。",
+            mean: "Trong hẻm có nhà, bốn mặt có tường ngắn, mở cửa về hướng nam",
+            words: [
+                ["巷","Hạng","hẻm"], ["中","trung","trong"], ["有","hữu","có"], ["屋","ốc","nhà"],
+                ["四","tứ","bốn"], ["面","diện","mặt"], ["短","đoản","ngắn"], ["牆","tường","tường"],
+                ["向","hướng","hướng"], ["南","nam","nam"], ["開","khai","mở"], ["門","môn","cửa"]
+            ]
+        },
+        {
+            id: 7,
+            hv: "Khách đường tại tiền, thư trai tại bàng, ngọa thất tại hậu.",
+            han: "客堂在前，書齋在旁，臥室在後。",
+            mean: "Nhà khách ở phía trước, phòng học ở bên cạnh, nhà (phòng) ngủ ở phía sau.",
+            words: [
+                ["客","Khách","khách"], ["堂","đường","nhà/đường"], ["在","tại","ở"], ["前","tiền","trước"],
+                ["書","thư","sách"], ["齋","trai","phòng học"], ["在","tại","ở"], ["旁","bàng","bên cạnh"],
+                ["臥","ngọa","nằm/ngủ"], ["室","thất","phòng"], ["在","tại","ở"], ["後","hậu","sau"]
+            ]
+        },
+        {
+            id: 8,
+            hv: "Tọa thượng khách, viễn phương lai. Phụ bồi khách, thực ngọ phạn.",
+            han: "座上客，遠方來。父陪客，食午飯。",
+            mean: "Khách trên chỗ ngồi, đến từ phương xa. Cha tiếp khách, ăn cơm trưa.",
+            words: [
+                ["座","Tọa","chỗ ngồi"], ["上","thượng","trên"], ["客","khách","khách"], ["遠","viễn","xa"],
+                ["方","phương","phương"], ["來","lai","lại/đến"], ["父","Phụ","cha"], ["陪","bồi","tiếp/bồi"],
+                ["客","khách","khách"], ["食","thực","ăn"], ["午","ngọ","trưa"], ["飯","phạn","cơm"]
+            ]
+        },
+        {
+            id: 9,
+            hv: "Phạn hậu xuất môn, dữ khách nhàn thiếu.",
+            han: "飯後出門，與客閒眺。",
+            mean: "Sau bữa cơm ra cửa, cùng khách thong thả ngắm trông.",
+            words: [
+                ["飯","Phạn","cơm"], ["後","hậu","sau"], ["出","xuất","ra"], ["門","môn","cửa"],
+                ["與","dữ","với"], ["客","khách","khách"], ["閒","nhàn","thong thả"], ["眺","thiếu","ngắm trông"]
+            ]
+        },
+        {
+            id: 10,
+            hv: "Tiền hữu thanh sơn, bàng hữu lưu thủy.",
+            han: "前有青山，旁有流水。",
+            mean: "Phía trước có núi xanh, bên cạnh có nước chảy.",
+            words: [
+                ["前","Tiền","trước"], ["有","hữu","có"], ["青","thanh","xanh"], ["山","sơn","núi"],
+                ["旁","bàng","bên cạnh"], ["有","hữu","có"], ["流","lưu","chảy"], ["水","thủy","nước"]
+            ]
+        },
+        {
+            id: 11,
+            hv: "Khẩu hữu thần hữu xỉ. Thần tại ngoại, kỳ sắc xích.",
+            han: "口有脣有齒。脣在外，其色赤。",
+            mean: "Miệng có môi, có răng. Môi ở ngoài, màu đỏ.",
+            words: [
+                ["口","Khẩu","miệng"], ["有","hữu","có"], ["脣","thần","môi"], ["有","hữu","có"],
+                ["齒","xỉ","răng"], ["脣","Thần","môi"], ["在","tại","ở"], ["外","ngoại","ngoài"],
+                ["其","kỳ","của nó"], ["色","sắc","màu"], ["赤","xích","đỏ"]
+            ]
+        },
+        {
+            id: 12,
+            hv: "Thần tại ngoại, kỳ sắc xích. Xỉ tại nội, kỳ sắc bạch.",
+            han: "脣在外，其色赤，齒在內，其色白。",
+            mean: "Môi ở ngoài, màu đỏ. Răng ở trong, màu trắng.",
+            words: [
+                ["脣","Thần","môi"], ["在","tại","ở"], ["外","ngoại","ngoài"], ["其","kỳ","của nó"],
+                ["色","sắc","màu"], ["赤","xích","đỏ"], ["齒","Xỉ","răng"], ["在","tại","ở"],
+                ["內","nội","trong"], ["其","kỳ","của ấy"], ["色","sắc","màu"], ["白","bạch","trắng"]
+            ]
+        },
+        {
+            id: 13,
+            hv: "Ẩm thực tùng khẩu nhập, ngôn ngữ tùng khẩu xuất.",
+            han: "飲食從口入，言語從口出。",
+            mean: "Đồ ăn uống từ miệng vào, lời nói năng từ miệng ra.",
+            words: [
+                ["飲","Ẩm","uống"], ["食","thực","ăn"], ["從","tùng","từ/theo"], ["口","khẩu","miệng"],
+                ["入","nhập","vào"], ["言","ngôn","lời"], ["語","ngữ","nói"], ["從","tùng","từ/theo"],
+                ["口","khẩu","miệng"], ["出","xuất","mọc/ra"]
+            ]
+        }
+    ];
+
+    // ==================== STATE & RENDER PHẦN 1, PHẦN 2 ====================
+    let maskP1 = { hv: false, mean: false, table: false };
+    let maskP2 = { han: false, mean: false, table: false };
+
+    function removeAccents(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    function renderWordGrid(words, isMasked) {
+        return `<div class="word-grid ${isMasked ? 'masked' : ''}" onclick="this.classList.toggle('revealed')">
+            ${words.map(w => `
+                <div class="word-cell">
+                    <div class="w-han">${w[0]}</div>
+                    <div class="w-hv">${w[1]}</div>
+                    <div class="w-mean">${w[2]}</div>
+                </div>
+            `).join('')}
+        </div>`;
+    }
+
+    function renderPart1() {
+        const q = document.getElementById('searchP1').value.trim().toLowerCase();
+        const qNo = removeAccents(q);
+        const box = document.getElementById('containerPart1');
+        box.innerHTML = '';
+
+        const filtered = part1Data.filter(item => {
+            if (!q) return true;
+            return item.han.includes(q) ||
+                   removeAccents(item.hv).includes(qNo) ||
+                   removeAccents(item.mean).includes(qNo) ||
+                   String(item.id) === q;
+        });
+
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'sentence-card';
+            card.innerHTML = `
+                <div class="card-header">
+                    <span class="q-badge">CÂU ${item.id} (Hán Văn ➔ Hán Việt &amp; Nghĩa)</span>
+                    <span style="font-size:0.85rem; color:var(--text-muted);">Số chữ: ${item.words.length} chữ</span>
+                </div>
+                <div class="summary-lines">
+                    <div class="line-item">
+                        <span class="line-label">Hán văn:</span>
+                        <span class="han-sentence">${item.han}</span>
+                    </div>
+                    <div class="line-item">
+                        <span class="line-label">Hán Việt:</span>
+                        <span class="hv-sentence ${maskP1.hv ? 'masked' : ''}" onclick="this.classList.toggle('revealed')">${item.hv}</span>
+                    </div>
+                    <div class="line-item">
+                        <span class="line-label">Nghĩa:</span>
+                        <span class="mean-sentence ${maskP1.mean ? 'masked' : ''}" onclick="this.classList.toggle('revealed')">${item.mean}</span>
+                    </div>
+                </div>
+                ${renderWordGrid(item.words, maskP1.table)}
+            `;
+            box.appendChild(card);
+        });
+    }
+
+    function toggleMaskP1(key) {
+        maskP1[key] = !maskP1[key];
+        document.getElementById('btnP1MaskHV').classList.toggle('active', maskP1.hv);
+        document.getElementById('btnP1MaskMean').classList.toggle('active', maskP1.mean);
+        document.getElementById('btnP1MaskTable').classList.toggle('active', maskP1.table);
+        renderPart1();
+    }
+
+    function renderPart2() {
+        const q = document.getElementById('searchP2').value.trim().toLowerCase();
+        const qNo = removeAccents(q);
+        const box = document.getElementById('containerPart2');
+        box.innerHTML = '';
+
+        const filtered = part2Data.filter(item => {
+            if (!q) return true;
+            return item.han.includes(q) ||
+                   removeAccents(item.hv).includes(qNo) ||
+                   removeAccents(item.mean).includes(qNo) ||
+                   String(item.id) === q;
+        });
+
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'sentence-card';
+            card.innerHTML = `
+                <div class="card-header">
+                    <span class="q-badge">CÂU ${item.id} (Hán Việt ➔ Hán Văn &amp; Nghĩa)</span>
+                    <span style="font-size:0.85rem; color:var(--text-muted);">Số chữ: ${item.words.length} chữ</span>
+                </div>
+                <div class="summary-lines">
+                    <div class="line-item">
+                        <span class="line-label">Hán Việt:</span>
+                        <span class="hv-sentence">${item.hv}</span>
+                    </div>
+                    <div class="line-item">
+                        <span class="line-label">Hán văn:</span>
+                        <span class="han-sentence ${maskP2.han ? 'masked' : ''}" onclick="this.classList.toggle('revealed')">${item.han}</span>
+                    </div>
+                    <div class="line-item">
+                        <span class="line-label">Nghĩa:</span>
+                        <span class="mean-sentence ${maskP2.mean ? 'masked' : ''}" onclick="this.classList.toggle('revealed')">${item.mean}</span>
+                    </div>
+                </div>
+                ${renderWordGrid(item.words, maskP2.table)}
+            `;
+            box.appendChild(card);
+        });
+    }
+
+    function toggleMaskP2(key) {
+        maskP2[key] = !maskP2[key];
+        document.getElementById('btnP2MaskHan').classList.toggle('active', maskP2.han);
+        document.getElementById('btnP2MaskMean').classList.toggle('active', maskP2.mean);
+        document.getElementById('btnP2MaskTable').classList.toggle('active', maskP2.table);
+        renderPart2();
+    }
+
+    // ==================== TAB 3: PHÒNG LUYỆN THI & GHÉP CHỮ ====================
+    let pracMode = 'p1';
+    let pracIdx = 0;
+    let assembledChars = [];
+    let shuffledBank = [];
+
+    function setPracticeMode(m) {
+        pracMode = m;
+        document.getElementById('pracMode1').classList.toggle('active', m === 'p1');
+        document.getElementById('pracMode2').classList.toggle('active', m === 'p2');
+        pracIdx = 0;
+        renderPractice();
+    }
+
+    function nextPracticeCard() {
+        const list = pracMode === 'p1' ? part1Data : part2Data;
+        pracIdx = (pracIdx + 1) % list.length;
+        renderPractice();
+    }
+
+    function renderPractice() {
+        const box = document.getElementById('practiceContent');
+        if (pracMode === 'p1') {
+            const item = part1Data[pracIdx];
+            box.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                    <span class="q-badge">PHẦN 1 - CÂU ${item.id} / 13</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn" onclick="pracIdx=(pracIdx-1+13)%13; renderPractice()">⬅️ Câu Trước</button>
+                        <button class="btn active" onclick="pracIdx=(pracIdx+1)%13; renderPractice()">Câu Tiếp ➡️</button>
+                    </div>
+                </div>
+                <div style="text-align:center; padding:26px 16px; background:rgba(0,0,0,0.4); border-radius:12px; margin-bottom:16px;">
+                    <p style="color:var(--text-muted); margin-bottom:8px;">Hãy đọc phiên âm Hán Việt và dịch nghĩa câu Hán văn sau:</p>
+                    <div class="han-sentence" style="font-size:2.2rem;">${item.han}</div>
+                </div>
+                <div style="text-align:center; margin-bottom:16px;">
+                    <button class="btn active" onclick="document.getElementById('p1AnsBox').style.display='block'">👁️ Hiện Đáp Án Đối Chiếu</button>
+                </div>
+                <div id="p1AnsBox" style="display:none; padding:16px; background:rgba(16,185,129,0.12); border:1px solid var(--accent-green); border-radius:10px;">
+                    <p style="margin-bottom:8px;"><strong style="color:var(--gold-light);">Hán Việt:</strong> <span class="hv-sentence">${item.hv}</span></p>
+                    <p style="margin-bottom:12px;"><strong style="color:var(--gold-light);">Nghĩa:</strong> <span>${item.mean}</span></p>
+                    ${renderWordGrid(item.words, false)}
+                </div>
+            `;
+        } else {
+            const item = part2Data[pracIdx];
+            assembledChars = [];
+            shuffledBank = item.words.map((w, idx) => ({ char: w[0], hv: w[1], idx })).sort(() => Math.random() - 0.5);
+            renderPart2Puzzle(item);
+        }
+    }
+
+    function renderPart2Puzzle(item) {
+        const box = document.getElementById('practiceContent');
+        const targetChars = item.words.map(w => w[0]).join('');
+        const currentStr = assembledChars.map(x => x.char).join('');
+        const isComplete = assembledChars.length === item.words.length;
+        const isCorrect = isComplete && currentStr === targetChars;
+
+        box.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                <span class="q-badge">PHẦN 2 - CÂU ${item.id} / 13</span>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn" onclick="pracIdx=(pracIdx-1+13)%13; renderPractice()">⬅️ Câu Trước</button>
+                    <button class="btn active" onclick="pracIdx=(pracIdx+1)%13; renderPractice()">Câu Tiếp ➡️</button>
+                </div>
+            </div>
+
+            <div style="text-align:center; padding:20px 16px; background:rgba(0,0,0,0.4); border-radius:12px; margin-bottom:14px;">
+                <p style="color:var(--text-muted); margin-bottom:6px;">Cho câu phiên âm Hán Việt, hãy bấm chọn các chữ Hán bên dưới theo đúng thứ tự:</p>
+                <div class="hv-sentence" style="font-size:1.45rem;">${item.hv}</div>
+            </div>
+
+            <div style="text-align:center; font-size:0.9rem; color:var(--gold-light);">Câu chữ Hán bạn đang ghép (Bấm vào chữ đã chọn để bỏ ra):</div>
+            <div class="char-bank" id="assembledBox">
+                ${assembledChars.map((c, i) => `<span class="char-tile" onclick="removeAssembled(${i})">${c.char}</span>`).join('')}
+            </div>
+
+            <div style="text-align:center; font-size:0.9rem; color:var(--text-muted);">Kho chữ Hán xáo trộn:</div>
+            <div class="char-bank">
+                ${shuffledBank.map((c, i) => {
+                    const used = assembledChars.some(a => a.bankIndex === i);
+                    return `<span class="char-tile ${used ? 'used' : ''}" onclick="pickCharTile(${i})">${c.char}</span>`;
+                }).join('')}
+            </div>
+
+            ${isComplete ? `
+                <div style="text-align:center; margin:12px 0; font-weight:700; font-size:1.1rem; color:${isCorrect ? 'var(--accent-green)' : 'var(--accent-red)'};">
+                    ${isCorrect ? '✅ Chính xác tuyệt đối! Bạn đã ghép đúng toàn bộ câu Hán văn!' : '❌ Thứ tự chữ Hán chưa khớp, bạn có thể bấm vào chữ trên khung để xếp lại!'}
+                </div>
+            ` : ''}
+
+            <div style="display:flex; justify-content:center; gap:10px; margin-top:12px;">
+                <button class="btn" onclick="assembledChars=[]; renderPart2Puzzle(part2Data[pracIdx])">🔄 Xếp Lại</button>
+                <button class="btn active" onclick="document.getElementById('p2AnsBox').style.display='block'">👁️ Xem Đáp Án &amp; Nghĩa</button>
+            </div>
+
+            <div id="p2AnsBox" style="display:none; margin-top:16px; padding:16px; background:rgba(16,185,129,0.12); border:1px solid var(--accent-green); border-radius:10px;">
+                <p style="margin-bottom:8px;"><strong style="color:var(--gold-light);">Hán văn chuẩn:</strong> <span class="han-sentence">${item.han}</span></p>
+                <p style="margin-bottom:12px;"><strong style="color:var(--gold-light);">Nghĩa:</strong> <span>${item.mean}</span></p>
+                ${renderWordGrid(item.words, false)}
+            </div>
+        `;
+    }
+
+    function pickCharTile(bankIndex) {
+        const item = part2Data[pracIdx];
+        assembledChars.push({ ...shuffledBank[bankIndex], bankIndex });
+        renderPart2Puzzle(item);
+    }
+
+    function removeAssembled(assembledIndex) {
+        const item = part2Data[pracIdx];
+        assembledChars.splice(assembledIndex, 1);
+        renderPart2Puzzle(item);
+    }
+
+    // ==================== CHUYỂN TAB & ĐỔI NỀN ====================
+    function switchView(viewId, btnEl) {
+        document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+        document.getElementById('view-' + viewId).classList.add('active');
+        document.querySelectorAll('.nav-tabs .btn').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+    }
+
+    function toggleTheme() {
+        document.body.classList.toggle('theme-nature');
+    }
+
+    // Hiệu ứng nền Vũ Trụ Sao Đêm
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function initCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        stars = Array.from({ length: 135 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.7 + 0.4,
+            speed: Math.random() * 0.35 + 0.08,
+            alpha: Math.random()
+        }));
+    }
+
+    function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const isNature = document.body.classList.contains('theme-nature');
+        stars.forEach(s => {
+            s.y -= s.speed;
+            if (s.y < 0) {
+                s.y = canvas.height;
+                s.x = Math.random() * canvas.width;
+            }
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = isNature
+                ? `rgba(110, 231, 183, ${s.alpha})`
+                : `rgba(253, 230, 138, ${s.alpha})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(animateStars);
+    }
+
+    window.addEventListener('resize', initCanvas);
+
+    // Khởi tạo
+    initCanvas();
+    animateStars();
+    renderPart1();
+    renderPart2();
+    setPracticeMode('p1');
+</script>
+
+</body>
+</html>

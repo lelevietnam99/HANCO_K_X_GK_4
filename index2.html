@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Chế độ No-Cache -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Bài Tập Trắc Nghiệm (97 Câu) - Hán Cổ 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: rgba(17, 24, 39, 0.88);
+            --card-border: rgba(212, 175, 55, 0.42);
+            --gold: #f59e0b;
+            --gold-light: #fde68a;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+        }
+
+        body.theme-nature {
+            --bg-dark: #071f18;
+            --card-bg: rgba(11, 37, 28, 0.9);
+            --card-border: rgba(52, 211, 153, 0.4);
+            --gold: #34d399;
+            --gold-light: #a7f3d0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.55;
+        }
+
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1340px;
+            margin: 0 auto;
+            padding: 20px 16px 60px;
+        }
+
+        header {
+            text-align: center;
+            padding: 22px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 18px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+        }
+
+        header h1 {
+            font-size: 1.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            color: var(--gold-light);
+            font-size: 0.95rem;
+        }
+
+        /* Thanh công cụ trên cùng */
+        .top-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            background: var(--card-bg);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .nav-tabs, .utility-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 9px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: var(--gold);
+        }
+
+        .btn.active {
+            background: var(--gold);
+            color: #090d16;
+            border-color: var(--gold);
+        }
+
+        .view-section {
+            display: none;
+            animation: fadeIn 0.22s ease;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bộ lọc & Tìm kiếm */
+        .control-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 240px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: rgba(0, 0, 0, 0.45);
+            color: #fff;
+            font-size: 0.94rem;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: var(--gold);
+        }
+
+        .char-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .chip {
+            padding: 5px 11px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 0.86rem;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+
+        .chip:hover, .chip.active {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+        }
+
+        .badge-count {
+            background: rgba(245, 158, 11, 0.16);
+            border: 1px solid var(--gold);
+            color: var(--gold-light);
+            padding: 6px 13px;
+            border-radius: 99px;
+            font-size: 0.86rem;
+            font-weight: 600;
+        }
+
+        /* Lưới câu hỏi ở Tab 1 */
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .questions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .q-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+            transition: transform 0.15s ease;
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .q-num {
+            background: var(--gold);
+            color: #000;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            white-space: nowrap;
+        }
+
+        .q-sentence {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            letter-spacing: 1.5px;
+            text-align: right;
+            flex: 1;
+        }
+
+        .hl-char {
+            color: #38bdf8;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Hộp Âm Hán Việt & Dịch Nghĩa */
+        .q-trans-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-left: 3px solid var(--accent-blue);
+            border-radius: 6px;
+            padding: 8px 11px;
+            margin-bottom: 11px;
+            font-size: 0.88rem;
+            line-height: 1.48;
+        }
+
+        .q-trans-am {
+            color: var(--gold-light);
+            margin-bottom: 3px;
+        }
+
+        .q-trans-nghia {
+            color: #d1d5db;
+        }
+
+        .q-trans-label {
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-right: 4px;
+        }
+
+        .q-ask {
+            font-size: 0.96rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .q-ask strong {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.25rem;
+            color: var(--accent-blue);
+            padding: 0 4px;
+        }
+
+        .opts-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .opt-item {
+            padding: 8px 11px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: left;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .opt-item:hover {
+            border-color: var(--gold);
+            background: rgba(245, 158, 11, 0.14);
+        }
+
+        .opt-item.show-correct, .opt-item.user-correct {
+            background: rgba(16, 185, 129, 0.24);
+            border-color: var(--accent-green);
+            color: #a7f3d0;
+            font-weight: 700;
+        }
+
+        .opt-item.user-wrong {
+            background: rgba(239, 68, 68, 0.25);
+            border-color: var(--accent-red);
+            color: #fecaca;
+        }
+
+        .q-note {
+            margin-top: 10px;
+            padding: 8px 10px;
+            border-radius: 7px;
+            background: rgba(245, 158, 11, 0.15);
+            border-left: 3px solid var(--gold);
+            color: var(--gold-light);
+            font-size: 0.84rem;
+        }
+
+        /* Phòng Thi Thử (Tab 2) */
+        .exam-layout {
+            display: grid;
+            grid-template-columns: 1fr 330px;
+            gap: 18px;
+        }
+
+        @media (max-width: 900px) {
+            .exam-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .exam-main {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .exam-sidebar {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 16px;
+            max-height: 540px;
+            overflow-y: auto;
+        }
+
+        .num-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .num-btn {
+            padding: 7px 0;
+            text-align: center;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .num-btn.current {
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .num-btn.done-ok {
+            background: var(--accent-green);
+            color: #000;
+            border-color: var(--accent-green);
+        }
+
+        .num-btn.done-bad {
+            background: var(--accent-red);
+            color: #fff;
+            border-color: var(--accent-red);
+        }
+
+        .exam-opt-btn {
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1.02rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s;
+        }
+
+        .exam-opt-btn:hover:not(:disabled) {
+            border-color: var(--gold);
+            background: rgba(245, 158, 11, 0.16);
+        }
+
+        .exam-opt-btn.correct {
+            background: rgba(16, 185, 129, 0.28);
+            border-color: var(--accent-green);
+            color: #a7f3d0;
+            font-weight: 700;
+        }
+
+        .exam-opt-btn.wrong {
+            background: rgba(239, 68, 68, 0.28);
+            border-color: var(--accent-red);
+            color: #fecaca;
+        }
+
+        .exam-trans-box {
+            margin: 12px auto 14px;
+            max-width: 650px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(56, 189, 248, 0.45);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        /* In A4 Khổ Ngang */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            #bgCanvas, .top-bar, .control-panel, #view-exam {
+                display: none !important;
+            }
+            #view-list {
+                display: block !important;
+            }
+            header, .q-card {
+                background: #fff !important;
+                color: #000 !important;
+                border: 1px solid #333 !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+            }
+            .questions-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 10px !important;
+            }
+            header h1, .q-sentence, .q-ask strong, .opt-item, .q-note,
+            .q-trans-am, .q-trans-nghia, .q-trans-label {
+                color: #000 !important;
+            }
+            .q-trans-box {
+                background: #f9fafb !important;
+                border-left: 3px solid #000 !important;
+            }
+            .opt-item.show-correct {
+                border: 2px solid #000 !important;
+                font-weight: 700 !important;
+                background: #e5e7eb !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<div class="container">
+    <header>
+        <h1>BÀI TẬP TRẮC NGHIỆM NGỮ PHÁP - HÁN CỔ 4</h1>
+        <p>Bộ Đề Ôn Tập &amp; Luyện Thi Đầy Đủ 97 Câu Trắc Nghiệm Từ Loại Hán Cổ (Kèm Âm &amp; Dịch Nghĩa)</p>
+    </header>
+
+    <div class="top-bar">
+        <div class="nav-tabs">
+            <button class="btn active" onclick="switchTab('list', this)">📋 Toàn Bộ 97 Câu (Ôn &amp; Dò Bài)</button>
+            <button class="btn" onclick="switchTab('exam', this)">🎯 Phòng Thi Thử (Từng Câu / Ngẫu Nhiên)</button>
+        </div>
+        <div class="utility-btns">
+            <button class="btn active" id="btnToggleTrans" onclick="toggleShowTrans()">📖 Đang Hiện Âm &amp; Nghĩa</button>
+            <button class="btn" onclick="toggleTheme()">🌌 Đổi Nền (Vũ Trụ / Rừng Trúc)</button>
+            <button class="btn" onclick="window.print()">🖨️ In A4 Khổ Ngang</button>
+        </div>
+    </div>
+
+    <!-- ==================== TAB 1: DANH SÁCH 97 CÂU ==================== -->
+    <section id="view-list" class="view-section active">
+        <div class="control-panel">
+            <div class="control-row">
+                <input type="text" id="searchInput" class="search-box" placeholder="🔍 Tìm theo số câu (1-97), chữ Hán, âm Hán Việt, dịch nghĩa hoặc từ loại..." oninput="renderList()">
+                <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                    <button class="btn active" id="btnShowAns" onclick="toggleShowAnswers()">👁️ Đang Hiện Đáp Án</button>
+                    <button class="btn" onclick="resetListPractice()">🔄 Làm Lại Từ Đầu</button>
+                    <span class="badge-count" id="listStatsBadge">Đang hiện: 97 / 97 câu</span>
+                </div>
+            </div>
+
+            <div class="char-filters" id="charFilterBar">
+                <span style="font-size:0.85rem; color:var(--gold-light); margin-right:4px;">Lọc nhanh chữ được hỏi:</span>
+            </div>
+        </div>
+
+        <div class="questions-grid" id="questionsGrid"></div>
+    </section>
+
+    <!-- ==================== TAB 2: PHÒNG THI THỬ ==================== -->
+    <section id="view-exam" class="view-section">
+        <div class="control-panel">
+            <div class="control-row">
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="btn active" id="exModeSeq" onclick="initExam('seq')">📖 Làm Lần Lượt (Câu 1 ➔ 97)</button>
+                    <button class="btn" id="exModeRand" onclick="initExam('rand')">🔀 Trộn Ngẫu Nhiên 97 Câu</button>
+                    <button class="btn" id="exModeWrong" onclick="initExam('wrong')">⚠️ Làm Lại Các Câu Sai</button>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <span class="badge-count" id="examScoreBadge">Đúng: 0 | Sai: 0 | Chưa làm: 97</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="exam-layout">
+            <div class="exam-main" id="examMainBox">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                    <span class="q-num" id="exQNum" style="font-size:1rem; padding:5px 14px;">Câu 1</span>
+                    <span style="color:var(--text-muted); font-size:0.9rem;" id="exProgressText">1 / 97</span>
+                </div>
+
+                <div style="text-align:center; padding:24px 16px; background:rgba(0,0,0,0.35); border-radius:12px; border:1px solid rgba(255,255,255,0.1); margin-bottom:18px;">
+                    <div class="hanzi" id="exSentence" style="font-family:'Noto Serif TC',serif; font-size:2.4rem; color:var(--gold-light); margin-bottom:10px;"></div>
+                    <div id="exTransContainer"></div>
+                    <p id="exAskText" style="font-size:1.15rem;"></p>
+                </div>
+
+                <div id="exOptionsGrid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;"></div>
+
+                <div id="exFeedback" style="margin-top:16px; min-height:32px; font-weight:600; text-align:center;"></div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:20px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.1);">
+                    <button class="btn" onclick="stepExam(-1)">⬅️ Câu Trước</button>
+                    <label style="display:flex; align-items:center; gap:6px; font-size:0.88rem; color:var(--gold-light); cursor:pointer;">
+                        <input type="checkbox" id="autoNextChk" checked> Tự chuyển câu khi chọn đúng
+                    </label>
+                    <button class="btn active" onclick="stepExam(1)">Câu Tiếp Theo ➡️</button>
+                </div>
+            </div>
+
+            <div class="exam-sidebar">
+                <h3 style="color:var(--gold); font-size:0.95rem; text-transform:uppercase; margin-bottom:6px;">Bảng Điều Hướng (97 Câu)</h3>
+                <p style="font-size:0.8rem; color:var(--text-muted);">Bấm vào số câu bất kỳ để chuyển nhanh:</p>
+                <div class="num-grid" id="examNavGrid"></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    // ==================== DỮ LIỆU 97 CÂU TRẮC NGHIỆM (KÈM ÂM & NGHĨA) ====================
+    // Định dạng: [số_câu, "Câu chữ Hán", "Âm Hán Việt", "Dịch nghĩa", "Chữ hỏi", {A, B, C, D, E?}, "Đáp_án", "Ghi_chú?"]
+    const rawQuestions = [
+        [1, "巷中有屋。", "Hạng trung hữu ốc.", "Trong ngõ (hẻm) có ngôi nhà.", "中", {A:"Phó từ", B:"Phương vị từ", C:"Giới từ", D:"Liên từ"}, "B"],
+        [2, "四面短牆。", "Tứ diện đoản tường.", "Bốn mặt là tường thấp (ngắn).", "四", {A:"Trợ từ", B:"Số từ", C:"Phó từ", D:"Liên từ"}, "B"],
+        [3, "夫死從子。", "Phu tử tòng tử.", "Chồng mất thì theo con.", "從", {A:"Liên từ", B:"Phó từ", C:"Động từ", D:"Trợ từ"}, "C"],
+        [4, "客堂在前。", "Khách đường tại tiền.", "Phòng khách ở phía trước.", "在", {A:"Động từ", B:"Trợ từ", C:"Liên từ", D:"Giới từ"}, "A"],
+        [5, "我父與客閒眺。", "Ngã phụ dữ khách nhàn diếu.", "Cha tôi cùng khách thong thả ngắm nhìn.", "與", {A:"Trợ từ", B:"Phó từ", C:"Giới từ", D:"Liên từ"}, "C"],
+        [6, "默者不為煩惱所擾。", "Mặc giả bất vi phiền não sở nhiễu.", "Người trầm mặc không bị phiền não quấy nhiễu.", "爲", {A:"Trợ từ", B:"Liên từ", C:"Phó từ", D:"Giới từ"}, "D"],
+        [7, "書齋在旁。", "Thư trai tại bàng.", "Phòng đọc sách ở bên cạnh.", "旁", {A:"Giới từ", B:"Phương vị từ", C:"Liên từ", D:"Phó từ"}, "B"],
+        [8, "我從去年辭帝京。", "Ngã tòng khứ niên từ đế kinh.", "Tôi từ năm ngoái rời bỏ kinh đô.", "從", {A:"Trợ từ", B:"Liên từ", C:"Giới từ", D:"Phó từ"}, "C"],
+        [9, "安生王柳之子也。", "An Sinh Vương Liễu chi tử dã.", "Là con của An Sinh Vương (Trần) Liễu vậy.", "之", {A:"Phó từ", B:"Giới từ", C:"Liên từ", D:"Trợ từ kết cấu"}, "D"],
+        [10, "齒在內，其色白。", "Xỉ tại nội, kỳ sắc bạch.", "Răng ở bên trong, màu của nó trắng.", "內", {A:"Phương vị từ", B:"Liên từ", C:"Phó từ", D:"Giới từ"}, "A"],
+        [11, "座上客，遠方來。", "Tọa thượng khách, viễn phương lai.", "Khách trên chỗ ngồi từ phương xa tới.", "上", {A:"Giới từ", B:"Phương vị từ", C:"Phó từ", D:"Liên từ"}, "B"],
+        [12, "角與皮。", "Giác dữ bì.", "Sừng và da.", "與", {A:"Trợ từ", B:"Phó từ", C:"Giới từ", D:"Liên từ"}, "D"],
+        [13, "離俗從道也。", "Ly tục tòng đạo dã.", "Rời bỏ thế tục để theo đạo vậy.", "旁", {A:"Giới từ", B:"Trợ từ", C:"Liên từ", D:"Động từ"}, "D", "Lưu ý: Bản gốc đề in là chữ 旁, nhưng theo bảng tổng hợp ngữ pháp thì câu 13 hỏi chữ 從 (Động từ)."],
+        [14, "前有青山，旁有流水。", "Tiền hữu thanh sơn, bàng hữu lưu thủy.", "Phía trước có núi xanh, bên cạnh có dòng nước chảy.", "旁", {A:"Giới từ", B:"Phó từ", C:"Liên từ", D:"Phương vị từ"}, "B"],
+        [15, "北風起，大雪飛。", "Bắc phong khởi, đại tuyết phi.", "Gió bấc nổi lên, tuyết lớn bay.", "北", {A:"Giới từ", B:"Phương vị từ", C:"Liên từ", D:"Phó từ"}, "B"],
+        [16, "登樓遠望，一片白色。", "Đăng lâu viễn vọng, nhất phiến bạch sắc.", "Lên lầu nhìn xa, một vùng màu trắng.", "遠", {A:"Trợ từ", B:"Phó từ", C:"Liên từ", D:"Giới từ"}, "B"],
+        [17, "重興間,兩退元兵。", "Trùng Hưng gian, lưỡng thoái Nguyên binh.", "Trong niên hiệu Trùng Hưng, hai lần đánh lui quân Nguyên.", "兩", {A:"Trợ từ", B:"Liên từ", C:"Giới từ", D:"Phó từ"}, "D"],
+        [18, "日為雲所蔽。", "Nhật vi vân sở tế.", "Mặt trời bị mây che khuất.", "爲", {A:"Liên từ", B:"Giới từ", C:"Trợ từ", D:"Phó từ"}, "B"],
+        [19, "脣在外，其色赤。", "Thần tại ngoại, kỳ sắc xích.", "Môi ở bên ngoài, màu của nó đỏ.", "在", {A:"Động từ", B:"Trợ từ", C:"Liên từ", D:"Giới từ"}, "A"],
+        [20, "脣在外，其色赤。", "Thần tại ngoại, kỳ sắc xích.", "Môi ở bên ngoài, màu của nó đỏ.", "外", {A:"Động từ", B:"Phương vị từ", C:"Liên từ", D:"Giới từ"}, "B"],
+        [21, "脣在外，其色赤。", "Thần tại ngoại, kỳ sắc xích.", "Môi ở bên ngoài, màu của nó đỏ.", "其", {A:"Đại từ", B:"Giới từ", C:"Trợ từ", D:"Phó từ"}, "A"],
+        [22, "齒在內，其色白。", "Xỉ tại nội, kỳ sắc bạch.", "Răng ở bên trong, màu của nó trắng.", "在", {A:"Liên từ", B:"Động từ", C:"Giới từ", D:"Trợ từ"}, "B"],
+        [23, "此房子向東。", "Thử phòng tử hướng đông.", "Ngôi nhà này hướng về phía đông.", "向", {A:"Động từ", B:"Giới từ", C:"Trợ từ", D:"Liên từ"}, "A"],
+        [24, "齒在內，其色白。", "Xỉ tại nội, kỳ sắc bạch.", "Răng ở bên trong, màu của nó trắng.", "其", {A:"Trợ từ", B:"Giới từ", C:"Đại từ", D:"Phó từ"}, "C"],
+        [25, "飲食從口入。", "Ẩm thực tòng khẩu nhập.", "Đồ ăn thức uống từ miệng vào.", "從", {A:"Phó từ", B:"Giới từ", C:"Trợ từ", D:"Liên từ"}, "B"],
+        [26, "前有青山，旁有流水。", "Tiền hữu thanh sơn, bàng hữu lưu thủy.", "Phía trước có núi xanh, bên cạnh có dòng nước chảy.", "前", {A:"Phó từ", B:"Giới từ", C:"Phương vị từ", D:"Liên từ"}, "A"],
+        [27, "臥室在後。", "Ngọa thất tại hậu.", "Phòng ngủ ở phía sau.", "在", {A:"Động từ", B:"Giới từ", C:"Trợ từ", D:"Liên từ"}, "A"],
+        [28, "從上海到北京。", "Tòng Thượng Hải đáo Bắc Kinh.", "Từ Thượng Hải đến Bắc Kinh.", "從", {A:"Trợ từ", B:"Giới từ", C:"Phó từ", D:"Liên từ"}, "B"],
+        [29, "從無到有。", "Tòng vô đáo hữu.", "Từ không đến có.", "從", {A:"Giới từ", B:"Phó từ", C:"Trợ từ", D:"Liên từ"}, "A"],
+        [30, "從少到多。", "Tòng thiểu đáo đa.", "Từ ít đến nhiều.", "從", {A:"Trợ từ", B:"Liên từ", C:"Phó từ", D:"Giới từ"}, "D"],
+        [31, "力不從心。", "Lực bất tòng tâm.", "Sức không theo kịp lòng (lực bất tòng tâm).", "從", {A:"Động từ", B:"Liên từ", C:"Giới từ", D:"Trợ từ"}, "A"],
+        [32, "書齋在旁。", "Thư trai tại bàng.", "Phòng đọc sách ở bên cạnh.", "在", {A:"Liên từ", B:"Động từ", C:"Trợ từ", D:"Giới từ"}, "B"],
+        [33, "人在燭旁，壁上有影。", "Nhân tại chúc bàng, bích thượng hữu ảnh.", "Người ở bên cạnh ngọn nến, trên vách có bóng.", "在", {A:"Liên từ", B:"Động từ", C:"Trợ từ", D:"Giới từ"}, "B"],
+        [34, "不能聽者為聾。", "Bất năng thính giả vi lung.", "Người không thể nghe được là điếc.", "爲", {A:"Trợ từ", B:"Liên từ", C:"Giới từ", D:"Động từ"}, "D"],
+        [35, "王乃與妹貳起兵攻之。", "Vương nãi dữ muội Nhị khởi binh công chi.", "Vua (Trưng Vương) bèn cùng em gái là (Trưng) Nhị dấy binh đánh hắn.", "與", {A:"Phó từ", B:"Liên từ", C:"Trợ từ", D:"Giới từ"}, "D"],
+        [36, "安生王與太宗有隙。", "An Sinh Vương dữ Thái Tông hữu khích.", "An Sinh Vương với vua Thái Tông có mối bất hòa (hiềm khích).", "與", {A:"Phó từ", B:"Giới từ", C:"Liên từ", D:"Trợ từ"}, "B"],
+        [37, "安生王柳之子也。", "An Sinh Vương Liễu chi tử dã.", "Là con của An Sinh Vương (Trần) Liễu vậy.", "也", {A:"Trợ từ", B:"Liên từ", C:"Giới từ", D:"Phó từ"}, "A"],
+        [38, "汝不能爲我得天下吾不暝目。", "Nhữ bất năng vị ngã đắc thiên hạ ngô bất minh mục.", "Ngươi không thể vì ta mà lấy được thiên hạ thì ta chết không nhắm mắt.", "汝", {A:"Phó từ", B:"Trợ từ", C:"Đại từ", D:"Giới từ"}, "C"],
+        [39, "汝不能爲我得天下吾不暝目。", "Nhữ bất năng vị ngã đắc thiên hạ ngô bất minh mục.", "Ngươi không thể vì ta mà lấy được thiên hạ thì ta chết không nhắm mắt.", "不", {A:"Trợ từ", B:"Liên từ", C:"Phó từ", D:"Giới từ"}, "C"],
+        [40, "汝不能爲我得天下吾不暝目。", "Nhữ bất năng vị ngã đắc thiên hạ ngô bất minh mục.", "Ngươi không thể vì ta mà lấy được thiên hạ thì ta chết không nhắm mắt.", "能", {A:"Trợ động từ", B:"Liên từ", C:"Giới từ", D:"Trợ từ"}, "A"],
+        [41, "汝不能爲我得天下吾不暝目。", "Nhữ bất năng vị ngã đắc thiên hạ ngô bất minh mục.", "Ngươi không thể vì ta mà lấy được thiên hạ thì ta chết không nhắm mắt.", "吾", {A:"Phó từ", B:"Giới từ", C:"Trợ từ", D:"Đại từ"}, "D"],
+        [42, "一童子在後。", "Nhất đồng tử tại hậu.", "Một đứa trẻ (tiểu đồng) ở phía sau.", "在", {A:"Trợ từ", B:"Động từ", C:"Liên từ", D:"Giới từ"}, "B"],
+        [43, "王深念之。", "Vương thâm niệm chi.", "Nhà vua rất thương nhớ (nghĩ đến) người ấy.", "之", {A:"Giới từ", B:"Trợ từ", C:"Phó từ", D:"Đại từ"}, "D"],
+        [44, "一片白色。", "Nhất phiến bạch sắc.", "Một vùng (mảng) màu trắng.", "一", {A:"Trợ từ", B:"Số từ", C:"Phó từ", D:"Liên từ"}, "B"],
+        [45, "及卒,立廟祀之。", "Cập tốt, lập miếu tự chi.", "Đến khi mất, lập miếu thờ ông.", "之", {A:"Đại từ", B:"Giới từ", C:"Trợ từ", D:"Phó từ"}, "A"],
+        [46, "材與不材。", "Tài dữ bất tài.", "Có tài và bất tài (gỗ dùng được và gỗ không dùng được).", "與", {A:"Phó từ", B:"Liên từ", C:"Trợ từ", D:"Giới từ"}, "B"],
+        [47, "臥室在後。", "Ngọa thất tại hậu.", "Phòng ngủ ở phía sau.", "後", {A:"Giới từ", B:"Phó từ", C:"Phương vị từ", D:"Liên từ"}, "C"],
+        [48, "手足承腦之命令以行動。", "Thủ túc thừa não chi mệnh lệnh dĩ hành động.", "Tay chân vâng theo mệnh lệnh của não để hành động.", "以", {A:"Giới từ", B:"Phó từ", C:"Liên từ", D:"Trợ từ"}, "C"],
+        [49, "我房子向西開門。", "Ngã phòng tử hướng tây khai môn.", "Ngôi nhà của tôi mở cửa hướng về phía tây.", "向", {A:"Giới từ", B:"Phó từ", C:"Trợ từ", D:"Liên từ"}, "A"],
+        [50, "王深念之。", "Vương thâm niệm chi.", "Nhà vua rất thương nhớ (nghĩ đến) người ấy.", "深", {A:"Phó từ", B:"Giới từ", C:"Liên từ", D:"Trợ từ"}, "A"],
+        [51, "不能言者為啞。", "Bất năng ngôn giả vi á.", "Người không thể nói được là câm.", "爲", {A:"Trợ từ", B:"Liên từ", C:"Giới từ", D:"Động từ"}, "D"],
+        [52, "何不試之以足。", "Hà bất thí chi dĩ túc.", "Sao không lấy chân mà thử nó?", "以", {A:"Giới từ", B:"Trợ từ", C:"Phó từ", D:"Liên từ"}, "A"],
+        [53, "未嫁從父。", "Vị giá tòng phụ.", "Chưa xuất giá (lấy chồng) thì theo cha.", "從", {A:"Liên từ", B:"Trợ từ", C:"Động từ", D:"Giới từ"}, "C"],
+        [54, "子為我問孟子。", "Tử vị ngã vấn Mạnh Tử.", "Thầy (bạn) hãy vì tôi mà hỏi Mạnh Tử.", "爲", {A:"Trợ từ", B:"Liên từ", C:"Giới từ", D:"Phó từ"}, "C"],
+        [55, "你向北，我向南。", "Nhĩ hướng bắc, ngã hướng nam.", "Bạn hướng về phía bắc, tôi hướng về phía nam.", "向", {A:"Liên từ", B:"Giới từ", C:"Động từ", D:"Trợ từ"}, "C"],
+        [56, "其性皆耐寒，與他樹不同。", "Kỳ tính giai nại hàn, dữ tha thụ bất đồng.", "Tính của chúng đều chịu lạnh giỏi, không giống với các cây khác.", "與", {A:"Trợ từ", B:"Liên từ", C:"Phó từ", D:"Giới từ"}, "D"],
+        [57, "殺人以刀。", "Sát nhân dĩ đao.", "Giết người bằng đao.", "以", {A:"Liên từ", B:"Trợ từ", C:"Giới từ", D:"Phó từ"}, "C"],
+        [58, "山與水。", "Sơn dữ thủy.", "Núi và nước.", "與", {A:"Trợ từ", B:"Liên từ", C:"Giới từ", D:"Phó từ"}, "B"],
+        [59, "富與貴。", "Phú dữ quý.", "Giàu và sang.", "與", {A:"Phó từ", B:"Liên từ", C:"Trợ từ", D:"Giới từ"}, "B"],
+        [60, "他在家，我不在家。", "Tha tại gia, ngã bất tại gia.", "Anh ấy ở nhà, tôi không ở nhà.", "在", {A:"Trợ từ", B:"Liên từ", C:"Giới từ", D:"Động từ"}, "D"],
+        [61, "他在家中修行。", "Tha tại gia trung tu hành.", "Anh ấy tu hành ở trong nhà.", "在", {A:"Liên từ", B:"Giới từ", C:"Trợ từ", D:"Phó từ"}, "B"],
+        [62, "他在家中學習。", "Tha tại gia trung học tập.", "Anh ấy học tập ở trong nhà.", "在", {A:"Phó từ", B:"Trợ từ", C:"Liên từ", D:"Giới từ"}, "D"],
+        [63, "我等在佛學院學古代漢語。", "Ngã đẳng tại Phật học viện học Cổ đại Hán ngữ.", "Chúng tôi học Hán ngữ cổ đại ở Học viện Phật giáo.", "在", {A:"Trợ từ", B:"Liên từ", C:"Phó từ", D:"Giới từ"}, "D"],
+        [64, "我房子向西。", "Ngã phòng tử hướng tây.", "Ngôi nhà của tôi hướng về phía tây.", "向", {A:"Động từ", B:"Giới từ", C:"Liên từ", D:"Trợ từ"}, "A"],
+        [65, "我在佛學院。", "Ngã tại Phật học viện.", "Tôi ở Học viện Phật giáo.", "在", {A:"Trợ từ", B:"Giới từ", C:"Động từ", D:"Liên từ"}, "C"],
+        [66, "我向南而行。", "Ngã hướng nam nhi hành.", "Tôi hướng về phía nam mà đi.", "向", {A:"Phó từ", B:"Liên từ", C:"Trợ từ", D:"Giới từ"}, "D"],
+        [67, "我與你。", "Ngã dữ nhĩ.", "Tôi và bạn.", "與", {A:"Trợ từ", B:"Phó từ", C:"Liên từ", D:"Giới từ"}, "C"],
+        [68, "飯後出門，與客閒眺。", "Phạn hậu xuất môn, dữ khách nhàn diếu.", "Sau bữa cơm ra khỏi cửa, cùng khách thong thả ngắm cảnh.", "與", {A:"Phó từ", B:"Trợ từ", C:"Liên từ", D:"Giới từ"}, "D"],
+        [69, "渴與飢。", "Khát dữ cơ.", "Khát và đói.", "與", {A:"Phó từ", B:"Trợ từ", C:"Liên từ", D:"Giới từ"}, "C"],
+        [70, "吾人在家中修行念佛。", "Ngô nhân tại gia trung tu hành niệm Phật.", "Chúng ta ở trong nhà tu hành niệm Phật.", "在", {A:"Liên từ", B:"Trợ từ", C:"Phó từ", D:"Giới từ"}, "D"],
+        [71, "工業與農業。", "Công nghiệp dữ nông nghiệp.", "Công nghiệp và nông nghiệp.", "與", {A:"Giới từ", B:"Trợ từ", C:"Liên từ", D:"Phó từ"}, "C"],
+        [72, "一童子在後見之。", "Nhất đồng tử tại hậu kiến chi.", "Một đứa trẻ ở phía sau nhìn thấy nó (việc ấy).", "在", {A:"Trợ từ", B:"Giới từ", C:"Phó từ", D:"Liên từ"}, "B"],
+        [73, "以佛法教人。", "Dĩ Phật pháp giáo nhân.", "Lấy Phật pháp để dạy người.", "以", {A:"Phó từ", B:"Liên từ", C:"Trợ từ", D:"Giới từ"}, "D"],
+        [74, "客堂在前。", "Khách đường tại tiền.", "Phòng khách ở phía trước.", "前", {A:"Phó từ", B:"Liên từ", C:"Giới từ", D:"Phương vị từ"}, "D"],
+        [75, "吾人在家中孝父母。", "Ngô nhân tại gia trung hiếu phụ mẫu.", "Chúng ta ở trong nhà hiếu thảo với cha mẹ.", "在", {A:"Liên từ", B:"Phó từ", C:"Giới từ", D:"Trợ từ"}, "C"],
+        [76, "民為貴,君為輕。", "Dân vi quý, quân vi khinh.", "Dân là quý (trọng), vua là nhẹ (kém hơn).", "爲", {A:"Động từ", B:"Giới từ", C:"Trợ từ", D:"Liên từ"}, "A"],
+        [77, "耳為聽官。", "Nhĩ vi thính quan.", "Tai là cơ quan nghe (thính giác).", "爲", {A:"Liên từ", B:"Giới từ", C:"Động từ", D:"Trợ từ"}, "C"],
+        [78, "目為視官。", "Mục vi thị quan.", "Mắt là cơ quan nhìn (thị giác).", "爲", {A:"Trợ từ", B:"Động từ", C:"Liên từ", D:"Giới từ"}, "B"],
+        [79, "鼻為嗅官。", "Tị vi khứu quan.", "Mũi là cơ quan ngửi (khứu giác).", "爲", {A:"Trợ từ", B:"Giới từ", C:"Động từ", D:"Liên từ"}, "C"],
+        [80, "舌為味官。", "Thiệt vi vị quan.", "Lưỡi là cơ quan nếm (vị giác).", "爲", {A:"Liên từ", B:"Giới từ", C:"Trợ từ", D:"Động từ"}, "D"],
+        [81, "以子之矛，陷子之盾，何如？。", "Dĩ tử chi mâu, hãm tử chi thuẫn, hà như?", "Lấy giáo của bác đâm vào khiên của bác thì thế nào?", "以", {A:"Liên từ", B:"Giới từ", C:"Trợ từ", D:"Phó từ"}, "B"],
+        [82, "不能視者為肓。", "Bất năng thị giả vi manh.", "Người không thể nhìn được là mù (chữ 肓 trong đề gốc đọc theo chữ 盲 - manh).", "爲", {A:"Liên từ", B:"Động từ", C:"Giới từ", D:"Trợ từ"}, "B"],
+        [83, "今爾向日而行，是為東方。", "Kim nhĩ hướng nhật nhi hành, thị vi đông phương.", "Nay ngươi hướng về phía mặt trời mà đi, đó là phương đông.", "向", {A:"Giới từ", B:"Phó từ", C:"Trợ từ", D:"Liên từ"}, "A"],
+        [84, "汝不能爲我得天下吾不暝目。", "Nhữ bất năng vị ngã đắc thiên hạ ngô bất minh mục.", "Ngươi không thể vì ta mà lấy được thiên hạ thì ta chết không nhắm mắt.", "爲", {A:"Liên từ", B:"Trợ từ", C:"Giới từ", D:"Phó từ"}, "C"],
+        [85, "我在佛學院學習漢語。", "Ngã tại Phật học viện học tập Hán ngữ.", "Tôi học tập Hán ngữ ở Học viện Phật giáo.", "在", {A:"Giới từ", B:"Phó từ", C:"Liên từ", D:"Trợ từ"}, "A"],
+        [86, "若為塵垢所阻。", "Nhược vi trần cấu sở trở.", "Nếu bị bụi bặm (trần cấu) ngăn trở.", "爲", {A:"Phó từ", B:"Giới từ", C:"Trợ từ", D:"Liên từ"}, "B"],
+        [87, "其形如箸。", "Kỳ hình như trứ.", "Hình dáng của nó giống như đôi đũa.", "其", {A:"Giới từ", B:"Trợ từ", C:"Phó từ", D:"Đại từ"}, "D"],
+        [88, "寂者不為苦樂所動。", "Tịch giả bất vi khổ lạc sở động.", "Người tĩnh lặng không bị khổ vui làm lay động.", "為", {A:"Phó từ", B:"Liên từ", C:"Giới từ", D:"Trợ từ"}, "C"],
+        [89, "身為宋國笑。", "Thân vi Tống quốc tiếu.", "Bản thân bị nước Tống chê cười.", "爲", {A:"Trợ từ", B:"Liên từ", C:"Giới từ", D:"Phó từ"}, "C"],
+        [90, "此房子向東開門。", "Thử phòng tử hướng đông khai môn.", "Ngôi nhà này mở cửa hướng về phía đông.", "向", {A:"Phó từ", B:"Giới từ", C:"Liên từ", D:"Trợ từ"}, "B"],
+        [91, "出嫁從夫。", "Xuất giá tòng phu.", "Lấy chồng (xuất giá) thì theo chồng.", "從", {A:"Giới từ", B:"Trợ từ", C: "Động từ", D:"Liên từ"}, "C"],
+        [92, "此房子向南開門。", "Thử phòng tử hướng nam khai môn.", "Ngôi nhà này mở cửa hướng về phía nam.", "向", {A:"Phó từ", B:"Giới từ", C:"Trợ từ", D:"Liên từ"}, "B"],
+        [93, "言語從口出。", "Ngôn ngữ tòng khẩu xuất.", "Lời nói từ miệng phát ra.", "從", {A:"Liên từ", B:"Trợ từ", C:"Phó từ", D:"Giới từ"}, "D"],
+        [94, "行八正道，以不失人格。", "Hành Bát chính đạo, dĩ bất thất nhân cách.", "Thực hành Bát chính đạo để không đánh mất nhân cách.", "以", {A:"Giới từ", B:"Trợ từ", C:"Phó từ", D:"Liên từ"}, "D"],
+        [95, "汝不能爲我得天下吾不暝目。", "Nhữ bất năng vị ngã đắc thiên hạ ngô bất minh mục.", "Ngươi không thể vì ta mà lấy được thiên hạ thì ta chết không nhắm mắt.", "汝", {A:"Động từ", B:"Liên từ", C:"Đại từ", D:"Trợ từ"}, "C"],
+        [96, "汝不能爲我得天下吾不暝目。", "Nhữ bất năng vị ngã đắc thiên hạ ngô bất minh mục.", "Ngươi không thể vì ta mà lấy được thiên hạ thì ta chết không nhắm mắt.", "能", {A:"Đại từ", B:"Liên từ", C:"Giới từ", D:"Trợ từ", E:"Trợ động từ"}, "E", "Lưu ý câu 96: Đề không có lựa chọn đúng. 能 là trợ động từ (TĐT), không phải “trợ từ”."],
+        [97, "今爾向日而行，是為東方。", "Kim nhĩ hướng nhật nhi hành, thị vi đông phương.", "Nay ngươi hướng về phía mặt trời mà đi, đó là phương đông.", "向", {A:"Giới từ", B:"Đại từ", C:"Trợ từ", D:"Liên từ"}, "A"]
+    ];
+
+    const questions = rawQuestions.map(q => ({
+        id: q[0],
+        sent: q[1],
+        am: q[2],
+        nghia: q[3],
+        ask: q[4],
+        normAsk: q[4] === "為" ? "爲" : q[4],
+        opts: q[5],
+        ans: q[6],
+        note: q[7] || ""
+    }));
+
+    // ==================== STATE DANH SÁCH (TAB 1) ====================
+    let showAnswers = true;
+    let showTrans = true;
+    let selectedCharFilter = "ALL";
+    let listUserChoices = {}; // { id: 'A' | 'B'... }
+
+    function removeAccents(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    function highlightSentence(sent, askChar) {
+        const targets = (askChar === "爲" || askChar === "為") ? ["爲", "為"] : [askChar];
+        let out = sent;
+        targets.forEach(t => {
+            out = out.split(t).join(`<span class="hl-char">${t}</span>`);
+        });
+        return out;
+    }
+
+    function initCharFilters() {
+        const bar = document.getElementById('charFilterBar');
+        const counts = {};
+        questions.forEach(q => {
+            counts[q.normAsk] = (counts[q.normAsk] || 0) + 1;
+        });
+
+        const allChip = document.createElement('button');
+        allChip.className = 'chip active';
+        allChip.dataset.char = 'ALL';
+        allChip.textContent = `Tất cả (97)`;
+        allChip.onclick = () => selectCharChip('ALL');
+        bar.appendChild(allChip);
+
+        Object.keys(counts).sort((a, b) => counts[b] - counts[a]).forEach(ch => {
+            const btn = document.createElement('button');
+            btn.className = 'chip';
+            btn.dataset.char = ch;
+            btn.textContent = `${ch} (${counts[ch]})`;
+            btn.onclick = () => selectCharChip(ch);
+            bar.appendChild(btn);
+        });
+    }
+
+    function selectCharChip(ch) {
+        selectedCharFilter = ch;
+        document.querySelectorAll('#charFilterBar .chip').forEach(c => {
+            c.classList.toggle('active', c.dataset.char === ch);
+        });
+        renderList();
+    }
+
+    function toggleShowAnswers() {
+        showAnswers = !showAnswers;
+        const btn = document.getElementById('btnShowAns');
+        btn.classList.toggle('active', showAnswers);
+        btn.textContent = showAnswers ? '👁️ Đang Hiện Đáp Án' : '🙈 Đang Ẩn Đáp Án (Bấm chọn để dò)';
+        renderList();
+    }
+
+    function toggleShowTrans() {
+        showTrans = !showTrans;
+        const btn = document.getElementById('btnToggleTrans');
+        btn.classList.toggle('active', showTrans);
+        btn.textContent = showTrans ? '📖 Đang Hiện Âm & Nghĩa' : '📕 Đang Ẩn Âm & Nghĩa';
+        renderList();
+        if (examDeck.length > 0) {
+            renderExamQuestion();
+        }
+    }
+
+    function resetListPractice() {
+        listUserChoices = {};
+        renderList();
+    }
+
+    function pickListOption(qId, key) {
+        listUserChoices[qId] = key;
+        renderList();
+    }
+
+    function renderList() {
+        const rawQ = document.getElementById('searchInput').value.trim();
+        const q = rawQ.toLowerCase();
+        const qNo = removeAccents(q);
+        const grid = document.getElementById('questionsGrid');
+        grid.innerHTML = '';
+
+        const filtered = questions.filter(item => {
+            if (selectedCharFilter !== 'ALL' && item.normAsk !== selectedCharFilter) return false;
+            if (!q) return true;
+            if (/^\d+$/.test(rawQ)) return item.id === parseInt(rawQ, 10);
+            const ansText = item.opts[item.ans] || "";
+            return item.sent.toLowerCase().includes(q) ||
+                   item.ask.toLowerCase().includes(q) ||
+                   removeAccents(item.am).includes(qNo) ||
+                   removeAccents(item.nghia).includes(qNo) ||
+                   removeAccents(ansText).includes(qNo) ||
+                   `câu ${item.id}` === q;
+        });
+
+        const answeredCount = Object.keys(listUserChoices).length;
+        const correctCount = Object.keys(listUserChoices).filter(id => {
+            const qObj = questions.find(x => x.id === Number(id));
+            return qObj && listUserChoices[id] === qObj.ans;
+        }).length;
+
+        document.getElementById('listStatsBadge').textContent = answeredCount > 0
+            ? `Đúng: ${correctCount}/${answeredCount} | Hiện: ${filtered.length}/97 câu`
+            : `Đang hiện: ${filtered.length} / 97 câu`;
+
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'q-card';
+            const userPick = listUserChoices[item.id];
+
+            const optsHtml = Object.entries(item.opts).map(([key, val]) => {
+                let cls = 'opt-item';
+                if (showAnswers && key === item.ans) {
+                    cls += ' show-correct';
+                } else if (!showAnswers && userPick) {
+                    if (key === item.ans) cls += ' user-correct';
+                    else if (key === userPick && userPick !== item.ans) cls += ' user-wrong';
+                }
+                return `<button class="${cls}" onclick="pickListOption(${item.id}, '${key}')">
+                    <strong>${key}.</strong> <span>${val}</span>
+                </button>`;
+            }).join('');
+
+            const transHtml = showTrans ? `
+                <div class="q-trans-box">
+                    <div class="q-trans-am"><span class="q-trans-label">Âm:</span>${item.am}</div>
+                    <div class="q-trans-nghia"><span class="q-trans-label">Nghĩa:</span>${item.nghia}</div>
+                </div>
+            ` : '';
+
+            card.innerHTML = `
+                <div>
+                    <div class="q-header">
+                        <span class="q-num">Câu ${item.id}</span>
+                        <div class="q-sentence">${highlightSentence(item.sent, item.ask)}</div>
+                    </div>
+                    ${transHtml}
+                    <div class="q-ask">
+                        Trong câu này, <strong>${item.ask}</strong> là:
+                        ${showAnswers ? `<span style="float:right; color:var(--gold); font-weight:700;">Đáp án: ${item.ans}</span>` : ''}
+                    </div>
+                    <div class="opts-list">${optsHtml}</div>
+                </div>
+                ${item.note ? `<div class="q-note">💡 ${item.note}</div>` : ''}
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // ==================== PHÒNG THI THỬ (TAB 2) ====================
+    let examDeck = [];
+    let examIndex = 0;
+    let examAnswers = {}; // { qId: 'A' | 'B' ... }
+
+    function initExam(mode) {
+        ['exModeSeq', 'exModeRand', 'exModeWrong'].forEach((btnId, i) => {
+            const m = ['seq', 'rand', 'wrong'][i];
+            document.getElementById(btnId).classList.toggle('active', m === mode);
+        });
+
+        if (mode === 'seq') {
+            examDeck = [...questions];
+            examAnswers = {};
+        } else if (mode === 'rand') {
+            examDeck = [...questions].sort(() => Math.random() - 0.5);
+            examAnswers = {};
+        } else if (mode === 'wrong') {
+            const wrongIds = Object.keys(examAnswers).filter(id => {
+                const qObj = questions.find(x => x.id === Number(id));
+                return qObj && examAnswers[id] !== qObj.ans;
+            }).map(Number);
+
+            if (wrongIds.length === 0) {
+                alert("Bạn chưa có câu trả lời sai nào để làm lại! Hệ thống sẽ trộn ngẫu nhiên 97 câu.");
+                examDeck = [...questions].sort(() => Math.random() - 0.5);
+            } else {
+                examDeck = questions.filter(q => wrongIds.includes(q.id));
+                wrongIds.forEach(id => delete examAnswers[id]);
+            }
+        }
+
+        examIndex = 0;
+        renderExamQuestion();
+        renderExamNav();
+        updateExamScore();
+    }
+
+    function updateExamScore() {
+        let ok = 0, bad = 0;
+        Object.keys(examAnswers).forEach(id => {
+            const qObj = questions.find(x => x.id === Number(id));
+            if (qObj) {
+                if (examAnswers[id] === qObj.ans) ok++;
+                else bad++;
+            }
+        });
+        const rem = examDeck.length - (ok + bad);
+        document.getElementById('examScoreBadge').textContent = `Đúng: ${ok} | Sai: ${bad} | Còn lại: ${rem}`;
+    }
+
+    function renderExamNav() {
+        const nav = document.getElementById('examNavGrid');
+        nav.innerHTML = '';
+        examDeck.forEach((q, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'num-btn';
+            if (idx === examIndex) btn.classList.add('current');
+            const picked = examAnswers[q.id];
+            if (picked) {
+                btn.classList.add(picked === q.ans ? 'done-ok' : 'done-bad');
+            }
+            btn.textContent = q.id;
+            btn.onclick = () => {
+                examIndex = idx;
+                renderExamQuestion();
+                renderExamNav();
+            };
+            nav.appendChild(btn);
+        });
+    }
+
+    function renderExamQuestion() {
+        const cur = examDeck[examIndex];
+        document.getElementById('exQNum').textContent = `Câu ${cur.id}`;
+        document.getElementById('exProgressText').textContent = `Vị trí: ${examIndex + 1} / ${examDeck.length}`;
+        document.getElementById('exSentence').innerHTML = highlightSentence(cur.sent, cur.ask);
+
+        const exTransContainer = document.getElementById('exTransContainer');
+        exTransContainer.innerHTML = showTrans ? `
+            <div class="exam-trans-box">
+                <div class="q-trans-am"><span class="q-trans-label">Âm Hán Việt:</span>${cur.am}</div>
+                <div class="q-trans-nghia"><span class="q-trans-label">Dịch nghĩa:</span>${cur.nghia}</div>
+            </div>
+        ` : '';
+
+        document.getElementById('exAskText').innerHTML = `Trong câu này, <strong style="color:var(--accent-blue); font-size:1.35rem;">${cur.ask}</strong> là:`;
+
+        const optGrid = document.getElementById('exOptionsGrid');
+        optGrid.innerHTML = '';
+        const picked = examAnswers[cur.id];
+        const fb = document.getElementById('exFeedback');
+        fb.innerHTML = '';
+
+        Object.entries(cur.opts).forEach(([key, val]) => {
+            const btn = document.createElement('button');
+            btn.className = 'exam-opt-btn';
+            btn.innerHTML = `<strong>${key}.</strong> ${val}`;
+
+            if (picked) {
+                btn.disabled = true;
+                if (key === cur.ans) btn.classList.add('correct');
+                else if (key === picked && picked !== cur.ans) btn.classList.add('wrong');
+            } else {
+                btn.onclick = () => chooseExamOption(cur, key);
+            }
+            optGrid.appendChild(btn);
+        });
+
+        if (picked) {
+            const isOk = picked === cur.ans;
+            fb.innerHTML = isOk
+                ? `<span style="color:var(--accent-green);">✅ Chính xác! Đáp án là ${cur.ans}. ${cur.opts[cur.ans]}</span>`
+                : `<span style="color:var(--accent-red);">❌ Sai rồi! Bạn chọn ${picked}, đáp án đúng phải là ${cur.ans}. ${cur.opts[cur.ans]}</span>`;
+            if (cur.note) {
+                fb.innerHTML += `<div class="q-note" style="text-align:left; margin-top:8px;">💡 ${cur.note}</div>`;
+            }
+        }
+    }
+
+    function chooseExamOption(cur, key) {
+        examAnswers[cur.id] = key;
+        renderExamQuestion();
+        renderExamNav();
+        updateExamScore();
+
+        if (key === cur.ans && document.getElementById('autoNextChk').checked && examIndex < examDeck.length - 1) {
+            setTimeout(() => {
+                stepExam(1);
+            }, 650);
+        }
+    }
+
+    function stepExam(dir) {
+        examIndex = (examIndex + dir + examDeck.length) % examDeck.length;
+        renderExamQuestion();
+        renderExamNav();
+    }
+
+    // ==================== CHUYỂN TAB & ĐỔI NỀN ====================
+    function switchTab(tabId, btnEl) {
+        document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+        document.getElementById('view-' + tabId).classList.add('active');
+        document.querySelectorAll('.nav-tabs .btn').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+    }
+
+    function toggleTheme() {
+        document.body.classList.toggle('theme-nature');
+    }
+
+    // Hiệu ứng nền Vũ Trụ Sao Đêm
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function initCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        stars = Array.from({ length: 135 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.7 + 0.4,
+            speed: Math.random() * 0.35 + 0.08,
+            alpha: Math.random()
+        }));
+    }
+
+    function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const isNature = document.body.classList.contains('theme-nature');
+        stars.forEach(s => {
+            s.y -= s.speed;
+            if (s.y < 0) {
+                s.y = canvas.height;
+                s.x = Math.random() * canvas.width;
+            }
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = isNature
+                ? `rgba(110, 231, 183, ${s.alpha})`
+                : `rgba(253, 230, 138, ${s.alpha})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(animateStars);
+    }
+
+    window.addEventListener('resize', initCanvas);
+
+    // Khởi tạo ứng dụng
+    initCanvas();
+    animateStars();
+    initCharFilters();
+    renderList();
+    initExam('seq');
+</script>
+
+</body>
+</html>
