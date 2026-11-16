@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ôn Thi Ngữ Pháp Hán Cổ: Câu 58 - 89 (Thực Hành & Trắc Nghiệm)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #040611;
+      --card-bg: rgba(15, 22, 48, 0.76);
+      --card-border: rgba(130, 160, 255, 0.25);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --gold: #fbbf24;
+      --cyan: #38bdf8;
+      --purple: #c084fc;
+      --emerald: #34d399;
+      --rose: #fb7185;
+      --orange: #fb923c;
+      --teal: #2dd4bf;
+      --indigo: #818cf8;
+      --lime: #a3e635;
+      --pink: #f472b6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Nền Vũ Trụ & Tinh Vân */
+    #cosmos-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(ellipse at bottom, #0f172a 0%, #03040b 100%);
+    }
+
+    .nebula {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(115px);
+      z-index: -1;
+      opacity: 0.32;
+      pointer-events: none;
+      animation: floatNebula 20s ease-in-out infinite alternate;
+    }
+
+    .nebula-1 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #4f46e5, transparent 70%);
+      top: -120px;
+      left: -100px;
+    }
+
+    .nebula-2 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, #9333ea, transparent 70%);
+      bottom: -160px;
+      right: -120px;
+      animation-delay: -8s;
+    }
+
+    .nebula-3 {
+      width: 460px;
+      height: 460px;
+      background: radial-gradient(circle, #0284c7, transparent 70%);
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
+
+    @keyframes floatNebula {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, -35px) scale(1.08); }
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 36px 20px 90px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+      background: linear-gradient(135deg, rgba(23, 33, 69, 0.82), rgba(12, 18, 42, 0.88));
+      border: 1px solid rgba(147, 197, 253, 0.32);
+      border-radius: 24px;
+      padding: 32px 24px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .course-badge {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 1.95rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      background: linear-gradient(90deg, #ffffff, #93c5fd, #fde68a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #cbd5e1;
+      font-size: 0.96rem;
+      margin-bottom: 22px;
+    }
+
+    /* Chuyển đổi chế độ Học / Thi Thử */
+    .mode-switcher {
+      display: inline-flex;
+      background: rgba(8, 12, 28, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 6px;
+      border-radius: 999px;
+      gap: 6px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .mode-tab {
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .mode-tab.active {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+    }
+
+    /* Chú giải ký hiệu từ loại */
+    .legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 12px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Nhãn từ loại */
+    .tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      display: inline-block;
+      line-height: 1.35;
+      letter-spacing: 0.3px;
+    }
+
+    .tag-sup {
+      vertical-align: super;
+      font-size: 0.68rem;
+      margin: 0 2px;
+      transition: opacity 0.2s ease;
+    }
+
+    body.hide-sentence-tags .tag-sup {
+      display: none;
+    }
+
+    .tag-dgt { background: rgba(56, 189, 248, 0.18); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.45); }
+    .tag-gt  { background: rgba(251, 146, 60, 0.18); color: var(--orange); border: 1px solid rgba(251, 146, 60, 0.45); }
+    .tag-lt  { background: rgba(251, 113, 133, 0.18); color: var(--rose); border: 1px solid rgba(251, 113, 133, 0.45); }
+    .tag-dt  { background: rgba(52, 211, 153, 0.18); color: var(--emerald); border: 1px solid rgba(52, 211, 153, 0.45); }
+    .tag-pvt { background: rgba(45, 212, 191, 0.18); color: var(--teal); border: 1px solid rgba(45, 212, 191, 0.45); }
+    .tag-pt  { background: rgba(192, 132, 252, 0.18); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.45); }
+    .tag-dtu { background: rgba(129, 140, 248, 0.18); color: var(--indigo); border: 1px solid rgba(129, 140, 248, 0.45); }
+    .tag-tt  { background: rgba(244, 114, 182, 0.18); color: var(--pink); border: 1px solid rgba(244, 114, 182, 0.45); }
+
+    /* Thanh công cụ & Bảng điểm */
+    .control-panel {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.32);
+      border-radius: 16px;
+      padding: 18px 22px;
+      margin-bottom: 26px;
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    .panel-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .instruction-text {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+    }
+
+    .circle-demo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.84rem;
+      margin: 0 4px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action-btn {
+      background: rgba(30, 41, 82, 0.85);
+      color: #f8fafc;
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      padding: 8px 15px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .action-btn.primary {
+      background: linear-gradient(135deg, #0284c7, #4f46e5);
+      border-color: transparent;
+    }
+
+    .action-btn.primary:hover {
+      color: #fff;
+      opacity: 0.92;
+    }
+
+    /* Thanh thống kê điểm thi */
+    .quiz-stats {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .quiz-stats.active {
+      display: flex;
+    }
+
+    .stat-pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      background: rgba(8, 12, 28, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .stat-pill.correct { color: var(--emerald); border-color: rgba(52, 211, 153, 0.4); }
+    .stat-pill.wrong   { color: var(--rose); border-color: rgba(251, 113, 133, 0.4); }
+    .stat-pill.score   { color: var(--gold); border-color: rgba(251, 191, 36, 0.4); }
+
+    .progress-wrap {
+      flex: 1;
+      min-width: 180px;
+      background: rgba(8, 12, 28, 0.8);
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--cyan), var(--emerald));
+      transition: width 0.3s ease;
+    }
+
+    /* Danh sách câu hỏi */
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .quiz-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px 28px;
+      backdrop-filter: blur(14px);
+      transition: border-color 0.25s ease, transform 0.2s ease;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .quiz-card:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .quiz-question {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .q-num {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(129, 140, 248, 0.22));
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      color: var(--cyan);
+      font-weight: 700;
+      padding: 3px 11px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+    }
+
+    .q-hanzi {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.55rem;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .q-ask {
+      color: #cbd5e1;
+      font-size: 1.02rem;
+    }
+
+    .q-target {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      font-weight: 700;
+      padding: 0 4px;
+      text-shadow: 0 0 12px rgba(251, 191, 36, 0.35);
+    }
+
+    /* Hộp Phiên âm Hán Việt & Dịch nghĩa */
+    .translation-banner {
+      background: rgba(8, 13, 31, 0.72);
+      border-left: 3px solid var(--cyan);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .trans-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .trans-label {
+      color: var(--text-muted);
+      font-weight: 600;
+      min-width: 115px;
+    }
+
+    .trans-hv {
+      color: #93c5fd;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .trans-vn {
+      color: #f8fafc;
+      font-weight: 500;
+    }
+
+    /* Lưới lựa chọn a, b, c, d */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(8, 12, 28, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      padding: 11px 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .option-item:hover {
+      border-color: rgba(251, 191, 36, 0.55);
+      transform: translateY(-1px);
+    }
+
+    .opt-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border: 2px solid rgba(148, 163, 184, 0.3);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    /* Trạng thái Đáp án Đúng (Khoanh tròn vàng chuẩn đề cương) */
+    .option-item.correct-revealed {
+      background: rgba(251, 191, 36, 0.15);
+      border-color: var(--gold);
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.22);
+    }
+
+    .option-item.correct-revealed .opt-letter {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(251, 191, 36, 0.22);
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    }
+
+    .option-item.correct-revealed .opt-text {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* Trạng thái Chọn Sai trong chế độ Thi Thử */
+    .option-item.wrong-selected {
+      background: rgba(251, 113, 133, 0.16);
+      border-color: var(--rose);
+    }
+
+    .option-item.wrong-selected .opt-letter {
+      border-color: var(--rose);
+      color: var(--rose);
+      background: rgba(251, 113, 133, 0.2);
+    }
+
+    .option-item.wrong-selected .opt-text {
+      color: var(--rose);
+      text-decoration: line-through;
+    }
+
+    /* Hộp Giải Thích Lý Do Chọn Đáp Án */
+    .explanation-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 78, 59, 0.25));
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      border-left: 4px solid var(--emerald);
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 0.94rem;
+      display: none;
+    }
+
+    .explanation-box.visible {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .exp-rule {
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .exp-detail {
+      color: #e2e8f0;
+    }
+
+    .exp-detail strong {
+      color: var(--emerald);
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 1.5rem; }
+      .quiz-card { padding: 18px; }
+      .q-hanzi { font-size: 1.3rem; }
+      .control-panel { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bầu trời sao & Tinh vân Vũ trụ -->
+  <canvas id="cosmos-canvas"></canvas>
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <div class="course-badge">Ôn Tập Cuối Học Kỳ 4 • Môn: Hán Cổ (Ngữ Pháp)</div>
+      <h1>BÀI TẬP THỰC HÀNH &amp; TRẮC NGHIỆM (CÂU 58 – 89)</h1>
+      <p class="subtitle">Trọn bộ 33 câu (gồm cả 2 câu 88) kèm Âm Hán Việt, Dịch nghĩa Tiếng Việt &amp; Giải thích chuyên sâu</p>
+
+      <div class="mode-switcher">
+        <button class="mode-tab active" id="tab-study" onclick="switchMode('study')">
+          📖 Chế độ Học &amp; Xem Giải Thích (Câu 58–89)
+        </button>
+        <button class="mode-tab" id="tab-exam" onclick="switchMode('exam')">
+          🎯 Chế độ Thi Thử Trắc Nghiệm (Chấm Điểm)
+        </button>
+      </div>
+
+      <div class="legend-bar">
+        <span><span class="tag tag-dt">DT</span> Danh từ</span>
+        <span><span class="tag tag-pvt">PVT</span> Phương vị từ</span>
+        <span><span class="tag tag-dgt">ĐgT</span> Động từ</span>
+        <span><span class="tag tag-tt">TT</span> Tính từ</span>
+        <span><span class="tag tag-gt">GT</span> Giới từ</span>
+        <span><span class="tag tag-lt">LT</span> Liên từ</span>
+        <span><span class="tag tag-pt">PT</span> Phó từ</span>
+        <span><span class="tag tag-dtu">ĐT</span> Đại từ</span>
+      </div>
+    </header>
+
+    <!-- THANH ĐIỀU KHIỂN & BẢNG ĐIỂM -->
+    <div class="control-panel">
+      <div class="panel-row">
+        <div class="instruction-text" id="mode-instruction">
+          Chọn đáp án đúng, dùng ký hiệu khoanh tròn, ví dụ <span class="circle-demo">c</span>
+        </div>
+        <div class="btn-group" id="study-controls">
+          <button class="action-btn" id="btn-toggle-tags" onclick="toggleSentenceTags()">
+            Ẩn nhãn từ loại trên câu Hán
+          </button>
+          <button class="action-btn primary" id="btn-toggle-answers" onclick="toggleAllStudyAnswers()">
+            Ẩn đáp án để tự nhẩm
+          </button>
+        </div>
+        <div class="btn-group" id="exam-controls" style="display: none;">
+          <button class="action-btn" onclick="shuffleExamQuestions()">
+            🔀 Đảo câu hỏi
+          </button>
+          <button class="action-btn" id="btn-retry-wrong" onclick="retryWrongQuestions()" style="display: none;">
+            ⚠️ Làm lại câu sai
+          </button>
+          <button class="action-btn primary" onclick="resetExam()">
+            🔄 Làm lại đề mới
+          </button>
+        </div>
+      </div>
+
+      <!-- Thống kê điểm khi ở Chế độ Thi Thử -->
+      <div class="quiz-stats" id="exam-stats">
+        <div class="stat-pills">
+          <span class="stat-pill" id="stat-progress">Đã làm: 0 / 33</span>
+          <span class="stat-pill correct" id="stat-correct">Đúng: 0</span>
+          <span class="stat-pill wrong" id="stat-wrong">Sai: 0</span>
+          <span class="stat-pill score" id="stat-score">Điểm: 0.0 / 10</span>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-bar" id="exam-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DANH SÁCH CÂU HỎI 58 - 89 -->
+    <div class="quiz-grid" id="quiz-container"></div>
+  </div>
+
+  <script>
+    const questionsData = [
+      {
+        id: "58",
+        displayNum: "58",
+        hanziHtml: `我房子 向<span class="tag tag-gt tag-sup">GT</span> 西<span class="tag tag-pvt tag-sup">PVT</span> 開<span class="tag tag-dgt tag-sup">ĐgT</span> 門。`,
+        target: "向",
+        hanViet: "Ngã phòng tử hướng tây khai môn.",
+        meaning: "Ngôi nhà của tôi hướng về phía tây mở cửa (mở cửa hướng về phía tây).",
+        options: [
+          { key: "a", text: "Giới từ" },
+          { key: "b", text: "Phó từ" },
+          { key: "c", text: "Trợ từ" },
+          { key: "d", text: "Liên từ" }
+        ],
+        correct: "a",
+        shortRule: "=> GT, Vì giữa nó và Động từ phía sau có Phương vị từ xen vào.",
+        detailExp: "Chữ <strong>向 (hướng - hướng về)</strong> kết hợp với Phương vị từ <strong>西 (tây - phía tây)</strong> tạo thành kết cấu giới từ đứng trước Động từ chính <strong>開 (khai - mở)</strong>. Vì giữa <strong>向</strong> và Động từ phía sau có Phương vị từ xen vào nên <strong>向</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "59",
+        displayNum: "59",
+        hanziHtml: `不能言者 為<span class="tag tag-dgt tag-sup">ĐgT</span> 啞<span class="tag tag-dt tag-sup">DT</span>。`,
+        target: "為",
+        hanViet: "Bất năng ngôn giả vi á.",
+        meaning: "Người không thể nói được thì là (gọi là) người câm.",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Giới từ" },
+          { key: "d", text: "Động từ" }
+        ],
+        correct: "d",
+        shortRule: "=> ĐgT, Vì phía sau không có Động từ khác.",
+        detailExp: "Phía sau chữ <strong>為 (vi - là)</strong> chỉ có Danh từ <strong>啞 (á - người câm)</strong> làm tân ngữ và không có động từ nào khác. Theo lý thuyết chữ 為, khi phía sau là Danh từ và không có động từ khác thì đọc là <strong>/Vi/</strong> và đóng vai trò là <strong>Động từ (ĐgT)</strong>."
+      },
+      {
+        id: "60",
+        displayNum: "60",
+        hanziHtml: `何不 試<span class="tag tag-dgt tag-sup">ĐgT</span> 之 以<span class="tag tag-gt tag-sup">GT</span> 足<span class="tag tag-dt tag-sup">DT</span>。`,
+        target: "以",
+        hanViet: "Hà bất thí chi dĩ túc.",
+        meaning: "Sao không lấy chân mà thử nó (Sao không thử nó bằng chân).",
+        options: [
+          { key: "a", text: "Giới từ" },
+          { key: "b", text: "Trợ từ" },
+          { key: "c", text: "Phó từ" },
+          { key: "d", text: "Liên từ" }
+        ],
+        correct: "a",
+        shortRule: "=> GT, Vì phía trước là Động từ.",
+        detailExp: "Trong cụm <strong>試之以足</strong>, chữ <strong>以 (dĩ - lấy, dùng, bằng)</strong> kết hợp với Danh từ <strong>足 (túc - chân)</strong> tạo thành kết cấu giới tân đặt sau Động từ <strong>試 (thí - thử)</strong> để chỉ công cụ thực hiện hành động, nên <strong>以</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "61",
+        displayNum: "61",
+        hanziHtml: `未嫁 從<span class="tag tag-dgt tag-sup">ĐgT</span> 父。`,
+        target: "從",
+        hanViet: "Vị giá tùng phụ.",
+        meaning: "Khi chưa xuất giá (chưa lấy chồng) thì nghe theo (đi theo) cha.",
+        options: [
+          { key: "a", text: "Liên từ" },
+          { key: "b", text: "Trợ từ" },
+          { key: "c", text: "Động từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "c",
+        shortRule: "=> ĐgT, Vì phía sau không có Động từ khác.",
+        detailExp: "Phía sau chữ <strong>從 (tùng - nghe theo, đi theo)</strong> chỉ có Danh từ <strong>父 (phụ - cha)</strong> và không còn động từ nào khác. Do đó <strong>從</strong> làm vị ngữ chính biểu thị hành động nên là <strong>Động từ (ĐgT)</strong>."
+      },
+      {
+        id: "62",
+        displayNum: "62",
+        hanziHtml: `子為 我<span class="tag tag-dtu tag-sup">ĐT</span> 問孟子。`,
+        target: "我",
+        hanViet: "Tử vị ngã vấn Mạnh Tử.",
+        meaning: "Thầy (anh/bạn) vì tôi mà hỏi Mạnh Tử (Nhờ anh hỏi Mạnh Tử giúp tôi).",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Đại từ" },
+          { key: "c", text: "Giới từ" },
+          { key: "d", text: "Phó từ" }
+        ],
+        correct: "b",
+        shortRule: "=> ĐT, Vì là nhân xưng ngôi thứ nhất số ít, chỉ tự thân.",
+        detailExp: "Theo bài Đại từ nhân xưng, chữ <strong>我 (ngã - tôi, ta)</strong> thuộc nhóm Đại từ tự xưng (ngôi thứ nhất chỉ số ít), dùng để chỉ bản thân người nói, nên là <strong>Đại từ (ĐT)</strong>."
+      },
+      {
+        id: "63",
+        displayNum: "63",
+        hanziHtml: `子 為<span class="tag tag-gt tag-sup">GT</span> 我<span class="tag tag-dtu tag-sup">ĐT</span> 問<span class="tag tag-dgt tag-sup">ĐgT</span> 孟子。`,
+        target: "為",
+        hanViet: "Tử vị ngã vấn Mạnh Tử.",
+        meaning: "Thầy (anh/bạn) vì tôi mà hỏi Mạnh Tử.",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Giới từ" },
+          { key: "d", text: "Phó từ" }
+        ],
+        correct: "c",
+        shortRule: "=> GT, Vì giữa nó và Động từ phía sau có Đại từ xen vào.",
+        detailExp: "Chữ <strong>為</strong> đọc là <strong>/Vị/</strong> <em>(vì, giúp cho)</em> kết hợp với Đại từ <strong>我 (ngã - tôi)</strong> đứng trước Động từ chính <strong>問 (vấn - hỏi)</strong>. Vì giữa <strong>為</strong> và Động từ phía sau có Đại từ xen vào nên <strong>為</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "64",
+        displayNum: "64",
+        hanziHtml: `你 向<span class="tag tag-dgt tag-sup">ĐgT</span> 北<span class="tag tag-pvt tag-sup">PVT</span>，我 向<span class="tag tag-dgt tag-sup">ĐgT</span> 南<span class="tag tag-pvt tag-sup">PVT</span>。`,
+        target: "向",
+        hanViet: "Nễ (nhĩ) hướng bắc, ngã hướng nam.",
+        meaning: "Anh hướng về phía bắc, tôi hướng về phía nam.",
+        options: [
+          { key: "a", text: "Liên từ" },
+          { key: "b", text: "Giới từ" },
+          { key: "c", text: "Động từ" },
+          { key: "d", text: "Trợ từ" }
+        ],
+        correct: "c",
+        shortRule: "=> ĐgT, Vì phía sau không có Động từ khác.",
+        detailExp: "Ở cả hai phân câu <strong>你向北</strong> và <strong>我向南</strong>, phía sau chữ <strong>向 (hướng)</strong> chỉ có Phương vị từ (<strong>北, 南</strong>) mà không có động từ nào khác. Do đó <strong>向</strong> đóng vai trò là <strong>Động từ (ĐgT)</strong>."
+      },
+      {
+        id: "65",
+        displayNum: "65",
+        hanziHtml: `你向北，我向 南<span class="tag tag-pvt tag-sup">PVT</span>。`,
+        target: "南",
+        hanViet: "Nễ (nhĩ) hướng bắc, ngã hướng nam.",
+        meaning: "Anh hướng về phía bắc, tôi hướng về phía nam.",
+        options: [
+          { key: "a", text: "Liên từ" },
+          { key: "b", text: "Giới từ" },
+          { key: "c", text: "Động từ" },
+          { key: "d", text: "Phương vị từ" }
+        ],
+        correct: "d",
+        shortRule: "=> PVT, Vì đứng cuối câu chỉ phương hướng.",
+        detailExp: "Chữ <strong>南 (nam - phía nam)</strong> đứng ở cuối câu, ngay sau động từ <strong>向</strong> để xác định phương hướng, nên <strong>南</strong> là <strong>Phương vị từ (PVT)</strong>."
+      },
+      {
+        id: "66",
+        displayNum: "66",
+        hanziHtml: `其性 皆<span class="tag tag-pt tag-sup">PT</span> 耐<span class="tag tag-dgt tag-sup">ĐgT</span> 寒，與他樹不同。`,
+        target: "皆",
+        hanViet: "Kỳ tính giai nại hàn, dữ tha thụ bất đồng.",
+        meaning: "Bản tính của chúng đều chịu được giá rét, không giống với các loài cây khác.",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Phó từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "c",
+        shortRule: "=> PT, Vì phía sau là Động từ.",
+        detailExp: "Chữ <strong>皆 (giai - đều)</strong> đứng liền kề ngay trước Động từ <strong>耐 (nại - chịu đựng)</strong> để bổ nghĩa tổng quát cho hành động đó. Vì phía sau là Động từ nên <strong>皆</strong> là <strong>Phó từ (PT)</strong>."
+      },
+      {
+        id: "67",
+        displayNum: "67",
+        hanziHtml: `其性皆耐寒，與<span class="tag tag-gt tag-sup">GT</span> 他樹<span class="tag tag-dt tag-sup">DT</span> 不同<span class="tag tag-tt tag-sup">TT</span>。`,
+        target: "與",
+        hanViet: "Kỳ tính giai nại hàn, dữ tha thụ bất đồng.",
+        meaning: "Bản tính của chúng đều chịu được giá rét, không giống với các loài cây khác.",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Phó từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "d",
+        shortRule: "=> GT, Vì giữa nó và Tính từ phía sau có Danh từ xen vào.",
+        detailExp: "Chữ <strong>與 (dữ - với, cùng với)</strong> kết hợp với cụm Danh từ <strong>他樹 (tha thụ - cây khác)</strong> đứng trước cụm vị ngữ Tính từ <strong>不同 (bất đồng - không giống)</strong>. Vì giữa <strong>與</strong> và Tính từ phía sau có Danh từ xen vào nên <strong>與</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "68",
+        displayNum: "68",
+        hanziHtml: `殺<span class="tag tag-dgt tag-sup">ĐgT</span> 人 以<span class="tag tag-gt tag-sup">GT</span> 刀<span class="tag tag-dt tag-sup">DT</span>。`,
+        target: "以",
+        hanViet: "Sát nhân dĩ đao.",
+        meaning: "Giết người bằng đao (Dùng đao giết người).",
+        options: [
+          { key: "a", text: "Liên từ" },
+          { key: "b", text: "Trợ từ" },
+          { key: "c", text: "Giới từ" },
+          { key: "d", text: "Phó từ" }
+        ],
+        correct: "c",
+        shortRule: "=> GT, Vì phía trước là Động từ.",
+        detailExp: "Chữ <strong>以 (dĩ - bằng, dùng)</strong> kết hợp với Danh từ <strong>刀 (đao - cây đao)</strong> tạo thành kết cấu giới từ đứng sau Động từ <strong>殺 (sát - giết)</strong> để chỉ công cụ thực hiện hành động, nên <strong>以</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "69",
+        displayNum: "69",
+        hanziHtml: `山<span class="tag tag-dt tag-sup">DT</span> 與<span class="tag tag-lt tag-sup">LT</span> 水<span class="tag tag-dt tag-sup">DT</span>。`,
+        target: "與",
+        hanViet: "Sơn dữ thủy.",
+        meaning: "Núi và sông (núi với nước).",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Giới từ" },
+          { key: "d", text: "Phó từ" }
+        ],
+        correct: "b",
+        shortRule: "=> LT, Vì đứng giữa nối 2 từ đồng từ loại (nối 2 DT).",
+        detailExp: "Chữ <strong>與 (dữ - và, với)</strong> đứng ở giữa nối hai Danh từ cùng từ loại là <strong>山 (sơn - núi)</strong> và <strong>水 (thủy - nước/sông)</strong>, phía sau không có động từ nào khác, nên <strong>與</strong> là <strong>Liên từ (LT)</strong>."
+      },
+      {
+        id: "70",
+        displayNum: "70",
+        hanziHtml: `富<span class="tag tag-tt tag-sup">TT</span> 與<span class="tag tag-lt tag-sup">LT</span> 貴<span class="tag tag-tt tag-sup">TT</span>。`,
+        target: "與",
+        hanViet: "Phú dữ quý.",
+        meaning: "Giàu và sang.",
+        options: [
+          { key: "a", text: "Phó từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Trợ từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "b",
+        shortRule: "=> LT, Vì đứng giữa nối 2 từ đồng từ loại (nối 2 TT).",
+        detailExp: "Chữ <strong>與 (dữ - và)</strong> đứng giữa nối hai Tính từ đồng từ loại là <strong>富 (phú - giàu)</strong> và <strong>貴 (quý - sang)</strong>, nên <strong>與</strong> đóng vai trò là <strong>Liên từ (LT)</strong>."
+      },
+      {
+        id: "71",
+        displayNum: "71",
+        hanziHtml: `他 在<span class="tag tag-dgt tag-sup">ĐgT</span> 家<span class="tag tag-dt tag-sup">DT</span>，我不 在<span class="tag tag-dgt tag-sup">ĐgT</span> 家<span class="tag tag-dt tag-sup">DT</span>。`,
+        target: "在",
+        hanViet: "Tha tại gia, ngã bất tại gia.",
+        meaning: "Anh ấy ở nhà, tôi không ở nhà.",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Giới từ" },
+          { key: "d", text: "Động từ" }
+        ],
+        correct: "d",
+        shortRule: "=> ĐgT, Vì phía sau không có Động từ khác.",
+        detailExp: "Trong cả hai vế <strong>他在家</strong> và <strong>我不在家</strong>, phía sau chữ <strong>在 (tại - ở)</strong> chỉ có Danh từ <strong>家 (gia - nhà)</strong> và không có động từ nào khác. Do đó <strong>在</strong> làm vị ngữ chính và là <strong>Động từ (ĐgT)</strong>."
+      },
+      {
+        id: "72",
+        displayNum: "72",
+        hanziHtml: `他在家，我 不<span class="tag tag-pt tag-sup">PT</span> 在<span class="tag tag-dgt tag-sup">ĐgT</span> 家。`,
+        target: "不",
+        hanViet: "Tha tại gia, ngã bất tại gia.",
+        meaning: "Anh ấy ở nhà, tôi không ở nhà.",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Phó từ" },
+          { key: "d", text: "Động từ" }
+        ],
+        correct: "c",
+        shortRule: "=> PT, Vì phía sau là Động từ.",
+        detailExp: "Chữ <strong>不 (bất - không)</strong> đứng liền kề ngay trước Động từ <strong>在 (tại - ở)</strong> để phủ định cho hành động/trạng thái ở nhà, nên <strong>不</strong> là <strong>Phó từ (PT)</strong>."
+      },
+      {
+        id: "73",
+        displayNum: "73",
+        hanziHtml: `他<span class="tag tag-dtu tag-sup">ĐT</span> 在家中學習。`,
+        target: "他",
+        hanViet: "Tha tại gia trung học tập.",
+        meaning: "Anh ấy ở trong nhà học tập.",
+        options: [
+          { key: "a", text: "Phó từ" },
+          { key: "b", text: "Đại từ" },
+          { key: "c", text: "Liên từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "b",
+        shortRule: "=> ĐT, Vì Nhân xưng ngôi thứ 3 số ít, chỉ người vắng mặt.",
+        detailExp: "Theo phân loại Đại từ nhân xưng, chữ <strong>他 (tha - anh ấy, ông ấy, nó)</strong> thuộc nhóm Đại từ tha xưng (ngôi thứ ba số ít), dùng để chỉ người thứ ba vắng mặt trong cuộc hội thoại, nên là <strong>Đại từ (ĐT)</strong>."
+      },
+      {
+        id: "74",
+        displayNum: "74",
+        hanziHtml: `他 在<span class="tag tag-gt tag-sup">GT</span> 家<span class="tag tag-dt tag-sup">DT</span> 中 學習<span class="tag tag-dgt tag-sup">ĐgT</span>。`,
+        target: "在",
+        hanViet: "Tha tại gia trung học tập.",
+        meaning: "Anh ấy ở trong nhà học tập.",
+        options: [
+          { key: "a", text: "Phó từ" },
+          { key: "b", text: "Trợ từ" },
+          { key: "c", text: "Liên từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "d",
+        shortRule: "=> GT, Vì giữa nó và Động từ phía sau có Danh từ xen vào.",
+        detailExp: "Khác với câu 71 (<em>他在家</em> không có động từ phía sau), ở câu 74 phía sau cụm <strong>在家中 (ở trong nhà)</strong> có Động từ chính là <strong>學習 (học tập)</strong>. Vì giữa <strong>在</strong> và Động từ phía sau có Danh từ <strong>家</strong> xen vào nên <strong>在</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "75",
+        displayNum: "75",
+        hanziHtml: `我等<span class="tag tag-dtu tag-sup">ĐT</span> 在佛學院學古代漢語。`,
+        target: "我等",
+        hanViet: "Ngã đẳng tại Phật học viện học cổ đại Hán ngữ.",
+        meaning: "Chúng tôi ở Học viện Phật giáo học tiếng Hán cổ đại (Hán cổ).",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Đại từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "c",
+        shortRule: "=> ĐT, Vì Nhân xưng ngôi thứ nhất số nhiều, chỉ tự thân.",
+        detailExp: "Theo bài Đại từ nhân xưng, <strong>我等 (ngã đẳng - chúng tôi, chúng ta)</strong> thuộc nhóm Đại từ tự xưng (ngôi thứ nhất chỉ số nhiều), nên là <strong>Đại từ (ĐT)</strong>."
+      },
+      {
+        id: "76",
+        displayNum: "76",
+        hanziHtml: `我等 在<span class="tag tag-gt tag-sup">GT</span> 佛學院<span class="tag tag-dt tag-sup">DT</span> 學<span class="tag tag-dgt tag-sup">ĐgT</span> 古代漢語。`,
+        target: "在",
+        hanViet: "Ngã đẳng tại Phật học viện học cổ đại Hán ngữ.",
+        meaning: "Chúng tôi ở Học viện Phật giáo học tiếng Hán cổ đại (Hán cổ).",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Phó từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "d",
+        shortRule: "=> GT, Vì giữa nó và Động từ phía sau có Danh từ xen vào.",
+        detailExp: "Giữa chữ <strong>在 (tại - ở)</strong> và Động từ chính <strong>學 (học)</strong> ở phía sau có Danh từ <strong>佛學院 (Phật học viện)</strong> xen vào tạo thành kết cấu giới từ chỉ nơi chốn diễn ra hành động học, nên <strong>在</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "77",
+        displayNum: "77",
+        hanziHtml: `我<span class="tag tag-dtu tag-sup">ĐT</span> 房子向西。`,
+        target: "我",
+        hanViet: "Ngã phòng tử hướng tây.",
+        meaning: "Ngôi nhà của tôi hướng về phía tây.",
+        options: [
+          { key: "a", text: "Động từ" },
+          { key: "b", text: "Giới từ" },
+          { key: "c", text: "Liên từ" },
+          { key: "d", text: "Đại từ" }
+        ],
+        correct: "d",
+        shortRule: "=> ĐT, Vì Nhân xưng ngôi thứ nhất số ít, chỉ tự thân.",
+        detailExp: "Chữ <strong>我 (ngã - tôi, của tôi)</strong> là Đại từ nhân xưng ngôi thứ nhất số ít chỉ bản thân người nói, nên là <strong>Đại từ (ĐT)</strong>."
+      },
+      {
+        id: "78",
+        displayNum: "78",
+        hanziHtml: `我房子 向<span class="tag tag-dgt tag-sup">ĐgT</span> 西<span class="tag tag-pvt tag-sup">PVT</span>。`,
+        target: "向",
+        hanViet: "Ngã phòng tử hướng tây.",
+        meaning: "Ngôi nhà của tôi hướng về phía tây.",
+        options: [
+          { key: "a", text: "Động từ" },
+          { key: "b", text: "Giới từ" },
+          { key: "c", text: "Liên từ" },
+          { key: "d", text: "Trợ từ" }
+        ],
+        correct: "a",
+        shortRule: "=> ĐgT, Vì phía sau không có Động từ khác.",
+        detailExp: "Khác với câu 58 (<em>我房子向西開門</em> có động từ <em>開</em> phía sau), ở câu 78 phía sau chữ <strong>向 (hướng)</strong> chỉ có Phương vị từ <strong>西 (tây)</strong> và không còn động từ nào khác, nên <strong>向</strong> là <strong>Động từ (ĐgT)</strong>."
+      },
+      {
+        id: "79",
+        displayNum: "79",
+        hanziHtml: `我房子向 西<span class="tag tag-pvt tag-sup">PVT</span>。`,
+        target: "西",
+        hanViet: "Ngã phòng tử hướng tây.",
+        meaning: "Ngôi nhà của tôi hướng về phía tây.",
+        options: [
+          { key: "a", text: "Động từ" },
+          { key: "b", text: "Phương vị từ" },
+          { key: "c", text: "Liên từ" },
+          { key: "d", text: "Trợ từ" }
+        ],
+        correct: "b",
+        shortRule: "=> PVT, Vì đứng cuối câu chỉ phương hướng.",
+        detailExp: "Chữ <strong>西 (tây - phía tây)</strong> đứng ở cuối câu sau động từ <strong>向</strong> để biểu thị phương hướng, nên <strong>西</strong> là <strong>Phương vị từ (PVT)</strong>."
+      },
+      {
+        id: "80",
+        displayNum: "80",
+        hanziHtml: `我 在<span class="tag tag-dgt tag-sup">ĐgT</span> 佛學院<span class="tag tag-dt tag-sup">DT</span>。`,
+        target: "在",
+        hanViet: "Ngã tại Phật học viện.",
+        meaning: "Tôi ở Học viện Phật giáo.",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Giới từ" },
+          { key: "c", text: "Động từ" },
+          { key: "d", text: "Liên từ" }
+        ],
+        correct: "c",
+        shortRule: "=> ĐgT, Vì phía sau không có Động từ khác.",
+        detailExp: "Phía sau chữ <strong>在 (tại - ở)</strong> chỉ có Danh từ <strong>佛學院 (Phật học viện)</strong> và không có động từ nào khác (khác với câu 76 có động từ <em>學</em> phía sau). Do đó <strong>在</strong> làm vị ngữ chính và là <strong>Động từ (ĐgT)</strong>."
+      },
+      {
+        id: "81",
+        displayNum: "81",
+        hanziHtml: `我 向<span class="tag tag-gt tag-sup">GT</span> 南<span class="tag tag-pvt tag-sup">PVT</span> 而 行<span class="tag tag-dgt tag-sup">ĐgT</span>。`,
+        target: "向",
+        hanViet: "Ngã hướng nam nhi hành.",
+        meaning: "Tôi hướng về phía nam mà đi.",
+        options: [
+          { key: "a", text: "Phó từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Trợ từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "d",
+        shortRule: "=> GT, Vì giữa nó và Động từ phía sau có Phương vị từ xen vào.",
+        detailExp: "Giữa chữ <strong>向 (hướng - hướng về)</strong> và Động từ chính <strong>行 (hành - đi)</strong> ở phía sau có Phương vị từ <strong>南 (nam - phía nam)</strong> xen vào, nên <strong>向</strong> đóng vai trò là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "82",
+        displayNum: "82",
+        hanziHtml: `我<span class="tag tag-dtu tag-sup">ĐT</span> 與<span class="tag tag-lt tag-sup">LT</span> 你<span class="tag tag-dtu tag-sup">ĐT</span>。`,
+        target: "與",
+        hanViet: "Ngã dữ nễ (nhĩ).",
+        meaning: "Tôi và anh (tôi với bạn).",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Phó từ" },
+          { key: "c", text: "Liên từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "c",
+        shortRule: "=> LT, Vì đứng giữa nối 2 từ đồng từ loại (nối 2 Đại từ).",
+        detailExp: "Chữ <strong>與 (dữ - và, với)</strong> đứng giữa nối hai Đại từ nhân xưng cùng từ loại là <strong>我 (ngã - tôi)</strong> và <strong>你 (nễ/nhĩ - anh)</strong>, phía sau không có động từ nào khác, nên <strong>與</strong> là <strong>Liên từ (LT)</strong>."
+      },
+      {
+        id: "83",
+        displayNum: "83",
+        hanziHtml: `飯後出門，與<span class="tag tag-gt tag-sup">GT</span> 客<span class="tag tag-dt tag-sup">DT</span> 閒眺<span class="tag tag-dgt tag-sup">ĐgT</span>。`,
+        target: "與",
+        hanViet: "Phạn hậu xuất môn, dữ khách nhàn diếu (thiếu).",
+        meaning: "Sau bữa cơm bước ra cửa, cùng với khách thong thả ngắm nhìn phương xa.",
+        options: [
+          { key: "a", text: "Phó từ" },
+          { key: "b", text: "Trợ từ" },
+          { key: "c", text: "Liên từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "d",
+        shortRule: "=> GT, Vì giữa nó và Động từ phía sau có Danh từ xen vào.",
+        detailExp: "Giữa chữ <strong>與 (dữ - cùng với)</strong> và Động từ <strong>閒眺 (nhàn diếu - thong thả ngắm nhìn)</strong> có Danh từ <strong>客 (khách)</strong> xen vào tạo thành kết cấu giới từ đứng trước động từ, nên <strong>與</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "84",
+        displayNum: "84",
+        hanziHtml: `渴<span class="tag tag-tt tag-sup">TT</span> 與<span class="tag tag-lt tag-sup">LT</span> 飢<span class="tag tag-tt tag-sup">TT</span>。`,
+        target: "與",
+        hanViet: "Khát dữ cơ.",
+        meaning: "Khát và đói.",
+        options: [
+          { key: "a", text: "Phó từ" },
+          { key: "b", text: "Trợ từ" },
+          { key: "c", text: "Liên từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "c",
+        shortRule: "=> LT, Vì đứng giữa nối 2 từ đồng từ loại (nối 2 Tính từ).",
+        detailExp: "Chữ <strong>與 (dữ - và)</strong> đứng giữa nối hai Tính từ cùng từ loại là <strong>渴 (khát)</strong> và <strong>飢 (cơ - đói)</strong>, nên <strong>與</strong> là <strong>Liên từ (LT)</strong>."
+      },
+      {
+        id: "85",
+        displayNum: "85",
+        hanziHtml: `吾人<span class="tag tag-dtu tag-sup">ĐT</span> 在<span class="tag tag-gt tag-sup">GT</span> 家<span class="tag tag-dt tag-sup">DT</span> 中修行<span class="tag tag-dgt tag-sup">ĐgT</span> 念佛。`,
+        target: "吾人",
+        hanViet: "Ngô nhân tại gia trung tu hành niệm Phật.",
+        meaning: "Chúng ta (chúng tôi) ở trong nhà tu hành niệm Phật.",
+        options: [
+          { key: "a", text: "Liên từ" },
+          { key: "b", text: "Trợ từ" },
+          { key: "c", text: "Đại từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "c",
+        shortRule: "=> ĐT, Vì Nhân xưng ngôi thứ nhất số nhiều, chỉ tự thân.",
+        detailExp: "Theo bài Đại từ nhân xưng, <strong>吾人 (ngô nhân - chúng tôi, chúng ta)</strong> thuộc nhóm Đại từ tự xưng (ngôi thứ nhất chỉ số nhiều), dùng để chỉ tập thể phía người nói, nên là <strong>Đại từ (ĐT)</strong>."
+      },
+      {
+        id: "86",
+        displayNum: "86",
+        hanziHtml: `吾人 在<span class="tag tag-gt tag-sup">GT</span> 家<span class="tag tag-dt tag-sup">DT</span> 中 修行<span class="tag tag-dgt tag-sup">ĐgT</span> 念佛。`,
+        target: "在",
+        hanViet: "Ngô nhân tại gia trung tu hành niệm Phật.",
+        meaning: "Chúng ta (chúng tôi) ở trong nhà tu hành niệm Phật.",
+        options: [
+          { key: "a", text: "Liên từ" },
+          { key: "b", text: "Trợ từ" },
+          { key: "c", text: "Phó từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "d",
+        shortRule: "=> GT, Vì giữa nó và Động từ phía sau có Danh từ xen vào.",
+        detailExp: "Giữa chữ <strong>在 (tại - ở)</strong> và chuỗi Động từ chính <strong>修行念佛 (tu hành niệm Phật)</strong> ở phía sau có Danh từ <strong>家 (gia - nhà)</strong> xen vào, tạo thành kết cấu giới từ chỉ địa điểm diễn ra hành động tu hành, nên <strong>在</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "87",
+        displayNum: "87",
+        hanziHtml: `工業<span class="tag tag-dt tag-sup">DT</span> 與<span class="tag tag-lt tag-sup">LT</span> 農業<span class="tag tag-dt tag-sup">DT</span>。`,
+        target: "與",
+        hanViet: "Công nghiệp dữ nông nghiệp.",
+        meaning: "Công nghiệp và nông nghiệp.",
+        options: [
+          { key: "a", text: "Giới từ" },
+          { key: "b", text: "Trợ từ" },
+          { key: "c", text: "Liên từ" },
+          { key: "d", text: "Phó từ" }
+        ],
+        correct: "c",
+        shortRule: "=> LT, Vì đứng giữa nối 2 từ đồng từ loại (nối 2 Danh từ).",
+        detailExp: "Chữ <strong>與 (dữ - và)</strong> đứng giữa nối hai Danh từ cùng từ loại là <strong>工業 (công nghiệp)</strong> và <strong>農業 (nông nghiệp)</strong>, nên <strong>與</strong> là <strong>Liên từ (LT)</strong>."
+      },
+      {
+        id: "88a",
+        displayNum: "88 (1)",
+        hanziHtml: `一童子 在<span class="tag tag-gt tag-sup">GT</span> 後<span class="tag tag-pvt tag-sup">PVT</span> 見<span class="tag tag-dgt tag-sup">ĐgT</span> 之。`,
+        target: "在",
+        hanViet: "Nhất đồng tử tại hậu kiến chi.",
+        meaning: "Một chú tiểu (đứa trẻ) ở phía sau nhìn thấy nó (ông ấy).",
+        options: [
+          { key: "a", text: "Trợ từ" },
+          { key: "b", text: "Giới từ" },
+          { key: "c", text: "Phó từ" },
+          { key: "d", text: "Liên từ" }
+        ],
+        correct: "b",
+        shortRule: "=> GT, Vì giữa nó và Động từ phía sau có Phương vị từ xen vào.",
+        detailExp: "Khác với câu 49 (<em>一童子在後</em> kết thúc câu luôn nên <em>在</em> là Động từ), ở câu 88 này phía sau <strong>在後</strong> còn có Động từ chính là <strong>見 (kiến - nhìn thấy)</strong>. Vì giữa <strong>在</strong> và Động từ phía sau có Phương vị từ <strong>後</strong> xen vào nên <strong>在</strong> chuyển thành <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "88b",
+        displayNum: "88 (2)",
+        hanziHtml: `以<span class="tag tag-gt tag-sup">GT</span> 佛法<span class="tag tag-dt tag-sup">DT</span> 教<span class="tag tag-dgt tag-sup">ĐgT</span> 人。`,
+        target: "以",
+        hanViet: "Dĩ Phật pháp giáo nhân.",
+        meaning: "Đem (dùng, lấy) Phật pháp dạy người.",
+        options: [
+          { key: "a", text: "Phó từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Trợ từ" },
+          { key: "d", text: "Giới từ" }
+        ],
+        correct: "d",
+        shortRule: "=> GT, Vì giữa nó và Động từ phía sau có Danh từ xen vào.",
+        detailExp: "Theo lý thuyết chữ <strong>以 (dĩ - lấy, đem, dùng)</strong>, khi giữa <strong>以</strong> và Động từ chính ở phía sau (<strong>教 - giáo: dạy</strong>) có Danh từ (<strong>佛法 - Phật pháp</strong>) xen vào tạo thành kết cấu giới từ, thì <strong>以</strong> là <strong>Giới từ (GT)</strong>."
+      },
+      {
+        id: "89",
+        displayNum: "89",
+        hanziHtml: `客堂 在<span class="tag tag-dgt tag-sup">ĐgT</span> 前。`,
+        target: "在",
+        hanViet: "Khách đường tại tiền.",
+        meaning: "Nhà khách (phòng khách) ở phía trước.",
+        options: [
+          { key: "a", text: "Phó từ" },
+          { key: "b", text: "Liên từ" },
+          { key: "c", text: "Động từ" },
+          { key: "d", text: "Phương vị từ" }
+        ],
+        correct: "c",
+        shortRule: "=> ĐgT, Vì phía sau không có Động từ khác.",
+        detailExp: "Trong câu <strong>客堂在前</strong>, phía sau chữ <strong>在 (tại - ở)</strong> chỉ có từ chỉ vị trí <strong>前 (tiền - phía trước)</strong> và không có động từ nào khác. Do đó <strong>在</strong> đóng vai trò làm vị ngữ chính và là <strong>Động từ (ĐgT)</strong>."
+      }
+    ];
+
+    let currentMode = 'study'; // 'study' | 'exam'
+    let studyAnswersVisible = true;
+    let sentenceTagsHidden = false;
+    let activeQuestions = [...questionsData];
+    let userSelections = {}; // { questionId: selectedKey }
+
+    const container = document.getElementById('quiz-container');
+
+    function renderQuestions() {
+      container.innerHTML = '';
+
+      activeQuestions.forEach((q) => {
+        const card = document.createElement('article');
+        card.className = 'quiz-card';
+        card.id = `q-card-${q.id}`;
+
+        const userChoice = userSelections[q.id];
+        const isAnswered = userChoice !== undefined;
+        const showResult = (currentMode === 'study' && studyAnswersVisible) || (currentMode === 'exam' && isAnswered);
+
+        const optionsHtml = q.options.map(opt => {
+          let optClass = 'option-item';
+          if (showResult) {
+            if (opt.key === q.correct) {
+              optClass += ' correct-revealed';
+            } else if (currentMode === 'exam' && userChoice === opt.key && userChoice !== q.correct) {
+              optClass += ' wrong-selected';
+            }
+          }
+          return `
+            <div class="${optClass}" onclick="handleOptionClick('${q.id}', '${opt.key}')">
+              <span class="opt-letter">${opt.key}</span>
+              <span class="opt-text">${opt.text}</span>
+            </div>
+          `;
+        }).join('');
+
+        card.innerHTML = `
+          <div class="quiz-question">
+            <span class="q-num">Câu ${q.displayNum}/</span>
+            <span class="q-hanzi">${q.hanziHtml}</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">${q.target}</span> là:</span>
+          </div>
+
+          <div class="translation-banner">
+            <div class="trans-row">
+              <span class="trans-label">✦ Âm Hán Việt:</span>
+              <span class="trans-hv">${q.hanViet}</span>
+            </div>
+            <div class="trans-row">
+              <span class="trans-label">✦ Dịch nghĩa:</span>
+              <span class="trans-vn">${q.meaning}</span>
+            </div>
+          </div>
+
+          <div class="options-grid">
+            ${optionsHtml}
+          </div>
+
+          <div class="explanation-box ${showResult ? 'visible' : ''}">
+            <div class="exp-rule">${q.shortRule}</div>
+            <div class="exp-detail">💡 <strong>Giải thích chi tiết:</strong> ${q.detailExp}</div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      updateExamStats();
+    }
+
+    function handleOptionClick(questionId, selectedKey) {
+      if (currentMode === 'study') {
+        const card = document.getElementById(`q-card-${questionId}`);
+        const expBox = card.querySelector('.explanation-box');
+        const q = questionsData.find(item => item.id === questionId);
+        const options = card.querySelectorAll('.option-item');
+
+        const isCurrentlyShown = expBox.classList.contains('visible');
+        expBox.classList.toggle('visible', !isCurrentlyShown);
+
+        options.forEach((optEl, idx) => {
+          if (q.options[idx].key === q.correct) {
+            optEl.classList.toggle('correct-revealed', !isCurrentlyShown);
+          }
+        });
+        return;
+      }
+
+      if (userSelections[questionId] !== undefined) return;
+      userSelections[questionId] = selectedKey;
+      renderQuestions();
+    }
+
+    function switchMode(mode) {
+      currentMode = mode;
+      document.getElementById('tab-study').classList.toggle('active', mode === 'study');
+      document.getElementById('tab-exam').classList.toggle('active', mode === 'exam');
+
+      document.getElementById('study-controls').style.display = mode === 'study' ? 'flex' : 'none';
+      document.getElementById('exam-controls').style.display = mode === 'exam' ? 'flex' : 'none';
+      document.getElementById('exam-stats').classList.toggle('active', mode === 'exam');
+
+      const instruction = document.getElementById('mode-instruction');
+
+      if (mode === 'exam') {
+        document.body.classList.add('hide-sentence-tags');
+        activeQuestions = [...questionsData];
+        userSelections = {};
+        instruction.innerHTML = `🎯 <strong>Chế độ Thi Thử:</strong> Nhãn từ loại trên câu Hán đã được ẩn. Hãy chọn đáp án đúng cho từng câu!`;
+      } else {
+        document.body.classList.toggle('hide-sentence-tags', sentenceTagsHidden);
+        activeQuestions = [...questionsData];
+        instruction.innerHTML = `Chọn đáp án đúng, dùng ký hiệu khoanh tròn, ví dụ <span class="circle-demo">c</span>`;
+      }
+
+      renderQuestions();
+    }
+
+    function toggleSentenceTags() {
+      sentenceTagsHidden = !sentenceTagsHidden;
+      document.body.classList.toggle('hide-sentence-tags', sentenceTagsHidden);
+      document.getElementById('btn-toggle-tags').textContent = sentenceTagsHidden
+        ? 'Hiện nhãn từ loại trên câu Hán'
+        : 'Ẩn nhãn từ loại trên câu Hán';
+    }
+
+    function toggleAllStudyAnswers() {
+      studyAnswersVisible = !studyAnswersVisible;
+      document.getElementById('btn-toggle-answers').textContent = studyAnswersVisible
+        ? 'Ẩn đáp án để tự nhẩm'
+        : 'Hiện tất cả đáp án';
+      renderQuestions();
+    }
+
+    function updateExamStats() {
+      if (currentMode !== 'exam') return;
+
+      const total = activeQuestions.length;
+      let answered = 0;
+      let correct = 0;
+      let wrong = 0;
+
+      activeQuestions.forEach(q => {
+        const sel = userSelections[q.id];
+        if (sel !== undefined) {
+          answered++;
+          if (sel === q.correct) correct++;
+          else wrong++;
+        }
+      });
+
+      const score10 = total > 0 ? ((correct / total) * 10).toFixed(1) : '0.0';
+      const percent = total > 0 ? Math.round((answered / total) * 100) : 0;
+
+      document.getElementById('stat-progress').textContent = `Đã làm: ${answered} / ${total}`;
+      document.getElementById('stat-correct').textContent = `Đúng: ${correct}`;
+      document.getElementById('stat-wrong').textContent = `Sai: ${wrong}`;
+      document.getElementById('stat-score').textContent = `Điểm: ${score10} / 10`;
+      document.getElementById('exam-progress-bar').style.width = `${percent}%`;
+
+      document.getElementById('btn-retry-wrong').style.display = wrong > 0 ? 'inline-block' : 'none';
+    }
+
+    function shuffleExamQuestions() {
+      activeQuestions = [...activeQuestions].sort(() => Math.random() - 0.5);
+      userSelections = {};
+      renderQuestions();
+    }
+
+    function retryWrongQuestions() {
+      const wrongList = activeQuestions.filter(q => userSelections[q.id] && userSelections[q.id] !== q.correct);
+      if (wrongList.length === 0) return;
+      activeQuestions = wrongList;
+      userSelections = {};
+      renderQuestions();
+    }
+
+    function resetExam() {
+      activeQuestions = [...questionsData];
+      userSelections = {};
+      renderQuestions();
+    }
+
+    // Khởi tạo danh sách câu hỏi
+    renderQuestions();
+
+    // Hiệu ứng Canvas Sao lấp lánh & Sao băng vũ trụ
+    const canvas = document.getElementById('cosmos-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let shootingStars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3600);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.6 + 0.3,
+          alpha: Math.random(),
+          delta: (Math.random() * 0.015 + 0.003) * (Math.random() < 0.5 ? 1 : -1)
+        });
+      }
+    }
+
+    function spawnShootingStar() {
+      if (Math.random() < 0.018 && shootingStars.length < 2) {
+        shootingStars.push({
+          x: Math.random() * canvas.width * 0.8 + canvas.width * 0.2,
+          y: Math.random() * canvas.height * 0.4,
+          len: Math.random() * 85 + 50,
+          speed: Math.random() * 8 + 6,
+          opacity: 1
+        });
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (const s of stars) {
+        s.alpha += s.delta;
+        if (s.alpha <= 0.15 || s.alpha >= 1) s.delta = -s.delta;
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(226, 232, 240, ${s.alpha})`;
+        ctx.fill();
+      }
+
+      spawnShootingStar();
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const st = shootingStars[i];
+        ctx.beginPath();
+        const grad = ctx.createLinearGradient(st.x, st.y, st.x + st.len, st.y - st.len);
+        grad.addColorStop(0, `rgba(251, 191, 36, ${st.opacity})`);
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2;
+        ctx.moveTo(st.x, st.y);
+        ctx.lineTo(st.x + st.len, st.y - st.len);
+        ctx.stroke();
+
+        st.x -= st.speed;
+        st.y += st.speed;
+        st.opacity -= 0.018;
+
+        if (st.opacity <= 0) {
+          shootingStars.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars();
+    });
+
+    resizeCanvas();
+    createStars();
+    animate();
+  </script>
+</body>
+</html>

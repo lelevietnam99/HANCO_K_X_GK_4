@@ -1,642 +1,728 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Chế độ No-Cache -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Cổng Ôn Tập & Luyện Thi Cuối Kỳ - Hán Cổ 4</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #090d16;
-            --card-bg: rgba(17, 24, 39, 0.88);
-            --card-border: rgba(212, 175, 55, 0.45);
-            --gold: #f59e0b;
-            --gold-light: #fde68a;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --accent-blue: #38bdf8;
-            --accent-green: #10b981;
-            --accent-purple: #c084fc;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Chế độ No-Cache giúp trình duyệt luôn tải bản mới nhất trên GitHub Pages -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Cổng Tổng Hợp Bài Học & Ôn Tập (Index 1 - Index 11)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #040611;
+      --card-bg: rgba(15, 22, 48, 0.72);
+      --card-border: rgba(130, 160, 255, 0.24);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --gold: #fbbf24;
+      --cyan: #38bdf8;
+      --purple: #c084fc;
+      --emerald: #34d399;
+    }
 
-        body.theme-nature {
-            --bg-dark: #071f18;
-            --card-bg: rgba(11, 37, 28, 0.9);
-            --card-border: rgba(52, 211, 153, 0.45);
-            --gold: #34d399;
-            --gold-light: #a7f3d0;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
 
-        body {
-            font-family: 'Be Vietnam Pro', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+    /* Nền Vũ Trụ & Tinh Vân */
+    #cosmos-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(ellipse at bottom, #0f172a 0%, #03040b 100%);
+    }
 
-        /* Canvas nền Vũ Trụ Sao Đêm */
-        #bgCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-        }
+    .nebula {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(115px);
+      z-index: -1;
+      opacity: 0.32;
+      pointer-events: none;
+      animation: floatNebula 20s ease-in-out infinite alternate;
+    }
 
-        .container {
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 28px 18px 60px;
-        }
+    .nebula-1 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #4f46e5, transparent 70%);
+      top: -120px;
+      left: -100px;
+    }
 
-        /* Header trung tâm */
-        header {
-            text-align: center;
-            padding: 32px 24px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            backdrop-filter: blur(12px);
-            margin-bottom: 24px;
-            box-shadow: 0 10px 36px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
+    .nebula-2 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, #9333ea, transparent 70%);
+      bottom: -160px;
+      right: -120px;
+      animation-delay: -8s;
+    }
 
-        .header-hanzi-bg {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 7rem;
-            color: rgba(245, 158, 11, 0.06);
-            position: absolute;
-            top: -15px;
-            right: 25px;
-            pointer-events: none;
-            user-select: none;
-        }
+    .nebula-3 {
+      width: 460px;
+      height: 460px;
+      background: radial-gradient(circle, #0284c7, transparent 70%);
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
 
-        header h1 {
-            font-size: 2.15rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-            text-shadow: 0 2px 12px rgba(245, 158, 11, 0.35);
-        }
+    @keyframes floatNebula {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, -35px) scale(1.08); }
+    }
 
-        header p {
-            color: var(--gold-light);
-            font-size: 1rem;
-            max-width: 760px;
-            margin: 0 auto 16px;
-        }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 44px 20px 90px;
+    }
 
-        .top-actions {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 12px;
-        }
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+      background: linear-gradient(135deg, rgba(23, 33, 69, 0.8), rgba(12, 18, 42, 0.88));
+      border: 1px solid rgba(147, 197, 253, 0.32);
+      border-radius: 24px;
+      padding: 38px 24px 30px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 10px 16px;
-            border-radius: 9px;
-            border: 1px solid var(--card-border);
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: inherit;
-        }
+    .hero-emblem {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 3.4rem;
+      line-height: 1.1;
+      color: var(--gold);
+      text-shadow: 0 0 28px rgba(251, 191, 36, 0.55);
+      margin-bottom: 10px;
+      display: inline-block;
+    }
 
-        .btn:hover {
-            background: rgba(245, 158, 11, 0.2);
-            border-color: var(--gold);
-            transform: translateY(-2px);
-        }
+    .course-badge {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      padding: 5px 16px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
 
-        .btn-primary {
-            background: var(--gold);
-            color: #090d16;
-            border-color: var(--gold);
-            font-weight: 700;
-        }
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      background: linear-gradient(90deg, #ffffff, #93c5fd, #fde68a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
 
-        .btn-primary:hover {
-            background: var(--gold-light);
-            color: #000;
-        }
+    .subtitle {
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      margin-bottom: 24px;
+    }
 
-        /* Lưới 3 Thẻ Học Phần (index1, index2, index3) */
-        .portal-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-            margin-bottom: 28px;
-        }
+    /* Thanh tìm kiếm & Tiến độ */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 860px;
+      margin: 0 auto;
+      padding-top: 18px;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+    }
 
-        @media (max-width: 980px) {
-            .portal-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+    .search-box {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
 
-        .portal-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 26px 22px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-            position: relative;
-        }
+    .search-box input {
+      width: 100%;
+      background: rgba(8, 12, 28, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--text-main);
+      padding: 11px 16px 11px 40px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
 
-        .portal-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--gold);
-            box-shadow: 0 14px 36px rgba(245, 158, 11, 0.22);
-        }
+    .search-box input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.25);
+    }
 
-        .card-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
 
-        .hanzi-seal {
-            width: 64px;
-            height: 64px;
-            border-radius: 14px;
-            background: rgba(245, 158, 11, 0.15);
-            border: 2px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Noto Serif TC', serif;
-            font-size: 2.1rem;
-            font-weight: 700;
-            color: var(--gold-light);
-            box-shadow: inset 0 0 12px rgba(245, 158, 11, 0.25);
-        }
+    .progress-summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(8, 12, 28, 0.75);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--emerald);
+    }
 
-        .file-badge {
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            color: var(--accent-blue);
-            padding: 5px 12px;
-            border-radius: 99px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
+    /* Lưới 11 trang */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 22px;
+    }
 
-        .portal-card h2 {
-            font-size: 1.32rem;
-            color: var(--gold);
-            margin-bottom: 10px;
-            line-height: 1.35;
-        }
+    .portal-card {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(14px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.38);
+      overflow: hidden;
+    }
 
-        .portal-card p {
-            color: var(--text-muted);
-            font-size: 0.93rem;
-            margin-bottom: 16px;
-        }
+    .portal-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--cyan));
+      opacity: 0.75;
+      transition: width 0.25s ease, opacity 0.25s ease;
+    }
 
-        .feature-list {
-            list-style: none;
-            margin-bottom: 22px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 14px;
-        }
+    .portal-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(251, 191, 36, 0.65);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55), 0 0 22px rgba(251, 191, 36, 0.18);
+    }
 
-        .feature-list li {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            color: var(--text-main);
-        }
+    .portal-card:hover::before {
+      width: 6px;
+      opacity: 1;
+    }
 
-        .feature-list li span.dot {
-            color: var(--gold);
-            font-weight: bold;
-        }
+    .portal-card.completed {
+      border-color: rgba(52, 211, 153, 0.5);
+    }
 
-        .card-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 9px;
-        }
+    .portal-card.completed::before {
+      background: var(--emerald);
+    }
 
-        .card-sub-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
 
-        /* Khung Xem Nhanh (Embedded Preview) */
-        #previewSection {
-            display: none;
-            background: var(--card-bg);
-            border: 2px solid var(--gold);
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 28px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-        }
+    .page-badge {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.25));
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: var(--cyan);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
 
-        .preview-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 18px;
-            background: rgba(0, 0, 0, 0.5);
-            border-bottom: 1px solid var(--card-border);
-            gap: 10px;
-        }
+    .file-tag {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--gold);
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
 
-        .preview-frame {
-            width: 100%;
-            height: 82vh;
-            border: none;
-            background: #090d16;
-        }
+    .card-body {
+      margin-bottom: 20px;
+    }
 
-        /* Bảng theo dõi tiến độ ôn tập */
-        .progress-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 22px 24px;
-            backdrop-filter: blur(10px);
-        }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .progress-header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
 
-        .progress-bar-wrap {
-            width: 100%;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 99px;
-            overflow: hidden;
-            margin-bottom: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(148, 163, 184, 0.16);
+    }
 
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--gold), var(--accent-green));
-            transition: width 0.35s ease;
-        }
+    .open-link {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s ease;
+    }
 
-        .checklist-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 10px;
-        }
+    .portal-card:hover .open-link {
+      transform: translateX(4px);
+    }
 
-        .check-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.15s;
-        }
+    .check-btn {
+      background: rgba(8, 12, 28, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--text-muted);
+      padding: 5px 11px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 2;
+    }
 
-        .check-item:hover {
-            border-color: var(--gold);
-        }
+    .check-btn:hover {
+      border-color: var(--emerald);
+      color: var(--emerald);
+    }
 
-        .check-item.done {
-            background: rgba(16, 185, 129, 0.15);
-            border-color: var(--accent-green);
-            color: #a7f3d0;
-            text-decoration: line-through;
-        }
+    .portal-card.completed .check-btn {
+      background: rgba(52, 211, 153, 0.18);
+      border-color: var(--emerald);
+      color: var(--emerald);
+    }
 
-        .check-item input {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--accent-green);
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 28px;
-            color: var(--text-muted);
-            font-size: 0.86rem;
-        }
-
-        kbd {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 4px;
-            padding: 2px 6px;
-            font-size: 0.8rem;
-            color: var(--gold-light);
-        }
-    </style>
+    @media (max-width: 640px) {
+      h1 { font-size: 1.6rem; }
+      .portal-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<canvas id="bgCanvas"></canvas>
+  <!-- Bầu trời sao & Tinh vân Vũ trụ -->
+  <canvas id="cosmos-canvas"></canvas>
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
 
-<div class="container">
+  <div class="container">
     <header>
-        <div class="header-hanzi-bg">漢古四</div>
-        <h1>CỔNG ÔN TẬP CUỐI KỲ - HÁN CỔ 4</h1>
-        <p>Trung Tâm Điều Hướng Học Liệu: Phiên Âm Hán Việt • Lý Thuyết &amp; 97 Câu Trắc Nghiệm Ngữ Pháp • 26 Câu Dịch Thuật</p>
-        <div class="top-actions">
-            <button class="btn" onclick="toggleTheme()">🌌 Đổi Nền (Vũ Trụ / Rừng Trúc)</button>
-            <button class="btn" onclick="openPreview('index1.html', 'Phần 1: Đề Cương Phiên Âm & Ngữ Pháp')">⚡ Xem Nhanh Phần 1</button>
-            <button class="btn" onclick="openPreview('index2.html', 'Phần 2: 97 Câu Trắc Nghiệm')">⚡ Xem Nhanh Phần 2</button>
-            <button class="btn" onclick="openPreview('index3.html', 'Phần 3: 26 Câu Dịch Thuật')">⚡ Xem Nhanh Phần 3</button>
+      <div class="hero-emblem">漢</div>
+      <div><span class="course-badge">Hệ Thống Học Tập &amp; Ôn Thi Trực Tuyến</span></div>
+      <h1>CỔNG TỔNG HỢP BÀI HỌC (INDEX 1 – 11)</h1>
+      <p class="subtitle">Danh mục điều hướng nhanh toàn bộ 11 chuyên đề lý thuyết và bài tập trắc nghiệm</p>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Tìm nhanh theo số trang (ví dụ: index1, bài 5)...">
         </div>
+        <div class="progress-summary" id="progress-text">
+          ✦ Tiến độ hoàn thành: 0 / 11 trang
+        </div>
+      </div>
     </header>
 
-    <!-- KHUNG XEM NHANH TRỰC TIẾP TRÊN TRANG CHỦ (IFRAME) -->
-    <section id="previewSection">
-        <div class="preview-toolbar">
-            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                <strong style="color:var(--gold);" id="previewTitle">Đang xem: index1.html</strong>
-                <button class="btn" onclick="openPreview('index1.html', 'Phần 1: Đề Cương Phiên Âm & Ngữ Pháp')">1. Phiên Âm &amp; Lý Thuyết</button>
-                <button class="btn" onclick="openPreview('index2.html', 'Phần 2: 97 Câu Trắc Nghiệm')">2. Trắc Nghiệm (97 Câu)</button>
-                <button class="btn" onclick="openPreview('index3.html', 'Phần 3: 26 Câu Dịch Thuật')">3. Dịch Câu (26 Câu)</button>
-            </div>
-            <div style="display:flex; gap:8px;">
-                <a id="previewDirectLink" href="index1.html" class="btn btn-primary">🚀 Mở Toàn Màn Hình</a>
-                <button class="btn" onclick="closePreview()">✖ Đóng Khung Xem Nhanh</button>
-            </div>
+    <!-- DANH SÁCH 11 ĐƯỜNG LINK (INDEX1.HTML -> INDEX11.HTML) -->
+    <main class="portal-grid" id="portal-grid">
+
+      <!-- Trang 1 -->
+      <a href="index1.html" class="portal-card" data-id="1">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 01</span>
+            <span class="file-tag">index1.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 01 — Bài học số 1</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và ví dụ phân tích chuyên đề 1.</p>
+          </div>
         </div>
-        <iframe id="previewFrame" class="preview-frame" src=""></iframe>
-    </section>
-
-    <!-- BA THẺ ĐƯỜNG LINK CHÍNH (INDEX1, INDEX2, INDEX3) -->
-    <div class="portal-grid">
-        <!-- Card 1: index1.html -->
-        <div class="portal-card">
-            <div>
-                <div class="card-top">
-                    <div class="hanzi-seal">經</div>
-                    <span class="file-badge">index1.html • Phím [1]</span>
-                </div>
-                <h2>PHẦN 1: PHIÊN ÂM &amp; LÝ THUYẾT NGỮ PHÁP</h2>
-                <p>Tổng hợp 40 cụm từ Phiên âm Hán Việt và Bảng hệ thống hóa ngữ pháp trọng tâm.</p>
-                <ul class="feature-list">
-                    <li><span class="dot">✦</span> <strong>Câu 1 (40 cụm từ):</strong> Đầy đủ chữ Hán, phiên âm Hán Việt và nghĩa thuần Việt.</li>
-                    <li><span class="dot">✦</span> <strong>9 chữ Hán đa chức năng:</strong> Phân biệt rõ từ loại &amp; nghĩa của 在, 與, 從, 爲, 向, 以, 之, 旁, 前.</li>
-                    <li><span class="dot">✦</span> <strong>Tra cứu nhanh câu 1–97:</strong> Gõ số câu hiện ngay từ loại, kèm Flashcard 3D &amp; Thi thử.</li>
-                </ul>
-            </div>
-            <div class="card-actions">
-                <a href="index1.html" class="btn btn-primary">🚀 Mở Trang Ôn Tập 1 (index1.html)</a>
-                <div class="card-sub-actions">
-                    <a href="index1.html" target="_blank" class="btn">🗗 Mở Tab Mới</a>
-                    <button class="btn" onclick="openPreview('index1.html', 'Phần 1: Đề Cương Phiên Âm & Ngữ Pháp')">👁️ Xem Tại Chỗ</button>
-                </div>
-            </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 1)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
         </div>
+      </a>
 
-        <!-- Card 2: index2.html -->
-        <div class="portal-card">
-            <div>
-                <div class="card-top">
-                    <div class="hanzi-seal">試</div>
-                    <span class="file-badge">index2.html • Phím [2]</span>
-                </div>
-                <h2>PHẦN 2: BÀI TẬP TRẮC NGHIỆM (97 CÂU)</h2>
-                <p>Luyện phản xạ xác định chính xác từ loại trong ngữ cảnh của từng câu Hán văn.</p>
-                <ul class="feature-list">
-                    <li><span class="dot">✦</span> <strong>Trọn bộ 97 câu:</strong> Đầy đủ đáp án A, B, C, D và ghi chú lưu ý cho câu đặc biệt (Câu 13, 96).</li>
-                    <li><span class="dot">✦</span> <strong>Lọc nhanh theo chữ Hán:</strong> Gom nhóm tất cả các câu hỏi cùng 1 chữ (在, 與, 爲, 從, 向...) để dễ so sánh.</li>
-                    <li><span class="dot">✦</span> <strong>Phòng thi thử thông minh:</strong> Chế độ làm lần lượt, trộn đề ngẫu nhiên và làm lại các câu sai.</li>
-                </ul>
-            </div>
-            <div class="card-actions">
-                <a href="index2.html" class="btn btn-primary">🚀 Mở Trang Bài Tập 2 (index2.html)</a>
-                <div class="card-sub-actions">
-                    <a href="index2.html" target="_blank" class="btn">🗗 Mở Tab Mới</a>
-                    <button class="btn" onclick="openPreview('index2.html', 'Phần 2: 97 Câu Trắc Nghiệm')">👁️ Xem Tại Chỗ</button>
-                </div>
-            </div>
+      <!-- Trang 2 -->
+      <a href="index2.html" class="portal-card" data-id="2">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 02</span>
+            <span class="file-tag">index2.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 02 — Bài học số 2</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và ví dụ phân tích chuyên đề 2.</p>
+          </div>
         </div>
-
-        <!-- Card 3: index3.html -->
-        <div class="portal-card">
-            <div>
-                <div class="card-top">
-                    <div class="hanzi-seal">譯</div>
-                    <span class="file-badge">index3.html • Phím [3]</span>
-                </div>
-                <h2>PHẦN 3: DỊCH CÂU &amp; VIẾT CHỮ HÁN (26 CÂU)</h2>
-                <p>Ôn luyện dịch thuật hai chiều Hán Văn ⇄ Hán Việt kèm bảng chiết tự nghĩa từng chữ.</p>
-                <ul class="feature-list">
-                    <li><span class="dot">✦</span> <strong>13 câu Hán văn ➔ Hán Việt:</strong> Đọc mặt chữ Hán, viết âm Hán Việt và dịch nghĩa toàn câu.</li>
-                    <li><span class="dot">✦</span> <strong>13 câu Hán Việt ➔ Hán văn:</strong> Nhìn phiên âm Hán Việt, viết lại câu chữ Hán và dịch nghĩa.</li>
-                    <li><span class="dot">✦</span> <strong>Bảng giải nghĩa từng từ &amp; Ghép chữ:</strong> Giải nghĩa từng chữ Hán trong câu và trò chơi xếp chữ.</li>
-                </ul>
-            </div>
-            <div class="card-actions">
-                <a href="index3.html" class="btn btn-primary">🚀 Mở Trang Dịch Câu 3 (index3.html)</a>
-                <div class="card-sub-actions">
-                    <a href="index3.html" target="_blank" class="btn">🗗 Mở Tab Mới</a>
-                    <button class="btn" onclick="openPreview('index3.html', 'Phần 3: 26 Câu Dịch Thuật')">👁️ Xem Tại Chỗ</button>
-                </div>
-            </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 2)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
         </div>
-    </div>
+      </a>
 
-    <!-- BẢNG THEO DÕI TIẾN ĐỘ ÔN TẬP CÁ NHÂN -->
-    <div class="progress-card">
-        <div class="progress-header">
-            <div>
-                <h3 style="color:var(--gold); font-size:1.15rem; text-transform:uppercase;">✅ Tiến Độ Ôn Tập Cá Nhân (Tự Động Lưu)</h3>
-                <p style="font-size:0.86rem; color:var(--text-muted);">Đánh dấu từng mục tiêu sau khi bạn đã ôn vững:</p>
-            </div>
-            <div style="display:flex; align-items:center; gap:10px;">
-                <span id="progressText" style="font-weight:700; color:var(--gold-light);">Hoàn thành: 0 / 6 mục (0%)</span>
-                <button class="btn" style="padding:6px 12px; font-size:0.8rem;" onclick="resetChecklist()">🔄 Đặt Lại</button>
-            </div>
+      <!-- Trang 3 -->
+      <a href="index3.html" class="portal-card" data-id="3">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 03</span>
+            <span class="file-tag">index3.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 03 — Bài học số 3</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và ví dụ phân tích chuyên đề 3.</p>
+          </div>
         </div>
-
-        <div class="progress-bar-wrap">
-            <div class="progress-bar-fill" id="progressBarFill"></div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 3)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
         </div>
+      </a>
 
-        <div class="checklist-grid" id="checklistGrid"></div>
-    </div>
+      <!-- Trang 4 -->
+      <a href="index4.html" class="portal-card" data-id="4">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 04</span>
+            <span class="file-tag">index4.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 04 — Bài học số 4</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và ví dụ phân tích chuyên đề 4.</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 4)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
+        </div>
+      </a>
 
-    <footer>
-        💡 Mẹo nhanh: Nhấn phím <kbd>1</kbd>, <kbd>2</kbd>, hoặc <kbd>3</kbd> trên bàn phím để mở nhanh <strong>index1.html</strong>, <strong>index2.html</strong>, <strong>index3.html</strong>.
-    </footer>
-</div>
+      <!-- Trang 5 -->
+      <a href="index5.html" class="portal-card" data-id="5">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 05</span>
+            <span class="file-tag">index5.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 05 — Bài học số 5</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và ví dụ phân tích chuyên đề 5.</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 5)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
+        </div>
+      </a>
 
-<script>
-    // ==================== DANH SÁCH MỤC TIÊU ÔN TẬP ====================
-    const studyTasks = [
-        { id: "t1", label: "Thuộc 40 cụm từ Phiên âm Hán Việt (index1)" },
-        { id: "t2", label: "Nắm vững 9 chữ Hán đa chức năng (index1)" },
-        { id: "t3", label: "Thuộc bảng tổng hợp từ loại câu 1–97 (index1)" },
-        { id: "t4", label: "Làm đúng 97/97 câu Trắc nghiệm ngữ pháp (index2)" },
-        { id: "t5", label: "Thuộc 13 câu Hán văn ➔ Hán Việt & Dịch (index3)" },
-        { id: "t6", label: "Viết được chữ Hán 13 câu Hán Việt ➔ Hán văn (index3)" }
-    ];
+      <!-- Trang 6 -->
+      <a href="index6.html" class="portal-card" data-id="6">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 06</span>
+            <span class="file-tag">index6.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 06 — Bài học số 6</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và ví dụ phân tích chuyên đề 6.</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 6)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
+        </div>
+      </a>
 
-    const STORAGE_KEY = "hanco4_hub_progress_v1";
-    let savedProgress = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      <!-- Trang 7 -->
+      <a href="index7.html" class="portal-card" data-id="7">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 07</span>
+            <span class="file-tag">index7.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 07 — Bài học số 7</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và ví dụ phân tích chuyên đề 7.</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 7)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
+        </div>
+      </a>
 
-    function renderChecklist() {
-        const grid = document.getElementById('checklistGrid');
-        grid.innerHTML = '';
-        let doneCount = 0;
+      <!-- Trang 8 -->
+      <a href="index8.html" class="portal-card" data-id="8">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 08</span>
+            <span class="file-tag">index8.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 08 — Bài học số 8</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và ví dụ phân tích chuyên đề 8.</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 8)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
+        </div>
+      </a>
 
-        studyTasks.forEach(task => {
-            const isDone = !!savedProgress[task.id];
-            if (isDone) doneCount++;
+      <!-- Trang 9 -->
+      <a href="index9.html" class="portal-card" data-id="9">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 09</span>
+            <span class="file-tag">index9.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 09 — Bài học số 9</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và bài tập thực hành chuyên đề 9.</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 9)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
+        </div>
+      </a>
 
-            const div = document.createElement('label');
-            div.className = `check-item ${isDone ? 'done' : ''}`;
-            div.innerHTML = `
-                <input type="checkbox" ${isDone ? 'checked' : ''} onchange="toggleTask('${task.id}')">
-                <span>${task.label}</span>
-            `;
-            grid.appendChild(div);
-        });
+      <!-- Trang 10 -->
+      <a href="index10.html" class="portal-card" data-id="10">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 10</span>
+            <span class="file-tag">index10.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 10 — Bài học số 10</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và bài tập thực hành chuyên đề 10.</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 10)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
+        </div>
+      </a>
 
-        const pct = Math.round((doneCount / studyTasks.length) * 100);
-        document.getElementById('progressText').textContent = `Hoàn thành: ${doneCount} / ${studyTasks.length} mục (${pct}%)`;
-        document.getElementById('progressBarFill').style.width = `${pct}%`;
+      <!-- Trang 11 -->
+      <a href="index11.html" class="portal-card" data-id="11">
+        <div>
+          <div class="card-top">
+            <span class="page-badge">TRANG 11</span>
+            <span class="file-tag">index11.html</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chuyên đề 11 — Bài học số 11</div>
+            <p class="card-desc">Nội dung bài học, lý thuyết ngữ pháp và bài tập thực hành chuyên đề 11.</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="check-btn" onclick="toggleDone(event, 11)">○ Đánh dấu đã học</button>
+          <span class="open-link">Mở trang ➔</span>
+        </div>
+      </a>
+
+    </main>
+  </div>
+
+  <script>
+    // Quản lý trạng thái đánh dấu hoàn thành bằng LocalStorage
+    const STORAGE_KEY = 'hanco_portal_done_pages';
+    let completedPages = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+    function updateProgressUI() {
+      const cards = document.querySelectorAll('.portal-card');
+      cards.forEach(card => {
+        const id = Number(card.getAttribute('data-id'));
+        const btn = card.querySelector('.check-btn');
+        const isDone = completedPages.includes(id);
+
+        card.classList.toggle('completed', isDone);
+        btn.textContent = isDone ? '✓ Đã ôn xong' : '○ Đánh dấu đã học';
+      });
+
+      document.getElementById('progress-text').textContent =
+        `✦ Tiến độ hoàn thành: ${completedPages.length} / 11 trang`;
     }
 
-    function toggleTask(id) {
-        savedProgress[id] = !savedProgress[id];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(savedProgress));
-        renderChecklist();
+    function toggleDone(event, id) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (completedPages.includes(id)) {
+        completedPages = completedPages.filter(item => item !== id);
+      } else {
+        completedPages.push(id);
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(completedPages));
+      updateProgressUI();
     }
 
-    function resetChecklist() {
-        savedProgress = {};
-        localStorage.removeItem(STORAGE_KEY);
-        renderChecklist();
-    }
+    // Tìm kiếm nhanh theo tên file hoặc tiêu đề
+    document.getElementById('search-input').addEventListener('input', function (e) {
+      const keyword = e.target.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.portal-card');
 
-    // ==================== CHẾ ĐỘ XEM NHANH (IFRAME PREVIEW) ====================
-    function openPreview(url, title) {
-        const sec = document.getElementById('previewSection');
-        const frame = document.getElementById('previewFrame');
-        document.getElementById('previewTitle').textContent = `Đang xem: ${title} (${url})`;
-        document.getElementById('previewDirectLink').href = url;
-        frame.src = url + "?t=" + new Date().getTime(); // Chống cache khi nạp iframe
-        sec.style.display = 'block';
-        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function closePreview() {
-        const sec = document.getElementById('previewSection');
-        const frame = document.getElementById('previewFrame');
-        frame.src = '';
-        sec.style.display = 'none';
-    }
-
-    // ==================== ĐỔI NỀN & PHÍM TẮT ====================
-    function toggleTheme() {
-        document.body.classList.toggle('theme-nature');
-    }
-
-    window.addEventListener('keydown', e => {
-        if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-        if (e.key === '1') window.location.href = 'index1.html';
-        if (e.key === '2') window.location.href = 'index2.html';
-        if (e.key === '3') window.location.href = 'index3.html';
-        if (e.key === 'Escape') closePreview();
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(keyword) ? 'flex' : 'none';
+      });
     });
 
-    // ==================== HIỆU ỨNG NỀN VŨ TRỤ SAO ĐÊM ====================
-    const canvas = document.getElementById('bgCanvas');
+    updateProgressUI();
+
+    // Hiệu ứng Canvas Sao lấp lánh & Sao băng vũ trụ
+    const canvas = document.getElementById('cosmos-canvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
+    let shootingStars = [];
 
-    function initCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        stars = Array.from({ length: 145 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 1.8 + 0.4,
-            speed: Math.random() * 0.38 + 0.08,
-            alpha: Math.random()
-        }));
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
 
-    function animateStars() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const isNature = document.body.classList.contains('theme-nature');
-        stars.forEach(s => {
-            s.y -= s.speed;
-            if (s.y < 0) {
-                s.y = canvas.height;
-                s.x = Math.random() * canvas.width;
-            }
-            ctx.beginPath();
-            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-            ctx.fillStyle = isNature
-                ? `rgba(110, 231, 183, ${s.alpha})`
-                : `rgba(253, 230, 138, ${s.alpha})`;
-            ctx.fill();
+    function createStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3600);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.6 + 0.3,
+          alpha: Math.random(),
+          delta: (Math.random() * 0.015 + 0.003) * (Math.random() < 0.5 ? 1 : -1)
         });
-        requestAnimationFrame(animateStars);
+      }
     }
 
-    window.addEventListener('resize', initCanvas);
+    function spawnShootingStar() {
+      if (Math.random() < 0.018 && shootingStars.length < 2) {
+        shootingStars.push({
+          x: Math.random() * canvas.width * 0.8 + canvas.width * 0.2,
+          y: Math.random() * canvas.height * 0.4,
+          len: Math.random() * 85 + 50,
+          speed: Math.random() * 8 + 6,
+          opacity: 1
+        });
+      }
+    }
 
-    // Khởi chạy
-    initCanvas();
-    animateStars();
-    renderChecklist();
-</script>
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      for (const s of stars) {
+        s.alpha += s.delta;
+        if (s.alpha <= 0.15 || s.alpha >= 1) s.delta = -s.delta;
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(226, 232, 240, ${s.alpha})`;
+        ctx.fill();
+      }
+
+      spawnShootingStar();
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const st = shootingStars[i];
+        ctx.beginPath();
+        const grad = ctx.createLinearGradient(st.x, st.y, st.x + st.len, st.y - st.len);
+        grad.addColorStop(0, `rgba(251, 191, 36, ${st.opacity})`);
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2;
+        ctx.moveTo(st.x, st.y);
+        ctx.lineTo(st.x + st.len, st.y - st.len);
+        ctx.stroke();
+
+        st.x -= st.speed;
+        st.y += st.speed;
+        st.opacity -= 0.018;
+
+        if (st.opacity <= 0) {
+          shootingStars.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars();
+    });
+
+    resizeCanvas();
+    createStars();
+    animate();
+  </script>
 </body>
 </html>

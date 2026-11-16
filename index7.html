@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngữ Pháp Hán Cổ: Đại Từ Nhân Xưng (人稱代詞) & Bài Tập Thực Hành</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #040611;
+      --card-bg: rgba(15, 22, 48, 0.72);
+      --card-border: rgba(130, 160, 255, 0.24);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --gold: #fbbf24;
+      --cyan: #38bdf8;
+      --purple: #c084fc;
+      --emerald: #34d399;
+      --rose: #fb7185;
+      --orange: #fb923c;
+      --teal: #2dd4bf;
+      --indigo: #818cf8;
+      --lime: #a3e635;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Nền Vũ Trụ & Tinh Vân */
+    #cosmos-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(ellipse at bottom, #0f172a 0%, #03040b 100%);
+    }
+
+    .nebula {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(115px);
+      z-index: -1;
+      opacity: 0.32;
+      pointer-events: none;
+      animation: floatNebula 20s ease-in-out infinite alternate;
+    }
+
+    .nebula-1 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #4f46e5, transparent 70%);
+      top: -120px;
+      left: -100px;
+    }
+
+    .nebula-2 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, #9333ea, transparent 70%);
+      bottom: -160px;
+      right: -120px;
+      animation-delay: -8s;
+    }
+
+    .nebula-3 {
+      width: 460px;
+      height: 460px;
+      background: radial-gradient(circle, #0284c7, transparent 70%);
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
+
+    @keyframes floatNebula {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, -35px) scale(1.08); }
+    }
+
+    /* Bố cục chính */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 20px 90px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 44px;
+      background: linear-gradient(135deg, rgba(23, 33, 69, 0.78), rgba(12, 18, 42, 0.85));
+      border: 1px solid rgba(147, 197, 253, 0.3);
+      border-radius: 24px;
+      padding: 36px 24px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .course-badge {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #ffffff, #93c5fd, #fde68a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .hanzi-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.7rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+      text-shadow: 0 0 18px rgba(251, 191, 36, 0.4);
+    }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .nav-btn {
+      background: rgba(30, 41, 82, 0.75);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* Chú giải ký hiệu từ loại */
+    .legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 12px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Nhãn từ loại */
+    .tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      display: inline-block;
+      line-height: 1.35;
+      letter-spacing: 0.3px;
+    }
+
+    .tag-sup {
+      vertical-align: super;
+      font-size: 0.68rem;
+      margin: 0 3px;
+    }
+
+    .tag-dgt { background: rgba(56, 189, 248, 0.18); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.45); }
+    .tag-gt  { background: rgba(251, 146, 60, 0.18); color: var(--orange); border: 1px solid rgba(251, 146, 60, 0.45); }
+    .tag-lt  { background: rgba(251, 113, 133, 0.18); color: var(--rose); border: 1px solid rgba(251, 113, 133, 0.45); }
+    .tag-dt  { background: rgba(52, 211, 153, 0.18); color: var(--emerald); border: 1px solid rgba(52, 211, 153, 0.45); }
+    .tag-pvt { background: rgba(45, 212, 191, 0.18); color: var(--teal); border: 1px solid rgba(45, 212, 191, 0.45); }
+    .tag-pt  { background: rgba(192, 132, 252, 0.18); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.45); }
+    .tag-dtu { background: rgba(129, 140, 248, 0.18); color: var(--indigo); border: 1px solid rgba(129, 140, 248, 0.45); }
+    .tag-st  { background: rgba(251, 191, 36, 0.18); color: var(--gold); border: 1px solid rgba(251, 191, 36, 0.45); }
+    .tag-tkc { background: rgba(163, 230, 53, 0.18); color: var(--lime); border: 1px solid rgba(163, 230, 53, 0.45); }
+
+    /* Section */
+    .section-block {
+      margin-bottom: 56px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-banner {
+      background: linear-gradient(90deg, rgba(251, 191, 36, 0.18), rgba(30, 41, 89, 0.45));
+      border-left: 5px solid var(--gold);
+      border-radius: 14px;
+      padding: 16px 24px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .section-banner h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    /* Card Định nghĩa & Phân loại */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 26px 30px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(251, 191, 36, 0.45);
+    }
+
+    .definition-text {
+      font-size: 1.1rem;
+      color: #f8fafc;
+    }
+
+    .pronoun-header {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pronoun-header .hanzi-badge {
+      font-family: 'Noto Serif TC', serif;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      color: var(--gold);
+      padding: 2px 12px;
+      border-radius: 8px;
+      font-size: 1.15rem;
+    }
+
+    .pronoun-desc {
+      color: #cbd5e1;
+      margin-bottom: 18px;
+      font-size: 0.98rem;
+    }
+
+    .sub-group {
+      background: rgba(8, 12, 28, 0.68);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+
+    .sub-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .sub-group-title {
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-size: 0.98rem;
+    }
+
+    .pronoun-list {
+      list-style: none;
+    }
+
+    .pronoun-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+      color: #e2e8f0;
+    }
+
+    .pronoun-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .pronoun-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+    }
+
+    .hanzi-word {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin: 0 2px;
+    }
+
+    .meaning-colon {
+      color: var(--emerald);
+      font-weight: 600;
+    }
+
+    /* Phần Bài Tập Thực Hành */
+    .practice-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 14px;
+      padding: 16px 22px;
+      margin-bottom: 24px;
+    }
+
+    .practice-instruction {
+      font-size: 0.98rem;
+      color: #e2e8f0;
+    }
+
+    .circle-demo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin: 0 4px;
+    }
+
+    .mode-btn {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .mode-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    /* Lưới câu hỏi trắc nghiệm */
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .quiz-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 22px 26px;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.25s ease;
+    }
+
+    .quiz-card:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    .quiz-question {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+
+    .q-num {
+      background: rgba(56, 189, 248, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: var(--cyan);
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .q-hanzi {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.45rem;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .q-ask {
+      color: #cbd5e1;
+    }
+
+    .q-target {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.35rem;
+      color: var(--gold);
+      font-weight: 700;
+      padding: 0 4px;
+    }
+
+    /* Các lựa chọn a, b, c, d */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(8, 12, 28, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .option-item:hover {
+      border-color: rgba(251, 191, 36, 0.45);
+    }
+
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    /* Khi hiển thị đáp án đúng (Khoanh tròn) */
+    .quiz-card.show-answer .option-item.is-correct {
+      background: rgba(251, 191, 36, 0.14);
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+    }
+
+    .quiz-card.show-answer .option-item.is-correct .opt-letter {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(251, 191, 36, 0.2);
+      box-shadow: 0 0 8px rgba(251, 191, 36, 0.45);
+    }
+
+    .quiz-card.show-answer .option-item.is-correct .opt-text {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* Giải thích => */
+    .explanation-box {
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 4px solid var(--emerald);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #d1fae5;
+      display: none;
+    }
+
+    .quiz-card.show-answer .explanation-box {
+      display: block;
+    }
+
+    .explanation-box strong {
+      color: var(--emerald);
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 1.5rem; }
+      .glass-card, .quiz-card { padding: 18px; }
+      .q-hanzi { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bầu trời sao & Tinh vân Vũ trụ -->
+  <canvas id="cosmos-canvas"></canvas>
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <div class="course-badge">Ngữ Pháp Hán Cổ • Lý Thuyết &amp; Thực Hành</div>
+      <h1>ĐẠI TỪ NHÂN XƯNG</h1>
+      <div class="hanzi-title">( 人稱代詞 )</div>
+
+      <div class="nav-tabs">
+        <a href="#dinh-nghia" class="nav-btn">I. ĐỊNH NGHĨA</a>
+        <a href="#phan-loai" class="nav-btn">II. PHÂN LOẠI (3 NGÔI)</a>
+        <a href="#bai-tap" class="nav-btn">II. BÀI TẬP THỰC HÀNH (17 CÂU)</a>
+      </div>
+
+      <div class="legend-bar">
+        <span><span class="tag tag-dtu">ĐT</span> Đại từ</span>
+        <span><span class="tag tag-dt">DT</span> Danh từ</span>
+        <span><span class="tag tag-pvt">PVT</span> Phương vị từ</span>
+        <span><span class="tag tag-st">ST</span> Số từ</span>
+        <span><span class="tag tag-dgt">ĐgT</span> Động từ</span>
+        <span><span class="tag tag-gt">GT</span> Giới từ</span>
+        <span><span class="tag tag-lt">LT</span> Liên từ</span>
+        <span><span class="tag tag-pt">PT</span> Phó từ</span>
+        <span><span class="tag tag-tkc">TKC</span> Trợ từ kết cấu</span>
+      </div>
+    </header>
+
+    <!-- ==================== I. ĐỊNH NGHĨA ==================== -->
+    <section id="dinh-nghia" class="section-block">
+      <div class="section-banner">
+        <h2>I. ĐỊNH NGHĨA</h2>
+      </div>
+      <div class="glass-card">
+        <p class="definition-text">
+          <strong>Đại từ nhân xưng</strong> là từ dùng để xưng hô trong giao tiếp, gọi tắt là <strong>Đại từ</strong> (<span class="tag tag-dtu">ĐT</span>).
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== II. PHÂN LOẠI ==================== -->
+    <section id="phan-loai" class="section-block">
+      <div class="section-banner">
+        <h2>II. PHÂN LOẠI</h2>
+      </div>
+
+      <!-- 1. Ngôi thứ nhất -->
+      <article class="glass-card">
+        <div class="pronoun-header">
+          1. Đại từ nhân xưng ngôi thứ nhất — Đại từ tự xưng
+          <span class="hanzi-badge">自稱代詞</span>
+        </div>
+        <p class="pronoun-desc">Tức là từ dùng để chỉ về tự thân (bản thân mình).</p>
+
+        <div class="sub-group">
+          <div class="sub-group-title">a. Đại từ nhân xưng ngôi thứ nhất chỉ số ít:</div>
+          <ul class="pronoun-list">
+            <li>
+              <span class="hanzi-word">我</span> ngã,
+              <span class="hanzi-word">吾</span> ngô,
+              <span class="hanzi-word">余</span> dư,
+              <span class="hanzi-word">予</span> dư,
+              <span class="hanzi-word">己</span> kỷ,
+              <span class="hanzi-word">自</span> tư:
+              <span class="meaning-colon">Tôi, ta, tớ, mình.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-group-title">b. Đại từ nhân xưng ngôi thứ nhất chỉ số nhiều:</div>
+          <ul class="pronoun-list">
+            <li>
+              <span class="hanzi-word">我輩</span> ngã bối,
+              <span class="hanzi-word">我等</span> ngã đẳng,
+              <span class="hanzi-word">我曹</span> ngã tào:
+              <span class="meaning-colon">Chúng tôi, chúng ta.</span>
+            </li>
+            <li>
+              <span class="hanzi-word">吾輩</span> ngô bối,
+              <span class="hanzi-word">吾等</span> ngô đẳng,
+              <span class="hanzi-word">吾徒</span> ngã đồ,
+              <span class="hanzi-word">吾人</span> ngô nhân,
+              <span class="hanzi-word">吾儕</span> ngô sài:
+              <span class="meaning-colon">Chúng tôi, chúng ta.</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 2. Ngôi thứ hai -->
+      <article class="glass-card">
+        <div class="pronoun-header">
+          2. Đại từ nhân xưng ngôi thứ hai — Đại từ đối xưng
+          <span class="hanzi-badge">對稱代詞</span>
+        </div>
+        <p class="pronoun-desc">Tức là từ chỉ về người thứ hai đối diện.</p>
+
+        <div class="sub-group">
+          <div class="sub-group-title">a. Đại từ nhân xưng ngôi thứ hai chỉ số ít:</div>
+          <ul class="pronoun-list">
+            <li>
+              <span class="hanzi-word">爾</span> nhĩ,
+              <span class="hanzi-word">汝</span> nhữ,
+              <span class="hanzi-word">你</span> nễ:
+              <span class="meaning-colon">Anh, bạn, mày, ngươi.</span>
+            </li>
+            <li>
+              <span class="hanzi-word">君</span> quân,
+              <span class="hanzi-word">子</span> tử:
+              <span class="meaning-colon">Ông, anh, bạn, mày, ngươi.</span>
+            </li>
+            <li>
+              <span class="hanzi-word">先生</span> tiên sinh,
+              <span class="hanzi-word">公</span> công:
+              <span class="meaning-colon">Ông (để gọi những bậc tôn trưởng).</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-group-title">b. Đại từ nhân xưng ngôi thứ hai chỉ số nhiều:</div>
+          <ul class="pronoun-list">
+            <li>
+              <span class="hanzi-word">汝等</span> nhữ đẳng,
+              <span class="hanzi-word">汝徒</span> nhữ đồ,
+              <span class="hanzi-word">爾等</span> nhĩ đẳng:
+              <span class="meaning-colon">Các anh, các ngươi, chúng mày, bọn mày.</span>
+            </li>
+            <li>
+              <span class="hanzi-word">公等</span> công đẳng,
+              <span class="hanzi-word">諸君</span> chư quân,
+              <span class="hanzi-word">諸公</span> chư công:
+              <span class="meaning-colon">Các ông.</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 3. Ngôi thứ ba -->
+      <article class="glass-card">
+        <div class="pronoun-header">
+          3. Đại từ nhân xưng ngôi thứ ba — Đại từ tha xưng
+          <span class="hanzi-badge">他稱代詞</span>
+        </div>
+        <p class="pronoun-desc">Tức là từ chỉ về người thứ ba hoặc chỉ người vắng mặt.</p>
+
+        <div class="sub-group">
+          <div class="sub-group-title">a. Đại từ nhân xưng ngôi thứ ba chỉ số ít:</div>
+          <ul class="pronoun-list">
+            <li>
+              <span class="hanzi-word">此</span> thử,
+              <span class="hanzi-word">彼</span> bỉ:
+              <span class="meaning-colon">Người này, người kia, nó, hoặc chỉ tên quốc gia.</span>
+            </li>
+            <li>
+              <span class="hanzi-word">他</span> tha: <span class="meaning-colon">Anh ấy, nó</span> ;
+              <span class="hanzi-word">她</span> tha: <span class="meaning-colon">Chị ấy, nó</span> ;
+              <span class="hanzi-word">它</span> tha: <span class="meaning-colon">Vật, đồ vật.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-group-title">b. Đại từ nhân xưng ngôi thứ ba chỉ số nhiều:</div>
+          <ul class="pronoun-list">
+            <li>
+              <span class="hanzi-word">彼等</span> bỉ đẳng:
+              <span class="meaning-colon">Chúng nó, họ, bọn họ.</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- ==================== II. BÀI TẬP THỰC HÀNH ==================== -->
+    <section id="bai-tap" class="section-block">
+      <div class="section-banner">
+        <h2>II. BÀI TẬP THỰC HÀNH</h2>
+      </div>
+
+      <div class="practice-toolbar">
+        <div class="practice-instruction">
+          Chọn đáp án đúng, dùng ký hiệu khoanh tròn, ví dụ <span class="circle-demo">c</span>
+          <span style="color: var(--text-muted); font-size: 0.88rem; margin-left: 6px;">(Nhấn vào từng câu hoặc nút bên phải để ẩn/hiện đáp án)</span>
+        </div>
+        <button id="toggle-all-btn" class="mode-btn">Ẩn đáp án để tự luyện</button>
+      </div>
+
+      <div class="quiz-grid" id="quiz-container">
+        <!-- Câu 1 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">1/</span>
+            <span class="q-hanzi">巷<span class="tag tag-dt tag-sup">DT</span> 中<span class="tag tag-pvt tag-sup">PVT</span> 有屋。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">中</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">b</span><span class="opt-text">Phương vị từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Liên từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; PVT</strong> chỉ vị trí, vì phía trước là DT.
+          </div>
+        </article>
+
+        <!-- Câu 2 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">2/</span>
+            <span class="q-hanzi">四<span class="tag tag-st tag-sup">ST</span> 面<span class="tag tag-dt tag-sup">DT</span> 短牆。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">四</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item is-correct"><span class="opt-letter">a</span><span class="opt-text">Số từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Trợ từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Liên từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; ST</strong> chỉ số đếm, vì phía sau luôn là DT.
+          </div>
+        </article>
+
+        <!-- Câu 3 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">3/</span>
+            <span class="q-hanzi">夫死 從<span class="tag tag-dgt tag-sup">ĐgT</span> 子<span class="tag tag-dt tag-sup">DT</span>。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">從</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">c</span><span class="opt-text">Động từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Trợ từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; ĐgT</strong> biểu thị động tác, vì phía sau không có Động từ khác.
+          </div>
+        </article>
+
+        <!-- Câu 4 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">4/</span>
+            <span class="q-hanzi">客堂 在<span class="tag tag-dgt tag-sup">ĐgT</span> 前<span class="tag tag-dt tag-sup">DT</span>。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">在</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item is-correct"><span class="opt-letter">a</span><span class="opt-text">Động từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Trợ từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Giới từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; ĐgT</strong> biểu thị động tác, vì phía sau không có Động từ khác.
+          </div>
+        </article>
+
+        <!-- Câu 5 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">5/</span>
+            <span class="q-hanzi">我父 與<span class="tag tag-gt tag-sup">GT</span> 客<span class="tag tag-dt tag-sup">DT</span> 閒眺<span class="tag tag-dgt tag-sup">ĐgT</span>。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">與</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Trợ từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">c</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Liên từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; GT</strong>, giữa nó và Động từ phía sau có Danh từ xen vào.
+          </div>
+        </article>
+
+        <!-- Câu 6 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">6/</span>
+            <span class="q-hanzi">默者不 為<span class="tag tag-gt tag-sup">GT</span> 煩惱 所 擾<span class="tag tag-dgt tag-sup">ĐgT</span>。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">為</span> /Vị/ là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Trợ từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">d</span><span class="opt-text">Giới từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; GT</strong>, vì phía sau nó là Động từ.
+          </div>
+        </article>
+
+        <!-- Câu 7 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">7/</span>
+            <span class="q-hanzi">書齋在旁<span class="tag tag-pvt tag-sup">PVT</span>。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">旁</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">b</span><span class="opt-text">Phương vị từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Phó từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; PVT</strong>, vì đứng cuối câu chỉ vị trí.
+          </div>
+        </article>
+
+        <!-- Câu 8 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">8/</span>
+            <span class="q-hanzi">我 從<span class="tag tag-gt tag-sup">GT</span> 去年<span class="tag tag-dt tag-sup">DT</span> 辭<span class="tag tag-dgt tag-sup">ĐgT</span> 帝京。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">從</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Trợ từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">c</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Phó từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; GT</strong>, giữa nó và Động từ phía sau có Danh từ xen vào.
+          </div>
+        </article>
+
+        <!-- Câu 9 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">9/</span>
+            <span class="q-hanzi">安生王柳 之<span class="tag tag-tkc tag-sup">TKC</span> 子<span class="tag tag-dt tag-sup">DT</span> 也。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">之</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">d</span><span class="opt-text">Trợ từ kết cấu</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; Trợ từ kết cấu (TKC)</strong>, vì phía sau luôn là Danh từ.
+          </div>
+        </article>
+
+        <!-- Câu 10 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">10/</span>
+            <span class="q-hanzi">齒在內<span class="tag tag-pvt tag-sup">PVT</span>，其色白。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">內</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item is-correct"><span class="opt-letter">a</span><span class="opt-text">Phương vị từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Giới từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; PVT</strong>, vì đứng cuối câu chỉ vị trí.
+          </div>
+        </article>
+
+        <!-- Câu 11 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">11/</span>
+            <span class="q-hanzi">座 上<span class="tag tag-pvt tag-sup">PVT</span> 客<span class="tag tag-dt tag-sup">DT</span>，遠方來。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">上</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">b</span><span class="opt-text">Phương vị từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Liên từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; PVT</strong> chỉ vị trí, phía sau luôn là Danh từ.
+          </div>
+        </article>
+
+        <!-- Câu 12 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">12/</span>
+            <span class="q-hanzi">角<span class="tag tag-dt tag-sup">DT</span> 與<span class="tag tag-lt tag-sup">LT</span> 皮<span class="tag tag-dt tag-sup">DT</span>。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">與</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Trợ từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">d</span><span class="opt-text">Liên từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; LT</strong>, vì đứng giữa nối 2 từ đồng từ loại (nối 2 DT).
+          </div>
+        </article>
+
+        <!-- Câu 13 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">13/</span>
+            <span class="q-hanzi">離俗 從<span class="tag tag-dgt tag-sup">ĐgT</span> 道<span class="tag tag-dt tag-sup">DT</span> 也。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">從</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item"><span class="opt-letter">b</span><span class="opt-text">Trợ từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">d</span><span class="opt-text">Động từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; ĐgT</strong> biểu thị động tác, vì phía sau không có Động từ khác.
+          </div>
+        </article>
+
+        <!-- Câu 14 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">14/</span>
+            <span class="q-hanzi">前<span class="tag tag-pt tag-sup">PT</span> 有<span class="tag tag-dgt tag-sup">ĐgT</span> 青山，旁有流水。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">前</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">b</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Phương vị từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; PT</strong>, vì phía sau là Động từ.
+          </div>
+        </article>
+
+        <!-- Câu 15 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">15/</span>
+            <span class="q-hanzi">前有青山，旁<span class="tag tag-pt tag-sup">PT</span> 有<span class="tag tag-dgt tag-sup">ĐgT</span> 流水。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">旁</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">b</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Phương vị từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; PT</strong>, vì phía sau là Động từ.
+          </div>
+        </article>
+
+        <!-- Câu 16 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">16/</span>
+            <span class="q-hanzi">北<span class="tag tag-pvt tag-sup">PVT</span> 風<span class="tag tag-dt tag-sup">DT</span> 起，大雪飛。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">北</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Giới từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">b</span><span class="opt-text">Phương vị từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Phó từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; PVT</strong> chỉ vị trí, phía sau luôn là Danh từ.
+          </div>
+        </article>
+
+        <!-- Câu 17 -->
+        <article class="quiz-card show-answer">
+          <div class="quiz-question">
+            <span class="q-num">17/</span>
+            <span class="q-hanzi">登樓 遠<span class="tag tag-pt tag-sup">PT</span> 望<span class="tag tag-dgt tag-sup">ĐgT</span>，一片白色。</span>
+            <span class="q-ask">Trong câu này, <span class="q-target">遠</span> là:</span>
+          </div>
+          <div class="options-grid">
+            <div class="option-item"><span class="opt-letter">a</span><span class="opt-text">Trợ từ</span></div>
+            <div class="option-item is-correct"><span class="opt-letter">b</span><span class="opt-text">Phó từ</span></div>
+            <div class="option-item"><span class="opt-letter">c</span><span class="opt-text">Liên từ</span></div>
+            <div class="option-item"><span class="opt-letter">d</span><span class="opt-text">Giới từ</span></div>
+          </div>
+          <div class="explanation-box">
+            <strong>=&gt; PT</strong>, vì phía sau là Động từ.
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- Script tương tác Bài tập & Hiệu ứng Vũ trụ -->
+  <script>
+    // Ẩn / Hiện đáp án để tự luyện tập
+    const toggleBtn = document.getElementById('toggle-all-btn');
+    const quizCards = document.querySelectorAll('.quiz-card');
+    let allShown = true;
+
+    toggleBtn.addEventListener('click', () => {
+      allShown = !allShown;
+      quizCards.forEach(card => {
+        card.classList.toggle('show-answer', allShown);
+      });
+      toggleBtn.textContent = allShown ? 'Ẩn đáp án để tự luyện' : 'Hiện tất cả đáp án';
+    });
+
+    quizCards.forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('show-answer');
+      });
+    });
+
+    // Hiệu ứng Canvas Sao lấp lánh & Sao băng
+    const canvas = document.getElementById('cosmos-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let shootingStars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3600);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.6 + 0.3,
+          alpha: Math.random(),
+          delta: (Math.random() * 0.015 + 0.003) * (Math.random() < 0.5 ? 1 : -1)
+        });
+      }
+    }
+
+    function spawnShootingStar() {
+      if (Math.random() < 0.018 && shootingStars.length < 2) {
+        shootingStars.push({
+          x: Math.random() * canvas.width * 0.8 + canvas.width * 0.2,
+          y: Math.random() * canvas.height * 0.4,
+          len: Math.random() * 85 + 50,
+          speed: Math.random() * 8 + 6,
+          opacity: 1
+        });
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (const s of stars) {
+        s.alpha += s.delta;
+        if (s.alpha <= 0.15 || s.alpha >= 1) s.delta = -s.delta;
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(226, 232, 240, ${s.alpha})`;
+        ctx.fill();
+      }
+
+      spawnShootingStar();
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const st = shootingStars[i];
+        ctx.beginPath();
+        const grad = ctx.createLinearGradient(st.x, st.y, st.x + st.len, st.y - st.len);
+        grad.addColorStop(0, `rgba(251, 191, 36, ${st.opacity})`);
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2;
+        ctx.moveTo(st.x, st.y);
+        ctx.lineTo(st.x + st.len, st.y - st.len);
+        ctx.stroke();
+
+        st.x -= st.speed;
+        st.y += st.speed;
+        st.opacity -= 0.018;
+
+        if (st.opacity <= 0) {
+          shootingStars.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars();
+    });
+
+    resizeCanvas();
+    createStars();
+    animate();
+  </script>
+</body>
+</html>

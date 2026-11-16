@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngữ Pháp Hán Văn: 乃 (NÃI)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #050714;
+      --card-bg: rgba(16, 22, 48, 0.68);
+      --card-border: rgba(130, 160, 255, 0.22);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --gold: #fbbf24;
+      --cyan: #38bdf8;
+      --purple: #c084fc;
+      --emerald: #34d399;
+      --rose: #fb7185;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Hiệu ứng nền vũ trụ & Tinh vân */
+    #cosmos-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(ellipse at bottom, #0f172a 0%, #03040b 100%);
+    }
+
+    .nebula {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(110px);
+      z-index: -1;
+      opacity: 0.35;
+      pointer-events: none;
+      animation: floatNebula 18s ease-in-out infinite alternate;
+    }
+
+    .nebula-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #6366f1, transparent 70%);
+      top: -100px;
+      left: -100px;
+    }
+
+    .nebula-2 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #a855f7, transparent 70%);
+      bottom: -150px;
+      right: -100px;
+      animation-delay: -7s;
+    }
+
+    .nebula-3 {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, #0ea5e9, transparent 70%);
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -12s;
+    }
+
+    @keyframes floatNebula {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, -30px) scale(1.1); }
+    }
+
+    /* Bố cục chính */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hero-char {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 5rem;
+      line-height: 1.1;
+      color: var(--gold);
+      text-shadow: 0 0 28px rgba(251, 191, 36, 0.55);
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      background: linear-gradient(90deg, #fff, #93c5fd, #e9d5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    /* Thanh điều hướng nhanh */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: rgba(30, 41, 82, 0.65);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+      text-decoration: none;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 18px rgba(251, 191, 36, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Phần lớn (Section I & II) */
+    .grammar-section {
+      margin-bottom: 56px;
+    }
+
+    .theory-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 89, 0.8), rgba(17, 24, 54, 0.85));
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .theory-list {
+      list-style: none;
+      margin-bottom: 18px;
+    }
+
+    .theory-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+      color: #e2e8f0;
+    }
+
+    .theory-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+    }
+
+    .formula-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: rgba(8, 12, 28, 0.65);
+      border-left: 4px solid var(--gold);
+      padding: 14px 20px;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .formula-item {
+      font-size: 0.95rem;
+    }
+
+    .formula-item strong {
+      color: var(--cyan);
+    }
+
+    /* Lưới thẻ ví dụ */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .example-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .example-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(251, 191, 36, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.12);
+    }
+
+    .example-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .example-num {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hanzi-sentence {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.55rem;
+      line-height: 1.75;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .highlight-nai {
+      color: var(--gold);
+      font-weight: 700;
+      text-shadow: 0 0 12px rgba(251, 191, 36, 0.45);
+    }
+
+    /* Nhãn từ loại (ĐgT, DT, PT, TT) */
+    .tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      vertical-align: super;
+      margin: 0 3px;
+      letter-spacing: 0.3px;
+      display: inline-block;
+      line-height: 1.3;
+    }
+
+    .tag-dgt {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--cyan);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+    }
+
+    .tag-dt {
+      background: rgba(52, 211, 153, 0.18);
+      color: var(--emerald);
+      border: 1px solid rgba(52, 211, 153, 0.45);
+    }
+
+    .tag-pt {
+      background: rgba(192, 132, 252, 0.2);
+      color: var(--purple);
+      border: 1px solid rgba(192, 132, 252, 0.45);
+    }
+
+    .tag-tt {
+      background: rgba(251, 113, 133, 0.2);
+      color: var(--rose);
+      border: 1px solid rgba(251, 113, 133, 0.45);
+    }
+
+    .reading-block {
+      margin: 14px 0 18px;
+      padding-left: 14px;
+      border-left: 2px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .reading-row {
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .reading-label {
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .am-text {
+      color: #bfdbfe;
+      font-style: italic;
+    }
+
+    .nghia-text {
+      color: #f8fafc;
+      font-weight: 500;
+    }
+
+    /* Hộp phân tích chữ 乃 Nãi a, b, c, d */
+    .analysis-box {
+      background: rgba(7, 10, 25, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 12px;
+      padding: 14px 18px;
+    }
+
+    .analysis-title {
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px 18px;
+      font-size: 0.9rem;
+    }
+
+    .analysis-item span {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .hanzi-sentence {
+        font-size: 1.3rem;
+      }
+      .theory-banner, .example-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nền Vũ Trụ & Tinh Vân -->
+  <canvas id="cosmos-canvas"></canvas>
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <div class="container">
+    <header>
+      <div class="hero-char">乃</div>
+      <h1>NGỮ PHÁP: 乃 NÃI</h1>
+      <p class="subtitle">Hệ thống cấu trúc, từ loại và phân tích câu Hán văn cổ điển</p>
+      <div class="nav-tabs">
+        <a href="#phan-1" class="nav-btn">I. 乃 /Nãi/ — Động từ (ĐgT)</a>
+        <a href="#phan-2" class="nav-btn">II. 乃 /Nãi/ — Phó từ (PT)</a>
+      </div>
+    </header>
+
+    <!-- ==================== PHẦN I: ĐỘNG TỪ ==================== -->
+    <section id="phan-1" class="grammar-section">
+      <div class="theory-banner">
+        <h2 class="section-title">
+          I. 乃 /Nãi/ Động từ (<span class="tag tag-dgt" style="vertical-align: middle;">ĐgT</span>): Là, chính là.
+        </h2>
+        <ul class="theory-list">
+          <li>Sau Động từ <strong>乃 /Nãi/</strong> không có Động từ khác, phía sau luôn là <strong>Danh từ</strong> hoặc <strong>ngữ Danh từ</strong>.</li>
+          <li>Động từ <strong>乃 /Nãi/</strong> tương đương với Động từ <strong>是 /Thị/</strong> hoặc Động từ <strong>為 /Vi/</strong>.</li>
+        </ul>
+        <div class="formula-box">
+          <div class="formula-item">
+            <strong>Cấu trúc:</strong> <span class="tag tag-dgt">ĐgT</span> <strong>乃</strong> + <span class="tag tag-dt">DT</span> hoặc <strong>Ngữ DT</strong>
+          </div>
+          <div class="formula-item">
+            <strong>Cách dịch:</strong> Dịch từ trước ra sau.
+          </div>
+        </div>
+      </div>
+
+      <div class="examples-grid">
+        <!-- Ví dụ I.1 -->
+        <article class="example-card">
+          <div class="example-header">
+            <span class="example-num">1</span>
+            <div class="hanzi-sentence">
+              色 <span class="highlight-nai">乃</span><span class="tag tag-dgt">ĐgT</span> 皮 囊<span class="tag tag-dt">DT</span> 盛 衆 穢， 世 人 被 惑 生 迷 醉。
+            </div>
+          </div>
+          <div class="reading-block">
+            <div class="reading-row">
+              <span class="reading-label">Âm:</span>
+              <span class="am-text">Sắc nãi bì nang thạnh (thịnh) chúng uế, thế nhân bị hoặc sinh mê túy.</span>
+            </div>
+            <div class="reading-row">
+              <span class="reading-label">Nghĩa:</span>
+              <span class="nghia-text">Sắc đẹp là đãy da đựng đồ nhơ, người đời bị lầm nên sinh mê say.</span>
+            </div>
+          </div>
+          <div class="analysis-box">
+            <div class="analysis-title">✦ Phân tích: 乃 Nãi</div>
+            <div class="analysis-grid">
+              <div class="analysis-item"><span>a. Từ loại:</span> Động từ (ĐgT)</div>
+              <div class="analysis-item"><span>b. Tại sao:</span> Phía sau không có Động từ khác, phía sau luôn là Danh từ</div>
+              <div class="analysis-item"><span>c. Nghĩa:</span> Là, chính là</div>
+              <div class="analysis-item"><span>d. Bộ thủ chính:</span> Bộ Phiệt 丿</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ví dụ I.2 -->
+        <article class="example-card">
+          <div class="example-header">
+            <span class="example-num">2</span>
+            <div class="hanzi-sentence">
+              僧 字 <span class="highlight-nai">乃</span><span class="tag tag-dgt">ĐgT</span> 佛<span class="tag tag-dt">DT</span> 弟 子<span class="tag tag-dt">DT</span> 之 團 體 名 稱。
+            </div>
+          </div>
+          <div class="reading-block">
+            <div class="reading-row">
+              <span class="reading-label">Âm:</span>
+              <span class="am-text">Tăng tự nãi Phật đệ tử chi đoàn thể danh xưng.</span>
+            </div>
+            <div class="reading-row">
+              <span class="reading-label">Nghĩa:</span>
+              <span class="nghia-text">Chữ Tăng này là tên gọi đoàn thể đệ tử của Phật.</span>
+            </div>
+          </div>
+          <div class="analysis-box">
+            <div class="analysis-title">✦ Phân tích: 乃 Nãi</div>
+            <div class="analysis-grid">
+              <div class="analysis-item"><span>a. Từ loại:</span> Động từ (ĐgT)</div>
+              <div class="analysis-item"><span>b. Tại sao:</span> Phía sau không có Động từ khác, phía sau là ngữ Danh từ</div>
+              <div class="analysis-item"><span>c. Nghĩa:</span> Là, chính là</div>
+              <div class="analysis-item"><span>d. Bộ thủ chính:</span> Bộ Phiệt 丿</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ví dụ I.3 -->
+        <article class="example-card">
+          <div class="example-header">
+            <span class="example-num">3</span>
+            <div class="hanzi-sentence">
+              言 則 為 經 ， 行 則 為 法。 故 曰：“言 行 <span class="highlight-nai">乃</span><span class="tag tag-dgt">ĐgT</span> 君 子<span class="tag tag-dt">DT</span> 之 樞 機<span class="tag tag-dt">DT</span>， 治 身 之 大 本” 。
+            </div>
+          </div>
+          <div class="reading-block">
+            <div class="reading-row">
+              <span class="reading-label">Âm:</span>
+              <span class="am-text">Ngôn tắc vi Kinh, hành tắc vi Pháp. Cố viết: “Ngôn hành nãi quân tử chi xu cơ, trị thân chi đại bổn”.</span>
+            </div>
+            <div class="reading-row">
+              <span class="reading-label">Nghĩa:</span>
+              <span class="nghia-text">Đã nói ra thì là Kinh, làm việc thì là Pháp. Cho nên nói rằng: “Nói và làm là then chốt của người quân tử, là gốc lớn của việc sửa mình”.</span>
+            </div>
+          </div>
+          <div class="analysis-box">
+            <div class="analysis-title">✦ Phân tích: 乃 Nãi</div>
+            <div class="analysis-grid">
+              <div class="analysis-item"><span>a. Từ loại:</span> Động từ (ĐgT)</div>
+              <div class="analysis-item"><span>b. Tại sao:</span> Phía sau không có Động từ khác, phía sau là ngữ Danh từ</div>
+              <div class="analysis-item"><span>c. Nghĩa:</span> Là, chính là</div>
+              <div class="analysis-item"><span>d. Bộ thủ chính:</span> Bộ Phiệt 丿</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ví dụ I.4 -->
+        <article class="example-card">
+          <div class="example-header">
+            <span class="example-num">4</span>
+            <div class="hanzi-sentence">
+              學 者 <span class="highlight-nai">乃</span><span class="tag tag-dgt">ĐgT</span> 身<span class="tag tag-dt">DT</span> 之 寶<span class="tag tag-dt">DT</span>，學 者 <span class="highlight-nai">乃</span><span class="tag tag-dgt">ĐgT</span> 世<span class="tag tag-dt">DT</span> 之 珍<span class="tag tag-dt">DT</span>。
+            </div>
+          </div>
+          <div class="reading-block">
+            <div class="reading-row">
+              <span class="reading-label">Âm:</span>
+              <span class="am-text">Học giả nãi thân chi bảo, học giả nãi thế chi trân.</span>
+            </div>
+            <div class="reading-row">
+              <span class="reading-label">Nghĩa:</span>
+              <span class="nghia-text">Sự học là bảo vật của bản thân, sự học là ngọc quý của đời.</span>
+            </div>
+          </div>
+          <div class="analysis-box">
+            <div class="analysis-title">✦ Phân tích: 乃 Nãi</div>
+            <div class="analysis-grid">
+              <div class="analysis-item"><span>a. Từ loại:</span> Động từ (ĐgT)</div>
+              <div class="analysis-item"><span>b. Tại sao:</span> Phía sau không có Động từ khác, phía sau là ngữ Danh từ</div>
+              <div class="analysis-item"><span>c. Nghĩa:</span> Là, chính là</div>
+              <div class="analysis-item"><span>d. Bộ thủ chính:</span> Bộ Phiệt 丿</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN II: PHÓ TỪ ==================== -->
+    <section id="phan-2" class="grammar-section">
+      <div class="theory-banner">
+        <h2 class="section-title">
+          II. 乃 /Nãi/ Phó từ (<span class="tag tag-pt" style="vertical-align: middle;">PT</span>): Bèn, liền, mới, lại, vừa mới, rồi mới.
+        </h2>
+        <ul class="theory-list">
+          <li>Sau Phó từ <strong>乃 /Nãi/</strong> luôn là <strong>Động từ</strong> hoặc <strong>Tính từ</strong>.</li>
+        </ul>
+        <div class="formula-box">
+          <div class="formula-item">
+            <strong>Cấu trúc:</strong> <span class="tag tag-pt">PT</span> <strong>乃</strong> + <span class="tag tag-dgt">ĐgT</span> hoặc <span class="tag tag-tt">TT</span>
+          </div>
+          <div class="formula-item">
+            <strong>Cách dịch:</strong> Dịch từ trước ra sau.
+          </div>
+        </div>
+      </div>
+
+      <div class="examples-grid">
+        <!-- Ví dụ II.1 -->
+        <article class="example-card">
+          <div class="example-header">
+            <span class="example-num">1</span>
+            <div class="hanzi-sentence">
+              鄰 人 嘉 其 志 ， <span class="highlight-nai">乃</span><span class="tag tag-pt">PT</span> 授<span class="tag tag-dgt">ĐgT</span> 偈 曰：“守 口 攝 意 ，身 無 犯 惡...” 。
+            </div>
+          </div>
+          <div class="reading-block">
+            <div class="reading-row">
+              <span class="reading-label">Âm:</span>
+              <span class="am-text">Lân nhân gia kỳ chí, nãi thọ kệ viết: “Thủ khẩu nhiếp ý, thân vô phạm ác...”.</span>
+            </div>
+            <div class="reading-row">
+              <span class="reading-label">Nghĩa:</span>
+              <span class="nghia-text">Người hàng xóm khen ngợi ý chí của anh ta, bèn (liền) trao cho bài kệ rằng: “Giữ miệng nhiếp ý, thân không làm các điều ác…”.</span>
+            </div>
+          </div>
+          <div class="analysis-box">
+            <div class="analysis-title">✦ Phân tích: 乃 Nãi</div>
+            <div class="analysis-grid">
+              <div class="analysis-item"><span>a. Từ loại:</span> Phó từ (PT)</div>
+              <div class="analysis-item"><span>b. Tại sao:</span> Phía sau là Động từ</div>
+              <div class="analysis-item"><span>c. Nghĩa:</span> Bèn, liền</div>
+              <div class="analysis-item"><span>d. Bộ thủ chính:</span> Bộ Phiệt 丿</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ví dụ II.2 -->
+        <article class="example-card">
+          <div class="example-header">
+            <span class="example-num">2</span>
+            <div class="hanzi-sentence">
+              對 於 有 我 之 說，完 全 不 定，如 是 佛 學 <span class="highlight-nai">乃</span><span class="tag tag-pt">PT</span> 出<span class="tag tag-dgt">ĐgT</span> 世 焉。
+            </div>
+          </div>
+          <div class="reading-block">
+            <div class="reading-row">
+              <span class="reading-label">Âm:</span>
+              <span class="am-text">Đối ư hữu Ngã chi thuyết, hoàn toàn bất định, như thị Phật học nãi xuất thế yên.</span>
+            </div>
+            <div class="reading-row">
+              <span class="reading-label">Nghĩa:</span>
+              <span class="nghia-text">Đối với thuyết Hữu Ngã, hoàn toàn không đứng vững, như thế Phật học mới ra đời.</span>
+            </div>
+          </div>
+          <div class="analysis-box">
+            <div class="analysis-title">✦ Phân tích: 乃 Nãi</div>
+            <div class="analysis-grid">
+              <div class="analysis-item"><span>a. Từ loại:</span> Phó từ (PT)</div>
+              <div class="analysis-item"><span>b. Tại sao:</span> Phía sau là Tính từ</div>
+              <div class="analysis-item"><span>c. Nghĩa:</span> Mới</div>
+              <div class="analysis-item"><span>d. Bộ thủ chính:</span> Bộ Phiệt 丿</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ví dụ II.3 -->
+        <article class="example-card">
+          <div class="example-header">
+            <span class="example-num">3</span>
+            <div class="hanzi-sentence">
+              人 智 既 進 ， <span class="highlight-nai">乃</span><span class="tag tag-pt">PT</span> 有<span class="tag tag-dgt">ĐgT</span> 科 學。
+            </div>
+          </div>
+          <div class="reading-block">
+            <div class="reading-row">
+              <span class="reading-label">Âm:</span>
+              <span class="am-text">Nhân trí ký tiến, nãi hữu khoa học.</span>
+            </div>
+            <div class="reading-row">
+              <span class="reading-label">Nghĩa:</span>
+              <span class="nghia-text">Trí tuệ của con người đã tiến bộ, rồi mới có khoa học.</span>
+            </div>
+          </div>
+          <div class="analysis-box">
+            <div class="analysis-title">✦ Phân tích: 乃 Nãi</div>
+            <div class="analysis-grid">
+              <div class="analysis-item"><span>a. Từ loại:</span> Phó từ (PT)</div>
+              <div class="analysis-item"><span>b. Tại sao:</span> Phía sau là Động từ</div>
+              <div class="analysis-item"><span>c. Nghĩa:</span> Rồi mới</div>
+              <div class="analysis-item"><span>d. Bộ thủ chính:</span> Bộ Phiệt 丿</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ví dụ II.4 -->
+        <article class="example-card">
+          <div class="example-header">
+            <span class="example-num">4</span>
+            <div class="hanzi-sentence">
+              貧 而 勤 學 可 以 立 身； 富 而 勤 學 名 <span class="highlight-nai">乃</span><span class="tag tag-pt">PT</span> 光 榮<span class="tag tag-tt">TT</span>。
+            </div>
+          </div>
+          <div class="reading-block">
+            <div class="reading-row">
+              <span class="reading-label">Âm:</span>
+              <span class="am-text">Bần nhi cần học khả dĩ lập thân; Phú nhi cần học danh nãi quang vinh.</span>
+            </div>
+            <div class="reading-row">
+              <span class="reading-label">Nghĩa:</span>
+              <span class="nghia-text">Nghèo mà siêng học thì có thể lập thân; Giàu mà siêng học thì tiếng tăm mới vẻ vang.</span>
+            </div>
+          </div>
+          <div class="analysis-box">
+            <div class="analysis-title">✦ Phân tích: 乃 Nãi</div>
+            <div class="analysis-grid">
+              <div class="analysis-item"><span>a. Từ loại:</span> Phó từ (PT)</div>
+              <div class="analysis-item"><span>b. Tại sao:</span> Phía sau là Tính từ</div>
+              <div class="analysis-item"><span>c. Nghĩa:</span> Mới</div>
+              <div class="analysis-item"><span>d. Bộ thủ chính:</span> Bộ Phiệt 丿</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <!-- Script khởi tạo bầu trời sao & sao băng vũ trụ -->
+  <script>
+    const canvas = document.getElementById('cosmos-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let shootingStars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3800);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.6 + 0.3,
+          alpha: Math.random(),
+          delta: (Math.random() * 0.015 + 0.003) * (Math.random() < 0.5 ? 1 : -1)
+        });
+      }
+    }
+
+    function spawnShootingStar() {
+      if (Math.random() < 0.018 && shootingStars.length < 2) {
+        shootingStars.push({
+          x: Math.random() * canvas.width * 0.8 + canvas.width * 0.2,
+          y: Math.random() * canvas.height * 0.4,
+          len: Math.random() * 80 + 50,
+          speed: Math.random() * 8 + 6,
+          opacity: 1
+        });
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Vẽ sao lấp lánh
+      for (const s of stars) {
+        s.alpha += s.delta;
+        if (s.alpha <= 0.15 || s.alpha >= 1) s.delta = -s.delta;
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(226, 232, 240, ${s.alpha})`;
+        ctx.fill();
+      }
+
+      // Vẽ sao băng
+      spawnShootingStar();
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const st = shootingStars[i];
+        ctx.beginPath();
+        const grad = ctx.createLinearGradient(st.x, st.y, st.x + st.len, st.y - st.len);
+        grad.addColorStop(0, `rgba(251, 191, 36, ${st.opacity})`);
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2;
+        ctx.moveTo(st.x, st.y);
+        ctx.lineTo(st.x + st.len, st.y - st.len);
+        ctx.stroke();
+
+        st.x -= st.speed;
+        st.y += st.speed;
+        st.opacity -= 0.018;
+
+        if (st.opacity <= 0) {
+          shootingStars.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars();
+    });
+
+    resizeCanvas();
+    createStars();
+    animate();
+  </script>
+</body>
+</html>

@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ôn Tập Hán Cổ (Ngữ Pháp): 從 (Tùng) - 為 (Vi/Vị) - 以 (Dĩ)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #040611;
+      --card-bg: rgba(15, 22, 48, 0.72);
+      --card-border: rgba(130, 160, 255, 0.24);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --gold: #fbbf24;
+      --cyan: #38bdf8;
+      --purple: #c084fc;
+      --emerald: #34d399;
+      --rose: #fb7185;
+      --orange: #fb923c;
+      --teal: #2dd4bf;
+      --indigo: #818cf8;
+      --lime: #a3e635;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Nền Vũ Trụ & Tinh Vân */
+    #cosmos-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(ellipse at bottom, #0f172a 0%, #03040b 100%);
+    }
+
+    .nebula {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(115px);
+      z-index: -1;
+      opacity: 0.32;
+      pointer-events: none;
+      animation: floatNebula 20s ease-in-out infinite alternate;
+    }
+
+    .nebula-1 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #4f46e5, transparent 70%);
+      top: -120px;
+      left: -100px;
+    }
+
+    .nebula-2 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, #9333ea, transparent 70%);
+      bottom: -160px;
+      right: -120px;
+      animation-delay: -8s;
+    }
+
+    .nebula-3 {
+      width: 460px;
+      height: 460px;
+      background: radial-gradient(circle, #0284c7, transparent 70%);
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
+
+    @keyframes floatNebula {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, -35px) scale(1.08); }
+    }
+
+    /* Bố cục chính */
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 40px 20px 90px;
+    }
+
+    /* Header thông tin môn học */
+    header {
+      text-align: center;
+      margin-bottom: 44px;
+      background: linear-gradient(135deg, rgba(23, 33, 69, 0.78), rgba(12, 18, 42, 0.85));
+      border: 1px solid rgba(147, 197, 253, 0.3);
+      border-radius: 24px;
+      padding: 36px 24px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .course-badge {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #ffffff, #93c5fd, #fde68a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #cbd5e1;
+      font-size: 1rem;
+      margin-bottom: 24px;
+    }
+
+    /* Điều hướng nhanh */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .nav-btn {
+      background: rgba(30, 41, 82, 0.75);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-btn span.hanzi {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+    }
+
+    .nav-btn:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* Chú giải ký hiệu từ loại */
+    .legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 14px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Nhãn từ loại */
+    .tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      line-height: 1.35;
+      letter-spacing: 0.3px;
+    }
+
+    .tag-dgt { background: rgba(56, 189, 248, 0.18); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.45); }
+    .tag-gt  { background: rgba(251, 146, 60, 0.18); color: var(--orange); border: 1px solid rgba(251, 146, 60, 0.45); }
+    .tag-lt  { background: rgba(251, 113, 133, 0.18); color: var(--rose); border: 1px solid rgba(251, 113, 133, 0.45); }
+    .tag-dt  { background: rgba(52, 211, 153, 0.18); color: var(--emerald); border: 1px solid rgba(52, 211, 153, 0.45); }
+    .tag-pvt { background: rgba(45, 212, 191, 0.18); color: var(--teal); border: 1px solid rgba(45, 212, 191, 0.45); }
+    .tag-tt  { background: rgba(192, 132, 252, 0.18); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.45); }
+    .tag-dtu { background: rgba(129, 140, 248, 0.18); color: var(--indigo); border: 1px solid rgba(129, 140, 248, 0.45); }
+    .tag-trt { background: rgba(163, 230, 53, 0.18); color: var(--lime); border: 1px solid rgba(163, 230, 53, 0.45); }
+
+    /* Khối từng chữ Hán (從, 為, 以) */
+    .word-section {
+      margin-bottom: 64px;
+      scroll-margin-top: 24px;
+    }
+
+    .word-banner {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(90deg, rgba(251, 191, 36, 0.16), rgba(30, 41, 89, 0.4));
+      border-left: 5px solid var(--gold);
+      border-radius: 16px;
+      padding: 18px 28px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .word-char {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 3.4rem;
+      line-height: 1;
+      color: var(--gold);
+      text-shadow: 0 0 24px rgba(251, 191, 36, 0.5);
+    }
+
+    .word-title-group h2 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .word-title-group p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    /* Card Từ loại (I, II) */
+    .grammar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 28px 30px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .grammar-card:hover {
+      border-color: rgba(251, 191, 36, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .meaning-highlight {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .theory-list {
+      list-style: none;
+      margin-bottom: 18px;
+    }
+
+    .theory-list > li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 10px;
+      color: #e2e8f0;
+    }
+
+    .theory-list > li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+    }
+
+    .sub-list {
+      list-style: none;
+      margin-top: 8px;
+      padding-left: 18px;
+    }
+
+    .sub-list li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+      color: #cbd5e1;
+    }
+
+    .sub-list li::before {
+      content: "+";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* Hộp Cấu trúc */
+    .structure-box {
+      background: rgba(7, 11, 26, 0.78);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-left: 4px solid var(--cyan);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .structure-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .structure-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .structure-label {
+      color: var(--cyan);
+      font-weight: 700;
+      min-width: 105px;
+    }
+
+    .formula-code {
+      background: rgba(30, 41, 82, 0.65);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #fff;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .hanzi-inline {
+      font-family: 'Noto Serif TC', serif;
+      color: var(--gold);
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 0 4px;
+    }
+
+    /* Hộp Cách dịch */
+    .translation-box {
+      background: rgba(20, 28, 58, 0.55);
+      border-left: 4px solid var(--gold);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 14px;
+    }
+
+    .translation-title {
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .translation-steps {
+      padding-left: 20px;
+      color: #e2e8f0;
+    }
+
+    .translation-steps li {
+      margin-bottom: 8px;
+    }
+
+    .translation-steps li:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 1.55rem; }
+      .grammar-card { padding: 20px; }
+      .word-char { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bầu trời sao & Tinh vân Vũ trụ -->
+  <canvas id="cosmos-canvas"></canvas>
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <div class="course-badge">Ngữ Pháp Hán Cổ • Hệ Thống Lý Thuyết</div>
+      <h1>從 (TÙNG) • 為 (VI / VỊ) • 以 (DĨ)</h1>
+      <p class="subtitle">Phân tích vị trí trong câu, cấu trúc ngữ pháp và nguyên tắc dịch thuật</p>
+
+      <div class="nav-tabs">
+        <a href="#tung" class="nav-btn"><span class="hanzi">從</span> TÙNG</a>
+        <a href="#vi" class="nav-btn"><span class="hanzi">為</span> VI hoặc VỊ</a>
+        <a href="#di" class="nav-btn"><span class="hanzi">以</span> DĨ</a>
+      </div>
+
+      <div class="legend-bar">
+        <span><span class="tag tag-dgt">ĐgT</span> Động từ</span>
+        <span><span class="tag tag-gt">GT</span> Giới từ</span>
+        <span><span class="tag tag-lt">LT</span> Liên từ</span>
+        <span><span class="tag tag-dt">DT</span> Danh từ</span>
+        <span><span class="tag tag-pvt">PVT</span> Phương vị từ</span>
+        <span><span class="tag tag-tt">TT</span> Tính từ</span>
+        <span><span class="tag tag-dtu">ĐT</span> Đại từ</span>
+        <span><span class="tag tag-trt">TRT</span> Trợ từ</span>
+      </div>
+    </header>
+
+    <!-- ==================== 1. 從 TÙNG ==================== -->
+    <section id="tung" class="word-section">
+      <div class="word-banner">
+        <div class="word-char">從</div>
+        <div class="word-title-group">
+          <h2>從 — TÙNG</h2>
+          <p>Động từ (ĐgT) &amp; Giới từ (GT)</p>
+        </div>
+      </div>
+
+      <!-- I. Động từ 從 -->
+      <article class="grammar-card">
+        <div class="card-header">
+          I. 從 /Tùng/ — Động từ (<span class="tag tag-dgt">ĐgT</span>):
+          <span class="meaning-highlight">Đi theo, nghe theo, thuận theo, tham dự, theo cách.</span>
+        </div>
+
+        <ul class="theory-list">
+          <li>
+            Động từ <span class="hanzi-inline">從</span> /Tùng/ biểu thị động tác, có các vị trí trong câu:
+            <ul class="sub-list">
+              <li>Động từ <span class="hanzi-inline">從</span> /Tùng/ biểu thị động tác luôn đứng cuối câu, sau nó không có Động từ khác.</li>
+              <li>Phía sau Động từ <span class="hanzi-inline">從</span> /Tùng/ luôn là <strong>Danh từ</strong>.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="structure-box">
+          <div class="structure-row">
+            <span class="structure-label">Cấu trúc:</span>
+            <span class="formula-code">….. <span class="tag tag-dgt">ĐgT</span> <span class="hanzi-inline">從</span> .</span>
+            <span>hoặc</span>
+            <span class="formula-code"><span class="tag tag-dgt">ĐgT</span> <span class="hanzi-inline">從</span> + <span class="tag tag-dt">DT</span></span>
+          </div>
+        </div>
+
+        <div class="translation-box">
+          <div class="translation-title">✦ Cách dịch:</div>
+          <p>Dịch từ trước ra sau.</p>
+        </div>
+      </article>
+
+      <!-- II. Giới từ 從 -->
+      <article class="grammar-card">
+        <div class="card-header">
+          II. 從 /Tùng/ — Giới từ (<span class="tag tag-gt">GT</span>):
+          <span class="meaning-highlight">Đi theo, nghe theo, thuận theo, tham dự, theo cách.</span>
+        </div>
+
+        <ul class="theory-list">
+          <li>
+            Giới từ <span class="hanzi-inline">從</span> /Tùng/ kết hợp với <strong>Phương vị từ</strong>, <strong>Danh từ</strong> hoặc <strong>ngữ Danh từ</strong> tạo thành <strong>Kết cấu Giới từ</strong>, luôn đứng trước Động từ.
+          </li>
+          <li>
+            Nói một cách khác, giữa Giới từ <span class="hanzi-inline">從</span> /Tùng/ và Động từ chính ở phía sau có <strong>Danh từ</strong> hoặc <strong>ngữ Danh từ</strong> xen vào.
+          </li>
+        </ul>
+
+        <div class="structure-box">
+          <div class="structure-row">
+            <span class="structure-label">Cấu trúc 1:</span>
+            <span class="formula-code"><span class="tag tag-gt">GT</span> <span class="hanzi-inline">從</span> ……. <span class="tag tag-dgt">ĐgT</span></span>
+          </div>
+          <div class="structure-row">
+            <span class="structure-label">Cấu trúc 2:</span>
+            <span class="formula-code"><span class="tag tag-gt">GT</span> <span class="hanzi-inline">從</span> + <span class="tag tag-dt">DT</span> / ngữ DT + <span class="tag tag-dgt">ĐgT</span> hoặc <span class="tag tag-tt">TT</span></span>
+          </div>
+        </div>
+
+        <div class="translation-box">
+          <div class="translation-title">✦ Cách dịch: Có hai cách dịch</div>
+          <ol class="translation-steps">
+            <li><strong>Dịch từ trước ra sau:</strong> Nghĩa là cụm Giới từ dịch trước, Động từ dịch sau. Do vì nhấn mạnh Giới từ cho nên dịch trước.</li>
+            <li><strong>Dịch từ trước ra sau (Động từ trước):</strong> Nghĩa là Động từ dịch trước, cụm Giới từ dịch sau. Do vì nhấn mạnh Động từ cho nên dịch trước.</li>
+          </ol>
+        </div>
+      </article>
+    </section>
+
+    <!-- ==================== 2. 為 VI hoặc VỊ ==================== -->
+    <section id="vi" class="word-section">
+      <div class="word-banner">
+        <div class="word-char">為</div>
+        <div class="word-title-group">
+          <h2>為 — VI hoặc VỊ</h2>
+          <p>Động từ /Vi/ (ĐgT) &amp; Giới từ /Vị/ (GT)</p>
+        </div>
+      </div>
+
+      <!-- I. Động từ 為 /Vi/ -->
+      <article class="grammar-card">
+        <div class="card-header">
+          I. 為 /Vi/ — Động từ (<span class="tag tag-dgt">ĐgT</span>):
+          <span class="meaning-highlight">Là, làm.</span>
+        </div>
+
+        <ul class="theory-list">
+          <li>
+            Động từ <span class="hanzi-inline">為</span> /Vi/ biểu thị động tác, có các vị trí trong câu:
+            <ul class="sub-list">
+              <li>Phía sau Động từ <span class="hanzi-inline">為</span> /Vi/ không có Động từ khác.</li>
+              <li>Phía sau Động từ <span class="hanzi-inline">為</span> /Vi/ luôn là <strong>Danh từ</strong>.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="structure-box">
+          <div class="structure-row">
+            <span class="structure-label">Cấu trúc:</span>
+            <span class="formula-code">….. <span class="tag tag-dgt">ĐgT</span> <span class="hanzi-inline">為</span> .</span>
+            <span>hoặc</span>
+            <span class="formula-code"><span class="tag tag-dgt">ĐgT</span> <span class="hanzi-inline">為</span> + <span class="tag tag-dt">DT</span></span>
+          </div>
+        </div>
+
+        <div class="translation-box">
+          <div class="translation-title">✦ Cách dịch:</div>
+          <p>Dịch từ trước ra sau.</p>
+        </div>
+      </article>
+
+      <!-- II. Giới từ 為 /Vị/ -->
+      <article class="grammar-card">
+        <div class="card-header">
+          II. 為 /Vị/ — Giới từ (<span class="tag tag-gt">GT</span>):
+          <span class="meaning-highlight">Vì, để, do, bị, được.</span>
+        </div>
+
+        <ul class="theory-list">
+          <li>
+            Phía sau nó là Động từ thì đọc là <strong>/Vị/</strong> <span class="hanzi-inline">為</span> khẳng định là <strong>Giới từ</strong>, có các vị trí trong câu:
+            <ul class="sub-list">
+              <li>Liền kề phía sau Giới từ <span class="hanzi-inline">為</span> /Vị/ luôn là <strong>Động từ</strong>.</li>
+              <li>Giới từ <span class="hanzi-inline">為</span> /Vị/ kết hợp với Trợ từ <span class="hanzi-inline">所</span> /Sở/ luôn là <strong>Động từ</strong>.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="structure-box">
+          <div class="structure-row">
+            <span class="structure-label">Cấu trúc 1:</span>
+            <span class="formula-code"><span class="tag tag-gt">GT</span> <span class="hanzi-inline">為</span> + <span class="tag tag-dgt">ĐgT</span> .</span>
+            <span>hoặc</span>
+            <span class="formula-code"><span class="tag tag-dgt">ĐgT</span> <span class="hanzi-inline">為</span> + <span class="tag tag-dt">DT</span></span>
+          </div>
+          <div class="structure-row">
+            <span class="structure-label">Cấu trúc 2:</span>
+            <span class="formula-code"><span class="tag tag-gt">GT</span> <span class="hanzi-inline">為</span> …….. <span class="tag tag-trt">TRT</span> <span class="hanzi-inline">所</span> + <span class="tag tag-dgt">ĐgT</span></span>
+          </div>
+        </div>
+
+        <div class="translation-box">
+          <div class="translation-title">✦ Cách dịch: Có hai cách dịch</div>
+          <ol class="translation-steps">
+            <li><strong>Dịch từ trước ra sau:</strong> Nghĩa là cụm Giới từ dịch trước, Động từ dịch sau. Do vì nhấn mạnh Giới từ cho nên dịch trước.</li>
+            <li><strong>Dịch từ trước ra sau (Động từ trước):</strong> Nghĩa là Động từ dịch trước, cụm Giới từ dịch sau. Do vì nhấn mạnh Động từ cho nên dịch trước.</li>
+          </ol>
+        </div>
+      </article>
+    </section>
+
+    <!-- ==================== 3. 以 DĨ ==================== -->
+    <section id="di" class="word-section">
+      <div class="word-banner">
+        <div class="word-char">以</div>
+        <div class="word-title-group">
+          <h2>以 — DĨ</h2>
+          <p>Liên từ (LT) &amp; Giới từ (GT)</p>
+        </div>
+      </div>
+
+      <!-- I. Liên từ 以 -->
+      <article class="grammar-card">
+        <div class="card-header">
+          I. 以 /Dĩ/ — Liên từ (<span class="tag tag-lt">LT</span>):
+          <span class="meaning-highlight">Để.</span>
+        </div>
+
+        <ul class="theory-list">
+          <li>Liền kề phía sau Liên từ “<span class="hanzi-inline">以</span>” /Dĩ/ luôn là <strong>Động từ</strong>.</li>
+        </ul>
+
+        <div class="structure-box">
+          <div class="structure-row">
+            <span class="structure-label">Cấu trúc:</span>
+            <span class="formula-code"><span class="tag tag-lt">LT</span> <span class="hanzi-inline">以</span> + <span class="tag tag-dgt">ĐgT</span></span>
+          </div>
+        </div>
+
+        <div class="translation-box">
+          <div class="translation-title">✦ Cách dịch:</div>
+          <p>Dịch từ trước ra sau.</p>
+        </div>
+      </article>
+
+      <!-- II. Giới từ 以 -->
+      <article class="grammar-card">
+        <div class="card-header">
+          II. 以 /Dĩ/ — Giới từ (<span class="tag tag-gt">GT</span>):
+          <span class="meaning-highlight">Dùng, lấy, đem, do, vì, bởi.</span>
+        </div>
+
+        <ul class="theory-list">
+          <li>
+            Giới từ <span class="hanzi-inline">以</span> /Dĩ/ kết hợp với Danh từ tạo thành <strong>Kết cấu Giới từ</strong> luôn đứng trước Động từ. Nói một cách khác, giữa Giới từ <span class="hanzi-inline">以</span> /Dĩ/ và Động từ phía sau có <strong>Danh từ</strong> hoặc <strong>Đại từ</strong> xen vào.
+          </li>
+        </ul>
+
+        <div class="structure-box">
+          <div class="structure-row">
+            <span class="structure-label">Cấu trúc:</span>
+            <span class="formula-code"><span class="tag tag-gt">GT</span> <span class="hanzi-inline">以</span> + <span class="tag tag-dt">DT</span> hoặc <span class="tag tag-dtu">ĐT</span> + <span class="tag tag-dgt">ĐgT</span></span>
+          </div>
+        </div>
+
+        <div class="translation-box">
+          <div class="translation-title">✦ Cách dịch: Có 2 cách</div>
+          <ol class="translation-steps">
+            <li><strong>Dịch từ trước ra sau:</strong> Nghĩa là dịch Giới từ dịch trước, Động từ dịch sau. Do vì nhấn mạnh Giới từ cho nên dịch trước.</li>
+            <li><strong>Dịch từ sau ra trước:</strong> Nghĩa là dịch Động từ dịch trước, Giới từ dịch sau. Do vì nhấn mạnh Giới từ cho nên dịch trước.</li>
+          </ol>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <!-- Hiệu ứng Canvas Sao lấp lánh & Sao băng -->
+  <script>
+    const canvas = document.getElementById('cosmos-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let shootingStars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3600);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.6 + 0.3,
+          alpha: Math.random(),
+          delta: (Math.random() * 0.015 + 0.003) * (Math.random() < 0.5 ? 1 : -1)
+        });
+      }
+    }
+
+    function spawnShootingStar() {
+      if (Math.random() < 0.018 && shootingStars.length < 2) {
+        shootingStars.push({
+          x: Math.random() * canvas.width * 0.8 + canvas.width * 0.2,
+          y: Math.random() * canvas.height * 0.4,
+          len: Math.random() * 85 + 50,
+          speed: Math.random() * 8 + 6,
+          opacity: 1
+        });
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (const s of stars) {
+        s.alpha += s.delta;
+        if (s.alpha <= 0.15 || s.alpha >= 1) s.delta = -s.delta;
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(226, 232, 240, ${s.alpha})`;
+        ctx.fill();
+      }
+
+      spawnShootingStar();
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const st = shootingStars[i];
+        ctx.beginPath();
+        const grad = ctx.createLinearGradient(st.x, st.y, st.x + st.len, st.y - st.len);
+        grad.addColorStop(0, `rgba(251, 191, 36, ${st.opacity})`);
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2;
+        ctx.moveTo(st.x, st.y);
+        ctx.lineTo(st.x + st.len, st.y - st.len);
+        ctx.stroke();
+
+        st.x -= st.speed;
+        st.y += st.speed;
+        st.opacity -= 0.018;
+
+        if (st.opacity <= 0) {
+          shootingStars.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars();
+    });
+
+    resizeCanvas();
+    createStars();
+    animate();
+  </script>
+</body>
+</html>
